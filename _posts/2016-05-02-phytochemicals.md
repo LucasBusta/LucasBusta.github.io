@@ -8,11 +8,18 @@ Remember the first death in Agatha Christie's "And Then There Were None"?
 
 Anthony Marston
 
-As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis. To do this, plants produce cyanide-containing compounds called cyanogens, for example, mandelonitrile (Figure 1). These cyanogens are inactive and generally not poisonous, so the plant cells can produce and store them in special compartments inside their cells without harming itself. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogen into hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!
+As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis.<sup><a href="#fn1" id="ref1">1</a></sup> To do this, plants produce cyanide-containing compounds called cyanogens, for example, mandelonitrile (Figure 1). These cyanogens are inactive and generally not poisonous, so the plant cells can produce and store them in special compartments inside their cells without harming itself. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogen into hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!
 
 <img src="fig1.jpg" alt="Cyanogen" style="width:800px; height:800px; float: left" hspace="20">
 
+<figure>
+    <img src='fig1.jpg' alt='missing' />
+    <figcaption>Caption goes hereasdfasdfasdfasdf</figcaption>
+</figure>
+
 Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides.
+
+Secoisolariciresinol diglucoside
 
 Some text with a footnote.<sup><a href="#fn1" id="ref1">1</a></sup>
 
@@ -24,7 +31,7 @@ Some more text with a footnote.<sup><a href="#fn4" id="ref4">4</a></sup>
 
 <hr></hr>
 
-<sup id="fn1">1. [Text of footnote 1]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+<sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 
 <sup id="fn2">2. [Text of footnote 2]<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
 
