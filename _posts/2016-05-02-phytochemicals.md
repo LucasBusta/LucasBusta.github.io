@@ -18,7 +18,7 @@ As sessile organisms, many plants use chemical strategies to protect themselves 
 Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many[] countries contains substantial amounts of linamarin and lotaustralin. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume.
 
 <figure>
-    <img src='fig2.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
+    <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
     <figcaption>Figure 2: Chemical structures of some cyanogenic glucosides.</figcaption>
 </figure>
 
