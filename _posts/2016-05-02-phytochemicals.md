@@ -12,6 +12,8 @@ As sessile organisms, many plants use chemical strategies to protect themselves 
 
 ![Cyanogen storage and activation](fig1.jpg "Cyanogen storage and activation")
 
+Cyanogens come in many forms. Oftentimes they accumulate as 
+
 
 
 
