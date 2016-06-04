@@ -4,13 +4,9 @@ title: "And Then There Were None! - plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
-<i>Remember the first death in Agatha Christie's "And Then There Were None"?
+<!-- Q: What do Agatha Christie, Adolf Hitler, and Erwin Schrödinger have in common?
 
-He picked up his drink and drank it off at a gulp.</i> 
-
-Too quickly, perhaps. He choked - choked badly. His face contorted, turned 
-purple. He gasped for breath - then slid down off his chair, the glass falling from 
-his hand. 
+A: In fiction or reality, they have all used cyanide as a poison!-->
 
 As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis.<sup><a href="#fn1" id="ref1">1</a></sup> To do this, plants produce cyanide-containing compounds called cyanogens, for example, mandelonitrile (Figure 1). These cyanogens are inactive and generally not poisonous, so the plant cells can produce and store them in special compartments inside their cells without harming itself. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogen into hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!
 
