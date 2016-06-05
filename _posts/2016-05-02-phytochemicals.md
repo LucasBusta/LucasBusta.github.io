@@ -28,7 +28,7 @@ Use in seed coatings
 
 <hr></hr>
 
-<sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+<sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant Physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 
 
 
