@@ -31,12 +31,12 @@ Not all plants are able to generate cyanogens and are therefore more susceptible
     <figcaption>Figure 3: Structure of cyanogenic seed coating. Taken from Halter et al.<sup><a href="#fn5" id="ref5">5</a></sup></figcaption>
 </figure>
 
-Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "Zygaena filipendulae" are able to eat cyanogenic glucosides and then use them for their own defense. They secrete cyanogenic glucosides they obtain in their diet and those that they produce internally in sticky droplets on their exteriors (Figure 4).<sup><a href="#fn6" id="ref6">6</a></sup> 
+Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "<i>Zygaena filipendulae</i>" are able to eat cyanogenic glucosides and then use them for their own defense. They secrete cyanogenic glucosides they obtain in their diet and those that they produce internally in sticky droplets on their exteriors (Figure 4).<sup><a href="#fn6" id="ref6">6</a></sup> 
 
 
 <figure>
-    <img src='fig4.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
-    <figcaption>Figure 4: Structure of cyanogenic seed coating. Taken from Jensen et al.<sup><a href="#fn6" id="ref6">6</a></sup></figcaption>
+    <img src='fig4.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
+    <figcaption>Figure 5: <i>Zygaena filipendulae</i> moth larvae. Taken from Jensen et al.<sup><a href="#fn6" id="ref6">6</a></sup></figcaption>
 </figure>
 
 All things are connected
