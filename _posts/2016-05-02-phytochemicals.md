@@ -6,21 +6,21 @@ date: 2016-05-02
 
 
 <figure>
-    <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="5" />
+    <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2" />
     <figcaption>Image credit: Kailen Mooney, University of California, Irvine</figcaption>
 </figure>
 
 <p align="justify"> As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis.<sup><a href="#fn1" id="ref1">1</a></sup> To do this, plants produce cyanide-containing molecules called cyanogenic compounds, for example, mandelonitrile (Figure 1). Cyanogenic compounds (cyanogens) are inactive and generally not poisonous, so plants' cells can produce and store them in special compartments inside their cells without causing harm. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogenic compound into hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!</p>
 
 <figure>
-    <img src='fig1.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
+    <img src='fig1.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2"  />
     <figcaption>Figure 1: Enzymatic conversion of mandelonitrile to benzaldehyde and hydrogen cyanide.</figcaption>
 </figure>
 
 <p align="justify">Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. Clearly, cyanogens are potent phytochemicals that allow the plant to protect itself from being consumed.</p>
 
 <figure>
-    <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
+    <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' border="2"  />
     <figcaption>Figure 2: Chemical structures of some cyanogenic glucosides.</figcaption>
 </figure>
 
@@ -32,7 +32,7 @@ date: 2016-05-02
 </figure>-->
 
 <figure>
-    <img src='fig4.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
+    <img src='fig4.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2"  />
     <figcaption>Figure 3: <i>Zygaena filipendulae</i> moth larvae. Taken from Jensen et al. Sticky droplets containing 
     cyanogens are circled.<sup><a href="#fn6" id="ref6">6</a></sup></figcaption>
 </figure>
