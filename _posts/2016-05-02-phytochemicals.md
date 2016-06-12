@@ -6,7 +6,7 @@ date: 2016-05-02
 
 
 <figure>
-    <img src='fig0.jpg' style="width:50%; height:50%; float: center" hspace="20" alt='missing' />
+    <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
     <figcaption>Image credit: Kailen Mooney, University of California, Irvine</figcaption>
 </figure>
 
