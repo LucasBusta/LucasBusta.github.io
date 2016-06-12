@@ -19,14 +19,19 @@ sup { vertical-align: top; font-size: 0.6em; }
     <figcaption>Figure 1: Enzymatic conversion of mandelonitrile to benzaldehyde and hydrogen cyanide.</figcaption>
 </figure>
 
-<p align="justify"> Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. </p>
+<p align="justify"> Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. Clearly, cyanogenic compounds are potent phytochemicals that allow the plant to protect itself from being consumed.</p>
 
 <figure>
     <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
     <figcaption>Figure 2: Chemical structures of some cyanogenic glucosides.</figcaption>
 </figure>
 
-Use in seed coatings
+Not all plants are able to generate cyanogens and are therefore more susceptible to attack. For example, approximately 25% of a wheat crop is lost to pests over the course of the agricultural process, with substantial amount of loss occurring when the seeds are being stored prior to planting.<sup><a href="#fn4" id="ref4">4</a></sup> To deal with this pesticides are often applied, but we are learning that pesticides often have detrimental effects to nearby water sources and can be difficult to control when washed away by rain. Materials chemists have recognized this problem and, based on cyanogens in nature, have invented a new coating to replace pesticides. In this application, seeds are coated with an enzyme, then a thin barrier, then a cyanogen (Figure 3). When the barrier is ruptured, the enzyme and cyanogen mix, releasing hydrogen cyanide. While this application is still in developmental phases and is undergoing testing to determine its effects on the nearby environment and ecosystem, it is a step towards the protection of crops with naturally occurring, biodegradable materials.<sup><a href="#fn5" id="ref5">5</a></sup>
+
+<figure>
+    <img src='fig3.png' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
+    <figcaption>Figure 3: Structure of cyanogenic seed coating. Taken from Halter et al.<sup><a href="#fn5" id="ref5">5</a></sup></figcaption>
+</figure>
 
 
 
@@ -35,6 +40,9 @@ Use in seed coatings
 <sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant Physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 <sup id="fn2">2. [Food and Agriculture Organization] http://www.fao.org/ag/agp/agpc/gcds/<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
 <sup id="fn3">3. [Banea-Mayambu JP, Tylleskar T, Gitebo N, Matadi N, Gebre-Medhin M, Rosling H. (1997). Geographical and seasonal association between linamarin and cyanide exposure from cassava and the upper motor neurone disease konzo in former Zaire. Trop Med Int Health 2(12):1143-51]<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup>
+<sup id="fn4">4. [Encyclopedia of Pest Management, ed. D. Pimentel, CRC Press, 2002.]<a href="#ref4" title="Jump back to footnote 4 in the text.">↩</a></sup>
+<sup id="fn5">5. [J. Mater. Chem. A, 2014, 2, 853]<a href="#ref4" title="Jump back to footnote 5 in the text.">↩</a></sup>
+
 
 
 
