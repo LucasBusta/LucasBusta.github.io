@@ -26,10 +26,10 @@ date: 2016-05-02
 
 <p align="justify">Not all plants are able to generate cyanogens and are therefore more susceptible to attack. For example, approximately 25% of a wheat crop is lost to pests over the course of the agricultural process, with substantial amount of loss occurring when the seeds are being stored prior to planting.<sup><a href="#fn4" id="ref4">4</a></sup> To deal with this pesticides are often applied, but we are learning that pesticides often have detrimental effects to nearby water sources and can be difficult to control when washed away by rain. Materials chemists have recognized this problem and, based on cyanogens in nature, have invented a new coating to replace pesticides. In this application, seeds are coated with an enzyme, then a thin barrier, then a cyanogen (Figure 3).<sup><a href="#fn5" id="ref5">5</a></sup> When the barrier is ruptured, the enzyme and cyanogen mix, releasing hydrogen cyanide. While this application is still in developmental phases and is undergoing testing to determine its effects on the nearby environment and ecosystem, it is a step towards the protection of crops with naturally occurring, biodegradable materials.<sup><a href="#fn5" id="ref5">5</a></sup></p>
 
-<figure>
+<!--<figure>
     <img src='fig3.png' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
     <figcaption>Figure 3: Structure of cyanogenic seed coating. Taken from Halter et al.<sup><a href="#fn5" id="ref5">5</a></sup></figcaption>
-</figure>
+</figure>-->
 
 <p align="justify">Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "<i>Zygaena filipendulae</i>" are able to eat cyanogenic glucosides and then use them for their own defense. They secrete cyanogenic glucosides they obtain in their diet and those that they produce internally in sticky droplets on their exteriors (Figure 4).<sup><a href="#fn6" id="ref6">6</a></sup> This example demostrates that different species can develop similar strategies to protect themselves, a process called <a href="https://en.wikipedia.org/wiki/Convergent_evolution" target="_blank">convergent evolution</a>, and that nature is a complex, interconnected system.</p>
 
