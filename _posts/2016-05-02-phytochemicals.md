@@ -4,6 +4,9 @@ title: "And Then There Were None! - plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
+sup { vertical-align: top; font-size: 0.6em; }
+
+
 <figure>
     <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
     <figcaption>Image credit: Kailen Mooney, University of California, Irvine</figcaption>
@@ -16,7 +19,7 @@ date: 2016-05-02
     <figcaption>Figure 1: Enzymatic conversion of mandelonitrile to benzaldehyde and hydrogen cyanide.</figcaption>
 </figure>
 
-<p align="justify"> Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many[] countries contains substantial amounts of linamarin and lotaustralin. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. </p>
+<p align="justify"> Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. </p>
 
 <figure>
     <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' />
@@ -30,6 +33,9 @@ Use in seed coatings
 <hr></hr>
 
 <sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant Physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+<sup id="fn2">2. [Food and Agriculture Organization] http://www.fao.org/ag/agp/agpc/gcds/<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
+<sup id="fn3">3. [Banea-Mayambu JP, Tylleskar T, Gitebo N, Matadi N, Gebre-Medhin M, Rosling H. (1997). Geographical and seasonal association between linamarin and cyanide exposure from cassava and the upper motor neurone disease konzo in former Zaire. Trop Med Int Health 2(12):1143-51]<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup>
+
 
 
 
