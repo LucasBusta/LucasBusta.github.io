@@ -4,10 +4,6 @@ title: "And Then There Were None! - plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
-<!-- Q: What do Agatha Christie, Adolf Hitler, and Erwin Schrödinger have in common?
-
-A: In fiction or reality, they have all used cyanide as a poison!-->
-
 <figure>
     <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
     <figcaption>Image credit: Kailen Mooney, University of California, Irvine</figcaption>
