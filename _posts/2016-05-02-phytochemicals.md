@@ -4,8 +4,6 @@ title: "Plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
-sup { vertical-align: top; font-size: 0.6em; }
-
 
 <figure>
     <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
