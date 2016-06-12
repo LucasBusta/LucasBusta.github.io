@@ -31,14 +31,16 @@ date: 2016-05-02
     <figcaption>Figure 3: Structure of cyanogenic seed coating. Taken from Halter et al.<sup><a href="#fn5" id="ref5">5</a></sup></figcaption>
 </figure>-->
 
-<p align="justify">Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "<i>Zygaena filipendulae</i>" are able to eat cyanogenic glucosides and then use them for their own defense. They secrete cyanogenic glucosides they obtain in their diet and those that they produce internally in sticky droplets on their exteriors (Figure 3).<sup><a href="#fn6" id="ref6">6</a></sup> This example demostrates that different species can develop similar strategies to protect themselves, a process called <a href="https://en.wikipedia.org/wiki/Convergent_evolution" target="_blank">convergent evolution</a>, and that nature is a complex, interconnected system.</p>
-
-
 <figure>
     <img src='fig4.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' />
     <figcaption>Figure 3: <i>Zygaena filipendulae</i> moth larvae. Taken from Jensen et al. Sticky droplets containing 
     cyanogens are circled.<sup><a href="#fn6" id="ref6">6</a></sup></figcaption>
 </figure>
+
+<p align="justify">Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "<i>Zygaena filipendulae</i>" are able to eat cyanogenic glucosides and then use them for their own defense. They secrete cyanogenic glucosides they obtain in their diet and those that they produce internally in sticky droplets on their exteriors (Figure 3).<sup><a href="#fn6" id="ref6">6</a></sup> This example demostrates that different species can develop similar strategies to protect themselves, a process called <a href="https://en.wikipedia.org/wiki/Convergent_evolution" target="_blank">convergent evolution</a>, and that nature is a complex, interconnected system.</p>
+
+
+
 
 <hr></hr>
 
