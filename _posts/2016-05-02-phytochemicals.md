@@ -45,12 +45,17 @@ All things are connected
 
 <hr></hr>
 
-<sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant Physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
-<sup id="fn2">2. [Food and Agriculture Organization] http://www.fao.org/ag/agp/agpc/gcds/<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
-<sup id="fn3">3. [Banea-Mayambu JP, Tylleskar T, Gitebo N, Matadi N, Gebre-Medhin M, Rosling H. (1997). Geographical and seasonal association between linamarin and cyanide exposure from cassava and the upper motor neurone disease konzo in former Zaire. Trop Med Int Health 2(12):1143-51]<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup>
-<sup id="fn4">4. [Encyclopedia of Pest Management, ed. D. Pimentel, CRC Press, 2002.]<a href="#ref4" title="Jump back to footnote 4 in the text.">↩</a></sup>
-<sup id="fn5">5. [J. Mater. Chem. A, 2014, 2, 853]<a href="#ref5" title="Jump back to footnote 5 in the text.">↩</a></sup>
-<sup id="fn6">6. [Jensen, N.B. et al. Convergent evolution in biosynthesis of cyanogenic defence compounds in plants and insects. Nat. Commun. 2:273 doi: 10.1038/ncomms1271 (2011).]<a href="#ref6" title="Jump back to footnote 6 in the text.">↩</a></sup>
+<p><sup id="fn1">1. [Poulton, J.E., 1990. Cyanogenesis in plants. Plant Physiology, 94(2), pp.401-405.]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup></p>
+
+<p><sup id="fn2">2. [Food and Agriculture Organization] http://www.fao.org/ag/agp/agpc/gcds/<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup></p>
+
+<p><sup id="fn3">3. [Banea-Mayambu JP, Tylleskar T, Gitebo N, Matadi N, Gebre-Medhin M, Rosling H. (1997). Geographical and seasonal association between linamarin and cyanide exposure from cassava and the upper motor neurone disease konzo in former Zaire. Trop Med Int Health 2(12):1143-51]<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup></p>
+
+<p><sup id="fn4">4. [Encyclopedia of Pest Management, ed. D. Pimentel, CRC Press, 2002.]<a href="#ref4" title="Jump back to footnote 4 in the text.">↩</a></sup></p>
+
+<p><sup id="fn5">5. [J. Mater. Chem. A, 2014, 2, 853]<a href="#ref5" title="Jump back to footnote 5 in the text.">↩</a></sup></p>
+
+<p><sup id="fn6">6. [Jensen, N.B. et al. Convergent evolution in biosynthesis of cyanogenic defence compounds in plants and insects. Nat. Commun. 2:273 doi: 10.1038/ncomms1271 (2011).]<a href="#ref6" title="Jump back to footnote 6 in the text.">↩</a></sup></p>
 
 
 
