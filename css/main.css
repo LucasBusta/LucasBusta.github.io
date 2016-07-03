@@ -47,3 +47,8 @@ ul.posts li {
     list-style: none;
 }
 
+figcaption {
+    position: below;
+    text-align: center;
+    }
+
