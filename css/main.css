@@ -47,14 +47,7 @@ ul.posts li {
     list-style: none;
 }
 
-<!-- figure {
-    display: inline-block;
-    border: 1px dotted gray;
-    margin: 20px; /* adjust as needed */
-} 
-figure img {
-    vertical-align: top;
-} -->
+
 figure figcaption {
     border: 1px dotted black;
     text-align: center;
