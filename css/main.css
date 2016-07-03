@@ -47,8 +47,3 @@ ul.posts li {
     list-style: none;
 }
 
-
-figure figcaption {
-    border: 1px dotted black;
-    text-align: center;
-}
