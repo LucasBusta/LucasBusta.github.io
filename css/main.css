@@ -56,7 +56,7 @@ figure img {
 }
 
 figcaption {
-  position: absolute;
+  position: below;
   height:50px;
   width:100%;
   line-height:50px;
