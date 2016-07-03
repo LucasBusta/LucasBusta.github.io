@@ -47,6 +47,10 @@ ul.posts li {
     list-style: none;
 }
 
+figure {
+     position: relative;
+}
+
 figcaption {
     position: below;
     text-align: center;
