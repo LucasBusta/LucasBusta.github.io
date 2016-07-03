@@ -10,9 +10,7 @@ date: 2016-05-02
     <figcaption>Image credit: Kailen Mooney, University of California, Irvine</figcaption>
 </figure>
 
-<div>
 <p align="justify">As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis.<sup><a href="#fn1" id="ref1">1</a></sup> To do this, plants produce cyanide-containing molecules called cyanogenic compounds, for example, mandelonitrile (Figure 1). Cyanogenic compounds (cyanogens) are inactive and generally not poisonous, so plants can produce and store them in special compartments inside their cells without causing harm. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogenic compound into toxic hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!</p>
-</div>
 
 <figure>
     <img src='fig1.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2"  />
