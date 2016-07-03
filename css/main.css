@@ -47,12 +47,24 @@ ul.posts li {
     list-style: none;
 }
 
-figure {
-     position: relative;
-}
-
 figcaption {
     position: below;
     text-align: center;
     }
 
+figure {
+     position: relative;
+}
+
+figure img {
+    display: block;
+}
+
+figcaption {
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
