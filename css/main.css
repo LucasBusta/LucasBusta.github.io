@@ -49,7 +49,6 @@ ul.posts li {
 
 figure {
      position: relative;
-     display: table;
 }
 
 figcaption {
@@ -59,7 +58,7 @@ figcaption {
   line-height:50px;
   background-color: grey;
   bottom:-50px;
-  display: table-caption;
+  transition: bottom 0.5s ease;
   caption-side: bottom;
 }
 
