@@ -49,10 +49,7 @@ ul.posts li {
 
 figure {
      position: relative;
-     display: table;
 }
-
-
 
 figcaption {
   position: below;
