@@ -4,6 +4,21 @@ title: "Plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
+    <table width="300" style="float: left;" border="2">
+		<tbody>
+			<tr>
+				<td style="text-align: center;">
+					<img src='fig0.jpg' width="300" hspace="20" alt='missing' border="1" />	
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;">
+					Image credit: Kailen Mooney, University of California, Irvine
+				</td>
+			</tr>
+		</tbody>
+    </table>
+
 
 <figure>
     <img src='fig0.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2" />
