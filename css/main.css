@@ -1,8 +1,9 @@
 body {
     margin: 50px;
     width: 50%;
-<!--transform: scale(0.8);-->
 }
+
+<!--transform: scale(0.8);-->
 
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
