@@ -21,10 +21,20 @@ date: 2016-05-02
 
 <p align="justify">As sessile organisms, many plants use chemical strategies to protect themselves from external attack, and poisoning attackers with cyanide is one of them! So far, more than 3000 species of plants have been identified that are capable of cyanogenesis.<sup><a href="#fn1" id="ref1">1</a></sup> To do this, plants produce cyanide-containing molecules called cyanogenic compounds, for example, mandelonitrile (Figure 1). Cyanogenic compounds (cyanogens) are inactive and generally not poisonous, so plants can produce and store them in special compartments inside their cells without causing harm. In nearby but separate compartments, plants also store a special enzyme capable of transforming the inactive cyanogenic compound into toxic hydrogen cyanide. Then, when insects or other animals bite down on the leaves of the plant, the compartments' walls are crushed, mixing the cyanogen with the enzyme and releasing hydrogen cyanide right inside the attackers mouth!</p>
 
-<figure>
-    <img src='fig1.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2"  />
-    <figcaption>Figure 1: Enzymatic conversion of mandelonitrile to benzaldehyde and hydrogen cyanide.</figcaption>
-</figure>
+<table width="300" style="float: left;">
+		<tbody>
+			<tr>
+				<td style="text-align: center;">
+					<img src='fig1.jpg' width="300" alt='missing' border="1" />	
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;">
+					Figure 1: Enzymatic conversion of mandelonitrile to benzaldehyde and hydrogen cyanide.
+				</td>
+			</tr>
+		</tbody>
+</table>
 
 <p align="justify">Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. Clearly, cyanogens are potent phytochemicals that allow the plant to protect itself from being consumed.</p>
 
