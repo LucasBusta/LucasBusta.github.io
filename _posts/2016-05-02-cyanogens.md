@@ -4,11 +4,11 @@ title: "Plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
-<table width="300" style="float: left;" frame="box" rules="none">
+<table width="300" style="float: left;" frame="box" rules="none" hspace="20">
 		<tbody>
 			<tr>
 				<td style="text-align: center;">
-					<img src='fig0.jpg' width="300" hspace="20" alt='missing' border="1" />	
+					<img src='fig0.jpg' width="300" alt='missing' border="1" />	
 				</td>
 			</tr>
 			<tr>
