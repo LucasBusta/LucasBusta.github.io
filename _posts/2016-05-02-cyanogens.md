@@ -42,7 +42,7 @@ date: 2016-05-02
 	<tbody>
 		<tr>
 			<td style="text-align: center;">
-				<img src='fig3.jpg' width="500" alt='missing' />	
+				<img src='fig2.jpg' width="500" alt='missing' />	
 			</td>
 		</tr>
 		<tr>
