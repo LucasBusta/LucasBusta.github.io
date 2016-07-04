@@ -4,7 +4,7 @@ title: "Plant cyanogenic compounds"
 date: 2016-05-02
 ---
 
-<table width="300" style="float: left;">
+<table width="300" style="float: left;" frame="box" rules="none">
 		<tbody>
 			<tr>
 				<td style="text-align: center;">
