@@ -1,6 +1,6 @@
 body {
-    margin: 80px;
-    width: 60%;
+    margin: 50px;
+    width: 50%;
 }
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
@@ -29,8 +29,8 @@ h1 {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 p {
-    font-size: 1em;
-    line-height: 1.2em;
+    font-size: 1.1em;
+    line-height: 1.3em;
     color: #333;
 }
 footer {
