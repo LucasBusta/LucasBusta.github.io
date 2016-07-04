@@ -1,9 +1,7 @@
 body {
     margin: 50px;
     width: 50%;
-    -webkit-transform: scale(0.67);
-       -moz-transform: scale(0.67);
-            transform: scale(0.67);
+    transform: scale(0.8);
 }
 
 nav ul, footer ul {
