@@ -47,3 +47,6 @@ ul.posts li {
     list-style: none;
 }
 
+table {border:1px solid #000}
+td,th {border:none}
+
