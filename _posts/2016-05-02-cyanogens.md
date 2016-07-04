@@ -8,7 +8,7 @@ date: 2016-05-02
 		<tbody>
 			<tr>
 				<td style="text-align: center;">
-					<img src='fig0.jpg' width="300" alt='missing' border="1" />	
+					<img src='fig0.jpg' width="300" alt='missing' />	
 				</td>
 			</tr>
 			<tr>
@@ -25,7 +25,7 @@ date: 2016-05-02
 		<tbody>
 			<tr>
 				<td style="text-align: center;">
-					<img src='fig1.jpg' width="300" alt='missing' border="1" />	
+					<img src='fig1.jpg' width="500" alt='missing' />	
 				</td>
 			</tr>
 			<tr>
@@ -38,10 +38,20 @@ date: 2016-05-02
 
 <p align="justify">Plants produce and store cyanogens in many forms. Oftentimes they are stored linked with sugar molecules like glucose, in which case they are called cyanogenic glycosides (Figure 2). One of these, amygdalin, is found in the seeds of many fruits in the rose family, like apples, plums, apricots, and peaches, but only in relatively small amounts. In contrast, cassava root, a staple food in many African, Asian, and Latin American countries<sup><a href="#fn2" id="ref2">2</a></sup>, contains substantial amounts of linamarin and lotaustralin<sup><a href="#fn3" id="ref3">3</a></sup>. Accordingly, cassava root needs to be processed before consumption. One method of doing this is to grind the cassava, exposing the activating enzyme to linamarin and lotaustralin, and then mix it with water so it can be spread in a thin layer and allowed to dry. Once released, active hydrogen cyanide has a low boiling point, so much of it evaporates quickly and the cassava becomes safer to consume. Clearly, cyanogens are potent phytochemicals that allow the plant to protect itself from being consumed.</p>
 
-<figure>
-    <img src='fig2.jpg' style="width:100%; height:100%; float: left" hspace="20" alt='missing' border="2"  />
-    <figcaption>Figure 2: Chemical structures of some cyanogenic glucosides.</figcaption>
-</figure>
+<table width="300" style="float: left;">
+	<tbody>
+		<tr>
+			<td style="text-align: center;">
+				<img src='fig3.jpg' width="500" alt='missing' />	
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				Figure 2: Chemical structures of some cyanogenic glucosides.
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <p align="justify">Plants unable to generate cyanogens are often more susceptible to attack than those that can. For example, approximately 25% of a wheat crop is lost to pests over the course of the agricultural process, with substantial losses occurring when the seeds are being stored prior to planting.<sup><a href="#fn4" id="ref4">4</a></sup> To deal with this pesticides are often applied, but we are learning that pesticides often have detrimental effects to nearby water sources and can be difficult to control when washed away by rain. Materials chemists have recognized this problem and, inspired by cyanogens in nature, have invented a new coating that can replace pesticides in some applications. In the wheat storage example, seeds are coated with an enzyme, then a thin barrier, then a cyanogen.<sup><a href="#fn5" id="ref5">5</a></sup> When the barrier is ruptured, the enzyme and cyanogen mix, releasing hydrogen cyanide. Overall, this makes the seeds less prone to attack during the pre-planting phase of the agricultural process. While this application is still in developmental phases and is undergoing testing to determine its effects on the nearby environment and ecosystem, it is a step towards the protection of crops with naturally occurring, biodegradable materials.<sup><a href="#fn5" id="ref5">5</a></sup></p>
 
@@ -50,11 +60,21 @@ date: 2016-05-02
     <figcaption>Figure 3: Structure of cyanogenic seed coating. Taken from Halter et al.<sup><a href="#fn5" id="ref5">5</a></sup></figcaption>
 </figure>-->
 
-<figure>
-    <img src='fig4.jpg' style="width:50%; height:50%; float: left" hspace="20" alt='missing' border="2"  />
-    <figcaption>Figure 3: <i>Zygaena filipendulae</i> moth larvae. Taken from Jensen et al. Sticky droplets containing 
-    cyanogens are circled.<sup><a href="#fn6" id="ref6">6</a></sup></figcaption>
-</figure>
+<table width="300" style="float: left;">
+	<tbody>
+		<tr>
+			<td style="text-align: center;">
+				<img src='fig4.jpg' width="500" alt='missing' />	
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				Figure 3: <i>Zygaena filipendulae</i> moth larvae. Taken from Jensen et al. Sticky droplets containing 
+    cyanogens are circled.<sup><a href="#fn6" id="ref6">6</a></sup>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <p align="justify">Not all plant attackers are affected negatively by cyanogens. Members of the moth species called "<i>Zygaena filipendulae</i>" are able to eat cyanogenic glucosides and then use them for their own defense. Cyanogenic glucosides they obtain in their diet and those that they produce internally are secreted in sticky droplets on their exteriors, deterring predatory birds (Figure 3).<sup><a href="#fn6" id="ref6">6</a></sup> This example demostrates that different species can develop similar strategies to protect themselves, a process called <a href="https://en.wikipedia.org/wiki/Convergent_evolution" target="_blank">convergent evolution</a>, and that nature is a complex, interconnected system.</p>
 
