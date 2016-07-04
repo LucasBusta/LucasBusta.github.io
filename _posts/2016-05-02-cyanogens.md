@@ -8,7 +8,7 @@ date: 2016-05-02
 		<tbody>
 			<tr>
 				<td style="text-align: center;">
-					<img src='fig0.jpg' width="300" alt='missing' border="1" />	
+					<img src='fig0.jpg' width="300" alt='missing' />	
 				</td>
 			</tr>
 			<tr>
