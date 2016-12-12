@@ -1,6 +1,10 @@
 body {
     margin: 50px;
     width: 50%;
+    background-image: back.jpg;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
 }
 
 div.centre {
