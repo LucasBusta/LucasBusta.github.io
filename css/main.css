@@ -12,6 +12,11 @@ div.block {
     background: rgb(255, 255, 255);
 }
 
+
+div.block + div.block{
+   margin-bottom:<10>px;
+}
+
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
