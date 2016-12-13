@@ -14,7 +14,7 @@ div.block {
 
 
 div.block + div.block{
-   margin-bottom:<10>px;
+   margin-bottom: 10px;
 }
 
 nav ul, footer ul {
