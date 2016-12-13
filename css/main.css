@@ -70,4 +70,5 @@ table.pub {
     margin: 0 auto;
     float: center; 
     width: 600px; 
+    border-spacing: 0px;
 }
