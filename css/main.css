@@ -5,6 +5,7 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
     text-align:center
+    font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 
 div.block {
