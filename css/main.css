@@ -67,4 +67,7 @@ table {
 table.pub {
     margin: 1em 1em 1em 1em;
     margin: 0 auto;
+    float: center; 
+    width: 700px; 
+    border-spacing: 15px; 
 }
