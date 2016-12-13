@@ -6,6 +6,10 @@ body {
     background-attachment: fixed;
 }
 
+div {
+    background: rgb(225, 225, 225);
+}
+
 div.centre {
   width: 800px;
   display: block;
