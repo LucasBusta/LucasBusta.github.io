@@ -73,4 +73,5 @@ table.pub {
     float: center; 
     width: 600px; 
     border-spacing: 0px;
+    border: 1px solid black;
 }
