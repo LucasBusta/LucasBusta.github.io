@@ -14,6 +14,12 @@ div.block {
     text-align: justify;
 }
 
+div.title {
+    background: rgb(255, 255, 255);
+    margin-bottom: 60px;
+    text-align: center;
+}
+
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
