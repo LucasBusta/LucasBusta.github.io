@@ -63,3 +63,8 @@ img {
 table {
     margin: 1em 1em 1em 1em;
 }
+
+table.pub {
+    margin: 1em 1em 1em 1em;
+    margin: 0 auto;
+}
