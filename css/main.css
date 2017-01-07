@@ -88,4 +88,5 @@ table.res {
     float: center; 
     width: 800px; 
     border-spacing: 0px;
+    border-spacing: 10px 10px;
 }
