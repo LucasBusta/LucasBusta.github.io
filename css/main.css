@@ -1,3 +1,15 @@
+div.title {
+    width:98%; 
+    margin:1%;
+  }
+  table#table1 {
+    text-align:center; 
+    margin-left:auto; 
+    margin-right:auto; 
+    width:100px;
+  }
+  tr,td {text-align:left;}
+
 body {
     margin-top: 50px;
     margin-left: 275px;
