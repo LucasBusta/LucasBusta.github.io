@@ -4,14 +4,19 @@ div.title {
     background: rgb(255, 255, 255);
     text-align: center;
   }
-  table#table1 {
+
+table#table1 {
     text-align:center; 
     margin-left:auto; 
     margin-right:auto; 
     width:200px;
     height:100px;
+    margin: 0 auto;
+    float: center; 
+    border-spacing: 0px;
   }
-  tr,td {text-align:left;}
+
+tr,td {text-align:left;}
 
 body {
     margin-top: 20px;
