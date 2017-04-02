@@ -22,27 +22,22 @@ title: Lucas Busta
 	<p align="justify">I am currently a post doctoral research associate in the laboratory of <a href="http://www.unl.edu/cahoonlab/welcome" target="_blank">Edgar Cahoon</a> in the <a href="http://www.unl.edu/psi/" target="_blank">Center for Plant Science Innovation</a> at the <a href="http://www.unl.edu/" target="_blank">University of Nebraska - Lincoln</a>. I am studing specialty lipids in crop species that protect crops from pathogens and also act as anti-cancer and health-promoting compounds in humans.</p>
 	
 	<p align="justify">As a Ph.D. student in the lab of Prof. <a href="http://blogs.ubc.ca/jetterlab/" target="_blank">Reinhard Jetter</a> in the <a href="https://www.ubc.ca/" target="_blank">The University of British Columbia's</a> department of <a href="https://www.chem.ubc.ca/" target="_blank">Chemistry</a>, I studied the specialty wax lipids that cover plant surfaces. I combined organic and analytical chemistry to discover new compounds and learn about their biosynthesis.</p>
-	
-	
-</div>
+
 
 <script>
-	var slideIndex = 1;
-showDivs(slideIndex);
+var slideIndex = 0;
+carousel();
 
-function plusDivs(n) {
-    showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
+function carousel() {
     var i;
     var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) {slideIndex = 1} 
-    if (n < 1) {slideIndex = x.length} ;
     for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none"; 
+      x[i].style.display = "none"; 
     }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1} 
     x[slideIndex-1].style.display = "block"; 
+    setTimeout(carousel, 2000); // Change image every 2 seconds
 }
 </script>
 
