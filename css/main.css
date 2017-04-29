@@ -7,8 +7,8 @@ body { font-family: sans-serif; }
 .grid {
   background: #EEE;
   "columnWidth": 200; 
-  "gutter": 20, 
-  "margin-bottom": 20, 
+  "gutter": 20;
+  "margin-bottom": 20; 
   "max-width": 800px;
 }
 
