@@ -16,6 +16,9 @@ table#table1 {
     border-spacing: 0px;
   }
 
+.grid-item { width: 200px; }
+.grid-item--width2 { width: 400px; }
+
 tr,td {text-align:left;}
 
 body {
