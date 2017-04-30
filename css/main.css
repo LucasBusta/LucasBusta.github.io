@@ -2,23 +2,6 @@
 
 body { font-family: sans-serif; }
 
-.grid {}
-
-/* clearfix */
-.grid:after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-.grid-item {
-  width: 400px;
-  float: left;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
-}
-
 div.title {
     width:98%; 
     margin:1%;
