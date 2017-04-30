@@ -19,7 +19,7 @@ title: Lucas Busta - Publications
         #container
         {
         	background-color: grey;
-		width: 1040px;
+		width: 1020px;
         }
 	
 	.item
@@ -39,8 +39,9 @@ title: Lucas Busta - Publications
 <script>
         var container = document.querySelector('#container');
         var msnry = new Masonry( container, {
-          columnWidth: 520,
-          //select all grid boxes
-          itemSelector: '.item'
+        columnWidth: 50,
+        //select all grid boxes
+        itemSelector: '.item'
+	gutter: 10
         });
 </script>
