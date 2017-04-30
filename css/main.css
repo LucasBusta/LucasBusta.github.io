@@ -2,11 +2,7 @@
 
 body { font-family: sans-serif; }
 
-/* ---- grid ---- */
-
-.grid {
- 
-}
+.grid {}
 
 /* clearfix */
 .grid:after {
@@ -14,8 +10,6 @@ body { font-family: sans-serif; }
   display: block;
   clear: both;
 }
-
-/* ---- grid-item ---- */
 
 .grid-item {
   width: 400px;
@@ -133,8 +127,6 @@ table.res {
     border-spacing: 10px 10px;
 }
 
-
-* {box-sizing:border-box}
 
 /* Slideshow container */
 .slideshow-container {
