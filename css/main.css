@@ -18,7 +18,7 @@ body { font-family: sans-serif; }
 /* ---- grid-item ---- */
 
 .grid-item {
-  width: 160px;
+  width: 400px;
   height: 120px;
   float: left;
   border: 2px solid #333;
