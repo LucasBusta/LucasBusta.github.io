@@ -34,9 +34,8 @@ body {
 
 div.block {
     background: rgb(255, 255, 255);
-    margin-bottom: 30px;
-    margin-top: 30px;
     text-align: center;
+    margin: auto;
 }
 
 nav ul, footer ul {
