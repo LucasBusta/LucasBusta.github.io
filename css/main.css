@@ -37,7 +37,7 @@ div.block {
     width:100%;
 }
 
-nav ul, footer ul {
+nav ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
     list-style: none;
@@ -46,7 +46,7 @@ nav ul, footer ul {
     margin-bottom: 20px;
 }
 
-nav ul li, footer ul li {
+nav ul li {
     display: inline;
     margin-right: 20px;
 }
@@ -75,10 +75,6 @@ p {
     font-size: 1.1em;
     line-height: 1.3em;
     color: #333;
-}
-footer {
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
 }
 
 table {
