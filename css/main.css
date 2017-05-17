@@ -44,6 +44,13 @@ nav ul, footer ul {
     list-style: none;
     font-weight: bold;
 }
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
 nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
