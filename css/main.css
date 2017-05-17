@@ -25,6 +25,7 @@ tr,td {text-align:left;}
 body {
     margin-left: 275px;
     margin-right: 275px;
+    margin-top 10px;
     background-repeat: repeat;
     background-attachment: fixed;
     text-align:center;
@@ -51,6 +52,7 @@ nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
 }
+
 a {
     text-decoration: none;
     color: #999;
