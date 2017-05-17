@@ -1,7 +1,5 @@
 * { box-sizing: border-box; }
 
-body { font-family: sans-serif; }
-
 div.title {
     width:98%; 
     margin:1%;
@@ -44,7 +42,8 @@ nav ul, footer ul {
     padding: 0px;
     list-style: none;
     font-weight: bold;
-    margin:auto;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 nav ul li, footer ul li {
