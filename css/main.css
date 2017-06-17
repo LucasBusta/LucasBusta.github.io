@@ -51,9 +51,10 @@ nav ul {
     margin-bottom: 50px;
 }
 
-nav li {
+nav ul li {
     display: inline;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px
 }
 
 a {
