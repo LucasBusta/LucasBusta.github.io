@@ -16,36 +16,15 @@ tr,td {text-align:left;}
 
 body {background-repeat: repeat; background-attachment: fixed; text-align:center; font-family:'Times New Roman'}
 
-div.block {
-    background: rgb(255, 255, 255);
-    text-align: center;
-    margin: auto;
-    width:100%;
-}
+div.block {background: rgb(255, 255, 255); text-align: center; margin: auto; width:100%}
 
-nav ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-    margin: auto;
-    margin-bottom: 50px;
-}
+nav ul {font-family:'Helvetica', 'Arial', 'Sans-Serif'; padding: 0px; list-style: none; font-weight: bold; margin: auto; margin-bottom: 50px}
 
-nav li {
-    display: inline;
-    margin-right: 10px;
-    margin-left: 10px
-}
+nav li {display: inline; margin-right: 10px; margin-left: 10px}
 
-a {
-    text-decoration: none;
-    color: #999;
-}
+a {text-decoration: none; color: #999}
 
-a:hover {
-    text-decoration: underline;
-}
+a:hover {text-decoration: underline}
 
 sup {font-size: 0.83em; vertical-align: super; line-height: 0}
 
