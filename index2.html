@@ -1,0 +1,100 @@
+---
+layout: default
+title: Lucas Busta
+---
+<div class="w3-container">
+	<div class="w3-content w3-display-container" align="center">
+
+		<div class="w3-display-container mySlides">
+			<img src="flower.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Arial'"> Flowers displaying the lotus effect</div>
+			</div>
+		</div>
+		
+		<div class="w3-display-container mySlides">
+			<img src="vials.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Helvetica', 'Arial', 'Sans-Serif'; font-weight: bold">Metabolite samples from diverse plant tissues for GC analysis (photo: collaborator E. W. LaBrant)</div>
+			</div>
+		</div>
+		
+		<div class="w3-display-container mySlides">
+			<img src="moss.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Helvetica', 'Arial', 'Sans-Serif'; font-weight: bold">Moss growing in under LED lights (photo: collaborator Jessica Budke / jmbudke.github.io)</div>
+			</div>
+		</div>
+		
+		<div class="w3-display-container mySlides">
+			<img src="carrots.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Helvetica', 'Arial', 'Sans-Serif'; font-weight: bold">Diverse carrots for a genetic diversity panel</div>
+			</div>
+		</div>
+		
+		<div class="w3-display-container mySlides">
+			<img src="wis.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Helvetica', 'Arial', 'Sans-Serif'; font-weight: bold">Working with high school students visiting the Cahoon lab (photo: Rebecca Cahoon)</div>
+			</div>
+		</div>
+		
+		<div class="w3-display-container mySlides">
+			<img src="ape.png" width=100%>
+			<div class="w3-display-bottommiddle w3-large w3-container w3-padding-16 w3-black">
+				<div style="font-family:'Helvetica', 'Arial', 'Sans-Serif'; font-weight: bold">Diverse Apiaceae species for a metabolic diversity panel</div>
+			</div>
+		</div>
+		<button class="w3-left" onclick="plusDivs(-1)">&#10094;</button>
+		<button class="w3-right" onclick="plusDivs(+1)">&#10095;</button>
+	</div>
+</div>
+
+	
+<div class="block" align="center">
+	<table cellpadding="10" style="margin: 0 auto">
+		<tr>
+			<td width="700" valign="top", align="center", style=text-align:center>
+				<p>I am fascinated by the unique chemistry plants use to survive harsh environments. As a postdoc in the <a href="http://www.unl.edu/cahoonlab/welcome" target="_blank">Cahoon lab</a>, my research unites classical analytical and organic chemistry with emerging high-throughput DNA sequencing technologies to understand the molecular structures, biosynthesis, and properties of phytochemicals. My goal is to use this approach to develop and apply new knowledge about plant chemistry to sustaining and improving agriculture. You can read more about phytochemicals and the important roles they play in our daily lives and the global economy on my <a href="https://plantsarechemists.blogspot.ca/" target="_blank">phytochemistry blog</a>.</p>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<script>
+//Automatic change
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none"; 
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1} 
+    x[slideIndex-1].style.display = "block"; 
+    setTimeout(carousel, 12000); // Change image every 12 seconds
+}
+	
+//Manual change	
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
