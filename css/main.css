@@ -1,16 +1,14 @@
 * { box-sizing: border-box; }
 
-.logo {
-   display: block;
-   margin: 0 auto 50px;
- }
+.logo {display: block; margin: 0 auto 50px}
 
-div.title {
-    width:98%; 
-    margin:1%;
-    background: rgb(255, 255, 255);
-    text-align: center;
-  }
+.mySlides {display:none}
+
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+
+.w3-badge {height:13px;width:13px;padding:0}
+
+div.title {width:98%; margin:1%; background: rgb(255, 255, 255); text-align: center}
 
 table#table1 {
     text-align:center; 
@@ -66,26 +64,16 @@ a:hover {
     text-decoration: underline;
 }
 
-sup {
-        font-size: 0.83em;
-        vertical-align: super;
-        line-height: 0;
-}
+sup {font-size: 0.83em; vertical-align: super; line-height: 0}
 
 h1 {
     font-size: 3em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 
-p {
-    font-size: 1.1em;
-    line-height: 1.3em;
-    color: #333;
-}
+p {font-size: 1.1em; line-height: 1.3em; color: #333}
 
-table {
-    margin: 1em 1em 1em 1em;
-}
+table {margin: 1em 1em 1em 1em}
 
 table.pub {
     margin: 1em 1em 1em 1em;
