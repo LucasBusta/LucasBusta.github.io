@@ -1,5 +1,10 @@
 * { box-sizing: border-box; }
 
+.w3-content w3-display-container {
+   font-family:'Helvetica', 'Arial', 'Sans-Serif';
+   font-weight: bold;
+ }   
+
 .logo {
    display: block;
    margin: 0 auto 30px;
