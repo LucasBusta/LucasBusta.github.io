@@ -1,5 +1,10 @@
 * { box-sizing: border-box; }
 
+.logo{
+   display: block;
+   margin: 0 auto 30px;
+ }
+
 div.title {
     width:98%; 
     margin:1%;
