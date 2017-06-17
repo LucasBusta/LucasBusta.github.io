@@ -1,8 +1,8 @@
 * { box-sizing: border-box; }
 
 /* Titles for each page */ 
-div.title {text-align: center; font-family:'Times New Roman'}
 
+h1 {font-size: 3em; font-family:'Helvetica', 'Arial', 'Sans-Serif'}
 
 .logo {display: block; margin: 0 auto 50px}
 
@@ -32,10 +32,7 @@ a:hover {text-decoration: underline}
 
 sup {font-size: 0.83em; vertical-align: super; line-height: 0}
 
-h1 {
-    font-size: 3em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
-}
+
 
 p {font-size: 1.1em; line-height: 1.3em; color: #333}
 
