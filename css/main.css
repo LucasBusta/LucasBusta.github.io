@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 
 /* Main wrapper */ 
-wrapper {margin:auto; margin-top:20px; margin-bottom:20px; max-width:1000px}
+.wrapper {margin:auto; margin-top:20px; margin-bottom:20px; max-width:1000px}
 
 /* Logo border */ 
 .logo {margin:auto; margin-bottom:40px}
