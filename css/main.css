@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 
 /* Logo border */ 
-.logo {margin:auto; margin-bottom:50px}
+.logo {margin:auto; margin-bottom:40px}
 
 /* Navegator */ 
 nav ul {font-family:'Helvetica'; padding: 0px; list-style: none; font-weight: bold; margin: auto; margin-bottom: 50px}
