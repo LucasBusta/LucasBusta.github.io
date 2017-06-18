@@ -3,15 +3,16 @@
 /* Logo border */ 
 .logo {margin:auto; margin-bottom:50px}
 
+/* Navegator */ 
+nav ul {font-family:'Helvetica'; padding: 0px; list-style: none; font-weight: bold; margin: auto; margin-bottom: 50px}
+nav li {display: inline; margin-right: 10px; margin-left: 10px}
+
 /* Titles for each page */ 
 h1 {font-size: 3em}
 
-
-
+/* Slideshow */ 
 .mySlides {display:none}
-
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
-
 .w3-badge {height:13px; width:13px; padding:0}
 
 
@@ -24,9 +25,7 @@ body {background-repeat: repeat; background-attachment: fixed; text-align:center
 
 div.block {background: rgb(255, 255, 255); text-align: center; margin: auto; width:100%}
 
-nav ul {font-family:'Helvetica', 'Arial', 'Sans-Serif'; padding: 0px; list-style: none; font-weight: bold; margin: auto; margin-bottom: 50px}
 
-nav li {display: inline; margin-right: 10px; margin-left: 10px}
 
 a {text-decoration: none; color: #999}
 
