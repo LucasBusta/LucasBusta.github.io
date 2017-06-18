@@ -6,6 +6,10 @@
 /* Logo border */ 
 .logo {margin:auto; margin-bottom:40px}
 
+/* Links */
+a {text-decoration: underline; color: #999}
+a:hover {text-decoration-style: wavy}
+
 /* Navegator */ 
 nav ul {font-family:'Helvetica'; padding: 0px; list-style: none; font-weight: bold; margin: auto; margin-bottom: 40px}
 nav li {display: inline; margin-right: 10px; margin-left: 10px}
@@ -25,12 +29,6 @@ tr,td {text-align:left;}
 body {background-repeat: repeat; background-attachment: fixed; text-align:center; font-family:'Times New Roman'}
 
 div.block {background: rgb(255, 255, 255); text-align: center; margin: auto; width:100%}
-
-
-
-/* Links */
-a {text-decoration: none; color: #999}
-a:hover {text-decoration: underline}
 
 /* Superscript */
 sup {font-size: 0.83em; vertical-align: super; line-height: 0}
