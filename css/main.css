@@ -25,6 +25,9 @@ h1 {font-size: 3em}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px; width:13px; padding:0}
 
+/* block text */
+.block_text {margin:auto; margin-top:30px; width:70%}
+
 table#table1 {text-align:center; width:200px; height:100px; margin: 0 auto; float: center; border-spacing: 0px}
 
 tr,td {text-align:left;}
