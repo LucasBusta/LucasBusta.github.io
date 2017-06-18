@@ -1,5 +1,8 @@
 * { box-sizing: border-box; }
 
+/* body */
+body {text-align:center; font-family:'Times New Roman'}
+
 /* Main wrapper */ 
 .wrapper {margin:auto; margin-top:20px; margin-bottom:20px; max-width:1000px}
 
@@ -25,8 +28,6 @@ h1 {font-size: 3em}
 table#table1 {text-align:center; width:200px; height:100px; margin: 0 auto; float: center; border-spacing: 0px}
 
 tr,td {text-align:left;}
-
-body {background-repeat: repeat; background-attachment: fixed; text-align:center; font-family:'Times New Roman'}
 
 div.block {background: rgb(255, 255, 255); text-align: center; margin: auto; width:100%}
 
