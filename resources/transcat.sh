@@ -1,471 +1,1278 @@
-#!/bin/bash
+#!/usr/bin/perl
+#🜁air🜄water🜂fire🜃earth
+use strict;
+use warnings;
+use Getopt::Long;
+use Cwd;
+use Data::Dumper;
+use File::Spec::Functions qw/ splitdir rel2abs /;
+use POSIX;
 
-#OIFS="$IFS"
-#IFS=$'\n'
-version=3.0
-bold=$(tput bold)
-normal=$(tput sgr0)
+my $version = 0.1;
 
-#Usage
-	Usage="
+my $M = 62;
+my $C = 50;
+my $readLength;
 
-  \\    /\\
-   )  ( ') TRANSCriptome Analysis Toolbox  
-  (  /  )   (TRANSCAT) Version $version
-   \\(__)|
+my @hits_fasta;
+my @reads;
+my @names;
+my $num;
+my $i;
+my $p;
+my $mergedir;
+my $miningdir;
+my $filterIN;
+my $filterMID;
+my $filterOUT;
+my @short;
+my $anchor_name = "";
+my ($IN, $IN2, $OUT, $OUT2);
+my $line;
+my $nReads;
+my $nBases;
+my $avgLength;
+my @readlength;
+my $kMin = 15;
+my $kMax;
+my $read;
+my $reads;
+my $file;
+my %seen;
 
-	Usage: 
-		bash transcat.sh -T <filename> [-Q <filename>] [instructions]
-		example: bash transcat.sh -T N_benth_transcriptome -Q FAD3s -cbgst
-	
-	Options:
-		Required:
-	    -T <filename> Specify ${bold}TRANSCRIPTOME${normal} (must be nucleotide .fasta, for example, a list of contigs)
+my $mainDir;
+my $baseDir;
 
-	    Optional:
-	    -Q <filename> Specify ${bold}QUERY${normal} (must be protein .fasta, for example, target protein sequence(s))
+my $project;
 
-	    Instructions:
-	    -c 			  ${bold}CLEAN${normal} the TRANSCRIPTOME (i.e. simplify names, linearize etc.)
-	    -g 			  ${bold}GET${normal} DATA from the SRA
-	    -s 			  Run ${bold}SALMON${normal} on READS v. REFERENCE
-	    -b 			  ${bold}BLAST${normal} the QUERY against the TRANSCRIPTOME
-	    -t 			  Genterate ${bold}HEAT TREE${normal} using blast results (prerequisites: ldbt)
+my $T;
+my $Q;
 
-	    Help:
+my $help = 0;
+my $h = 0;
 
-	    --help 		  Displays this helpful help screen
-	 
-	 Required steps:
-		1. Create directories: 'reference', and 'scripts'
-		2. Place this script in 'scripts'
-		3. Place TRANSCRIPTOME (as nucleotide .fasta) in 'reference'
-		
-	 Steps for additional functions:
-	 	1. Place QUERY protein sequence (as .fasta) in 'reference'
-	 	2. Place list of READS (as 'reads') in 'reference' interleaved with sample NAMES
-	 		example:	SRR685298
-	 				 	Leaf
-	 				 	SRR696884
-	 				 	Stem
-	 				 	SRR696915
-	 				 	Flower"
+my $single;
+my $paired;
+my $get;
+my $preanalyze;
 
-#Set options
-	T=0
-	Q=0
-	c=0
-	g=0
-	s=0
-	b=0
-	t=0
+my @assemblers = ("idba", "soap", "spades", "trinity");
+my $q = 20;
+my $filter;
+my $normalize;
+my $merge;
+my $skipmergenorm;
+my $mergenorm;
 
-	optarg=0
+my $assemble;
+my $idba;
+my $soap;
+my $spades;
+my $trinity;
+my $kmerge;
+my $translatedenovos;
+my $nonredund;
+my $consensus;
 
-	#colons come after options that require arguments
-	shrt_opts=T:Q:cgsbt
-	long_opts=help
+my $translate;
 
-	opts=`getopt -n transcat.sh -o $shrt_opts -ul $long_opts -- $@`
+my $anchor;
+my $sindex;
+my $squant;
+my $blast;
+my $plot;
+my $quant;
 
-	eval set -- "$opts"
+my $collect;
+my $subprojects;
 
-	while [ $1 != -- ]; do
-		case "$1" in
-		-T ) T=$2;;
-		-Q ) Q=$2;;
-		-c ) c=1;;
-		-g ) g=1;;
-		-s ) s=1;;
-		-b ) b=1;;
-		-t ) t=1;;
-		--help)
-			echo ""
-			echo "$Usage"
-			echo ""
-			exit 0
-			;;
-		esac
-		shift
-	done
-	shift	# move past '--' from getopt call
+my $height = 28;
+my $width = 12;
+my $ylim = 10;
 
-#Welcome screen
-	
-	echo "
-  \\    /\\
-   )  ( ') TRANSCriptome Analysis Toolbox  
-  (  /  )   (TRANSCAT) Version $version
-   \\(__)|"
-	echo ""
+GetOptions(	"help" => \$help,
+			"h" => \$h,
+			"version" => \$version,
 
-	#Identify the TRANSRIPTOME
-	echo TRANSCRIPTOME = "../reference/${T}.fasta"
-	if [ -e "../reference/${T}.fasta" ]; then
-	    echo "Found ../reference/${T}.fasta"
-		else
-		echo "Cannot find ../reference/${T}.fasta"
-	fi
+			"project=s" => \$project,
 
-	#Identify the QUERY
-	if [ "$Q" != "0" ]; then
-		echo QUERY = "../reference/${Q}.fasta"
-		if [ -e "../reference/${Q}.fasta" ]; then
-		    echo "Found ../reference/${Q}.fasta"
-			else
-			echo "Cannot find ../reference/${Q}.fasta"
-		fi
-	fi
-	echo ""
+			"single=s" => \$single,
+			"paired=s" => \$paired,
+			"get" => \$get,
+			"preanalyze" => \$preanalyze,
 
-#[-c]CLEAN the TRANSCRIPTOME
-	if [ "$c" == "1" ]; then
+			"M=i" => \$M,
+			"T=s" => \$T,
+			"Q=s" => \$Q,
+			"C=s" => \$C,
 
-		#simplify TRANSCRIPTOME  headers
-			echo "Cleaning ../reference/${T}.fasta:"
-			# 	echo "Simplifying ../reference/${T}.fasta headers..."
-			# 	#cutting off up 'til "LOC":  (^ means beginning of line, .* is wildcard)
-			# 		# sed -i 's/^.*LOC/>LOC/' rna.fasta
-			# 	#cutting after ", mRNA":  ($ means end of line)
-			# 		# sed -i 's/ .*$//' rna.fasta
-			# 	#replace all spaces:
-			# 		sed -i 's/ /_/g' ../reference/${T}.fasta
-			# 	#replace all |:
-			# 		sed -i 's/|/_/g' ../reference/${T}.fasta
-	fi
+			"filter" => \$filter,
+			"normalize" => \$normalize,
+			"merge" => \$merge,
+			"skipmergenorm" => \$skipmergenorm,
+			"mergenorm" => \$mergenorm,
 
-#[-b]BLAST the QUERY against the TRANSCRIPTOME
-	if [ "$b" == "1" ]; then
-		if [ "$Q" != "0" ]; then
+			"assemble" => \$assemble,
+			"idba" => \$idba,
+			"spades" => \$spades,
+			"soap" => \$soap,
+			"trinity" => \$trinity,
+			"kmerge" => \$kmerge,
+			"translatedenovos" => \$translatedenovos,
+			"nonredund" => \$nonredund,
+			"consensus" => \$consensus,
 
-		#linearizing the TRANSCRIPTOME
-			echo "Linearizing ../reference/${T}.fasta..."
-			sed -e 's/\(^>.*$\)/#\1#/' "../reference/${T}.fasta" | tr -d "\r" | tr -d "\n" | sed -e 's/$/#/' | tr "#" "\n" | sed -e '/^$/d' > "../reference/${T}_l.fasta"
-			rm ../reference/${T}.fasta
-			mv ../reference/${T}_l.fasta ../reference/${T}.fasta
+			"translate=s" => \$translate,
 
-		#Make the transcriptome BLASTable
-			echo "Making BLASTable database from ../reference/${T}.fasta..."
-			module load blast
-			makeblastdb -in "../reference/${T}.fasta" -parse_seqids -dbtype nucl
+			"anchor=s" => \$anchor,
+			"sindex" => \$sindex,
+			"squant" => \$squant,
+			"blast=i" => \$blast,
+			"plot" => \$plot,
+			"quant" => \$quant,
+			"height=i" => \$height,
+			"width=i" => \$width,
+			"ylim=i" => \$ylim,
+
+			"collect" => \$collect,
+			"subprojects=s" => \$subprojects,
+			"reads=s" => \$reads,
+);
+
+print "\n 				🜁🜄  Elemental v${version}  🜃🜂\n\n";
+
+if ($h or $help) {
+	print "
+	Conventions:
+		-> 	Takes input files with .fa and .fq extensions.
+		-> 	Assumes {name}_1.xx and {name}_2.xx nomenclature for 
+			paired reads. Provide only {name} in configuration file.
+
+	Usage: 	perl elemental.pl [functions]
+ 
+		1. 	Create project directory with subdirectory 'scripts' 
+			containing a readsfile or projectfile
+				for example, a file 'ivy' with contents: 
+					SRR685298
+					Leaf_1
+					SRR696884
+					Leaf_2
+					SRR696915
+					Flower
+
+		2. 	If using reads you already have, create a RawReads 
+			folder containing, for example (if paired):
+				SRR685298(_1).fq
+				(SRR685298_2.fq)
+				SRR696884(_1).fq
+				(SRR696884_2.fq), etc...
+
+			Alternatively, use -get to download SRA reads (see below)
+
+		3. 	Read pre-processing and assembly functions:
+				[provide: -single <readfile> or -paired <readfile>]:
 			
-		#Linearize the QUERY
-			echo ""
-			echo "Linearizing ../reference/${Q}.fasta..."
-			sed -e 's/\(^>.*$\)/#\1#/' "../reference/${Q}.fasta" | tr -d "\r" | tr -d "\n" | sed -e 's/$/#/' | tr "#" "\n" | sed -e '/^$/d' > "../reference/${Q}_l.fasta"
-			rm ../reference/${Q}.fasta
-			mv ../reference/${Q}_l.fasta ../reference/${Q}.fasta
+				#Read pre-processesing
+					-get 			Download reads from the SRA
+					-filter 		Filter the rawreads 	[-M 62 can do reads at least 16GB (sum for paired), maybe more, but not 34GB]
+				
+				#Pre-processesing for assembly
+					-normalize 		Normalize filtered reads 	[-M 62 {0-1 GB} -M 250 {1+ GB}]
+					-mergenorm 		Merge specified reads and normalize them to prepare for assembly 	[-M 62 {0-5 GB} -M 250 {5-40+ GB}]
+					-skipmergenorm 		(if only one set of readeads is being used then mergenorm is not necessary)
+				
+				#Assembly
+					-assemble 		Assemble normalized reads using the specified assemblers
 
-		#Blast query against database
-			echo "BLASTing ../reference/${Q}.fasta against ../reference/${T}.fasta..."
-			tblastn -db "../reference/${T}.fasta" -query "../reference/${Q}.fasta" -out "../reference/${Q}_${T}_hits.out" -outfmt "6 sacc"
-			echo "Removing duplicate hits..."
-			awk '!a[$0]++' "../reference/${Q}_${T}_hits.out" > "../reference/${Q}_${T}_hits_s.out"
-			rm ../reference/${Q}_${T}_hits.out
-			mv ../reference/${Q}_${T}_hits_s.out ../reference/${Q}_${T}_hits.out
-			nhits=$(cat "../reference/${Q}_${T}_hits.out" | wc -l)
-			echo "$nhits Hits"
-			echo "Preparing output file..."
+				#Post-assembly
+					-kmerge
+					-translatedenovos 	Creates four files, each containing all contigs from one assembler, then translates them
+					-nonredund 		Selects nonredund AA-generating contigs from each assembler, creating 'nonredund_{assembler}_contigs.fa
+					-consensus 		Selects contigs found by a minimum of <integer> assemblers
 
-		#Create "results.fasta" (output fasta of BLAST hits) contents
-			for i in $(seq 1 $nhits); do
-				hit_name=$(sed -n "${i}p" "../reference/${Q}_${T}_hits.out");
-				hit_line=$(grep -n $hit_name "../reference/${T}.fasta"| cut -d : -f 1);
-				#echo "Hit Line: $hit_line"
-				seq_line=$((1+$hit_line));
-				#echo "Seq Lin: $seq_line"
-				hit_header=$(sed -n "${hit_line}p" "../reference/${T}.fasta");
-				#echo "Hit: $hit_name"
-				seq=$(sed -n "${seq_line}p" "../reference/${T}.fasta");
-				#echo "Seq: $seq"
-				hits_fasta[$((2 * ${i} - 1))]=$hit_header;
-				hits_fasta[$((2 * ${i}))]=$seq;
-			done
-
-		#print "results.fasta"
-			printf '%s\n' "${hits_fasta[@]}" > "../reference/${Q}_${T}_hits.fasta"
-			echo "Filtering out hits less than 800bp..."
-			awk '!/^>/ { next } { getline seq } length(seq) >= 800 { print $0 "\n" seq }' "../reference/${Q}_${T}_hits.fasta" > "../reference/${Q}_${T}_hits_f.fasta"
-			rm ../reference/${Q}_${T}_hits.fasta
-			mv ../reference/${Q}_${T}_hits_f.fasta ../reference/${Q}_${T}_hits.fasta
-			echo "Done!"
-
-		else
-			echo "Please specify a BLAST query."
-		fi
-	fi
-	echo ""
-
-#[-g]Get READS from SRA
-	if [ "$g" == "1" ]; then
-
-		#Create fastq directory
-			if [ -d "../fastq" ]; then
-			    echo "Found directory '../fastq'"
-				else
-				mkdir ../fastq
-				echo "Created directory '../fastq'"
-			fi
-
-		#Create reads variable
-			reads=$(cat ../reference/reads)
-			echo "Files to get: $reads"
+		4.	Transcriptome analyis functions:
+				[provide -T <filename> (.fa) and -Q <filename> (.faa)]
 			
-		#Create and dispatch fqdump.slurm for each DATA
-			if [ -d "LOG" ]; then
-			    echo "Found directory 'LOG'"
-				else
-				mkdir LOG
-				echo "Created directory 'LOG'"
-			fi
-			echo "#!/bin/sh
-#SBATCH --time=12:00:00
-#SBATCH --mem=16GB
-#SBATCH --job-name=SAMPLE
-#SBATCH --error=./LOG/get_SAMPLE.err
-#SBATCH --output=./LOG/get_SAMPLE.out
+				#Transcriptome cleaning
+					truncate header 'til  (^ means beginning of line, .* is wildcard)
+						sed -i 's/^.*|X/>X/' rna.fa
+					truncate header after ::  (\$ means end of line)
+						sed -i 's/|_.*\$//' MAH1_rna_hqmerge_align.faa
+					replace all spaces:
+						sed -i 's/ /_/g' <file>
+					replace all |:
+						sed -i 's/|/_/g' <file>
+					truncation series:
+						sed -i -e 's/^.*XR_/>XR_/' -e 's/^.*XM_/>XM_/' -e 's/| .*\$//' rna.fasta
+					add _ to the end of the header
+						sed 's/>.*/&_/' ivyConsensus.fasta > ivyConsensus_.fasta
 
-module load SRAtoolkit
+				#Read quantification
+					-sindex (-T)	Index a transcriptome to prepare for salmon-based quantification
+					-squant (-T)	-single or -paired	Quantify transcripts in a reads file\n\n";
+}
 
-cd ../fastq
-fastq-dump -A SAMPLE --split-files" > fqdump.slurm
+if ($project) {
 
-			for x in $reads
-				do
-				sed "s/SAMPLE/$x/g" fqdump.slurm > fqdump_auto.slurm
-				sbatch fqdump_auto.slurm
-			done
-	fi
+	print "Setting up Elemental...\n";
 
-# #rename files according to read_names
-# 		echo "Renaming files..."
-# 		cd ../fastq
-# 		for FILE in `ls *.fastq | sort`; do
-# 			R=$(sed "s/.fastq//" <<< "$FILE");
-# 			#echo $R;
-# 		    m=$(grep -n $R ../reference/read_names | cut -f1 -d:);
-# 		    #echo $m;
-# 		    n=$(($m+1));
-# 		    #echo $n;
-# 		    #echo Moving $FILE to `sed -n ${n}p ../reference/read_names`;
-# 		    mv "${FILE}" `sed -n ${n}p ../reference/read_names`;
-# 		done
-# 			#add .fastq to all file names
-# 			find . -type f -exec mv '{}' '{}'.fastq \;
-# 		echo "Done."
-# 		cd ../scripts
+		# print "Be sure to initialize modules using \"source modules.sh\" before running this script!\n";
+			open ($OUT, ">modules.sh") or die "Can't open modules.sh";
+			print $OUT "#!/bin/bash\nml R blast salmon genemarks/4.3 R clustal-omega\nexport R_LIBS=/home/moriyama/lucasbusta/R/R_libs\n";
+			close $OUT;
 
-#[-s]run salmon
-	if [ "$s" == "1" ]; then
+		# print "Defining base directory and project name...\n";
+			$mainDir = "/work/moriyama/lucasbusta/";
+			$baseDir = "/work/moriyama/lucasbusta/${project}";
 
-		# #rename files according to read_names
-		# echo "Renaming files..."
-		# for FILE in `ls *.fastq | sort`; do
-		# 	R=$(sed "s/.fastq//" <<< "$FILE");
-		# 	#echo $R;
-		#     m=$(grep -n $R ../reference/read_names | cut -f1 -d:);
-		#     #echo $m;
-		#     n=$(($m+1));
-		#     #echo $n;
-		#     #echo Moving $FILE to `sed -n ${n}p ../reference/read_names`;
-		#     mv "${FILE}" `sed -n ${n}p ../reference/read_names`;
-		# done
-		# 	#add .fastq to all file names
-		# 	find . -type f -exec mv '{}' '{}'.fastq \;
+			# chdir ('..') or die "Failed to get to base directory.";
+			# my $baseDir = getcwd;
+			# chomp $baseDir;
+			# print "	Base directory = $baseDir\n";
+			# my $project = (splitdir(rel2abs($0)))[-2];
+			# chomp $project;
+			# print "	Project name = $project\n\n";
+			# chdir ('scripts') or die "Check directory structure. Elemental should be in $baseDir/scripts\n\n";
 
-		#Build salmon directories
-			if [ -d "../salmon" ]; then
-			    rm -r ../salmon
-			    mkdir ../salmon
-			    mkdir ../salmon/${T}
-			    echo "Overwriting directory '../salmon'"
-				else
-				mkdir ../salmon
-				mkdir ../salmon/${T}
-				echo "Created directory '../salmon'"
-				echo "Created directory '../salmon/${T}'"
-			fi
+		# print "Setting up directories...\n";
+			if (-d "$baseDir/scripts/LOG") {
+				print "	Found $baseDir/scripts/LOG\n";
+			} else {
+				mkdir ("$baseDir/scripts/LOG");
+				print "	Made $baseDir/scripts/LOG\n";
+			}
+			if (-d "$baseDir/RawReads") {
+				print "	Found $baseDir/RawReads\n";
+			} else {
+				mkdir ("$baseDir/RawReads");
+				print "	Made $baseDir/RawReads\n";
+			}
+			if (-d "$baseDir/FilteredReads") {
+				print "	Found $baseDir/FilteredReads\n";
+			} else {
+				mkdir ("$baseDir/FilteredReads");
+				print "	Made $baseDir/FilteredReads\n";
+			}
+			if (-d "$baseDir/NormalizedReads") {
+				print "	Found $baseDir/NormalizedReads\n";
+			} else {
+				mkdir ("$baseDir/NormalizedReads");
+				print "	Made $baseDir/NormalizedReads\n";
+			}
+			if (-d "$baseDir/NormalizedMergedReads") {
+				print "	Found $baseDir/NormalizedMergedReads\n";
+			} else {
+				mkdir ("$baseDir/NormalizedMergedReads");
+				print "	Made $baseDir/NormalizedMergedReads\n";
+			}
+			if (-d "$baseDir/Assemblies") {
+				print "	Found $baseDir/Assemblies\n";
+			} else {
+				mkdir ("$baseDir/Assemblies");
+				print "	Made $baseDir/Assemblies\n";
+			}
+			if (-d "$baseDir/Assemblies/idba") {
+				print "	Found $baseDir/Assemblies/idba\n";
+			} else {
+				mkdir ("$baseDir/Assemblies/idba");
+				print "	Made $baseDir/Assemblies/idba\n";
+			}
+			if (-d "$baseDir/Assemblies/soap") {
+				print "	Found $baseDir/Assemblies/soap\n";
+			} else {
+				mkdir ("$baseDir/Assemblies/soap");
+				print "	Made $baseDir/Assemblies/soap\n";
+			}
+			if (-d "$baseDir/Assemblies/spades") {
+				print "	Found $baseDir/Assemblies/spades\n";
+			} else {
+				mkdir ("$baseDir/Assemblies/spades");
+				print "	Made $baseDir/Assemblies/spades\n";
+			}
+			if (-d "$baseDir/Assemblies/trinity") {
+				print "	Found $baseDir/Assemblies/trinity\n";
+			} else {
+				mkdir ("$baseDir/Assemblies/trinity");
+				print "	Made $baseDir/Assemblies/trinity\n";
+			}
+			if (-d "$baseDir/Mining") {
+				print "	Found $baseDir/Mining\n";
+			} else {
+				mkdir ("$baseDir/Mining");
+				print "	Made $baseDir/Mining\n";
+			}
+			if (-d "$baseDir/Mining/salmon") {
+				print "	Found $baseDir/Mining/salmon\n";
+			} else {
+				mkdir ("$baseDir/Mining/salmon");
+				print "	Made $baseDir/Mining/salmon\n";
+			}
+} else {
+	print "Please specify a project...\n";
+}
 
-		#Build salmon reference
-			echo "Building salmon database for ../reference/${T}..."
-			module load salmon
-			salmon index -t ../reference/${T}.fasta -i ../reference/${T}_index -k 31
 
-		#Dispatch salmon runs
-			echo "Dispatching salmon quantification runs..."
-			reads=$(cat ../reference/reads)
-			echo "#!/bin/sh
-#SBATCH --time=12:00:00
-#SBATCH --mem=62GB
-#SBATCH --job-name=salmon_${T}_SAMPLE
-#SBATCH --error=./LOG/salmon_${T}_SAMPLE.err
-#SBATCH --output=./LOG/salmon_${T}_SAMPLE.out
+if ($single) {
 
-module load salmon
-module load erne
-#erne-filter --query1 ../fastq/SAMPLE_1.fastq --query2 ../fastq/SAMPLE_1.fastq --output-prefix ../fastq/SAMPLE_f --ultra-sensitive --force-standard
-#salmon quant -i ../reference/${T}_index -l A -1 ../fastq/SAMPLE_f_1.fastq -2 ../fastq/SAMPLE_f_2.fastq -o ../salmon/${T}/SAMPLE
-#salmon quant -i ../reference/${T}_index -l A -1 ../fastq/SAMPLE_1.fastq -2 ../fastq/SAMPLE_2.fastq -o ../salmon/${T}/SAMPLE
-salmon quant -i ../reference/${T}_index -l A -r ../fastq/SAMPLE.fastq -o ../salmon/${T}/SAMPLE
-" > "salmon_${T}.slurm"
+	print "Setting up reads...\n";
+		if (-e "$baseDir/scripts/$single") { 
+			print "	Found $baseDir/scripts/$single\n"; 
+			} else { 
+			die "	Can't find $baseDir/scripts/$single\n";
+		}
 
-		reads=$(sed -n '1~2!p' ../reference/reads)
-		for x in $reads
-			do
-			sed "s/SAMPLE/$x/g" "salmon_${T}.slurm" > "salmon_${T}_auto.slurm"
-			sbatch "salmon_${T}_auto.slurm" 
-		done
+		print "	Importing read list...\n";
+			my @reads = `sed -n '0~2!p' $baseDir/scripts/$single`;
+			chomp @reads;
+			print "	Reads are: @reads\n\n";
 
-		echo "Done."
-	fi
+	if ($get) {
+		print "Submitting jobs to get SRA files...\n";
+		foreach my $read (@reads) {
+			open ($OUT, ">$baseDir/scripts/fastqdump_${read}.slurm") or die "Can't open $baseDir/scripts/fastqdump_${read}.slurm";
+			print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=16GB\n#SBATCH --job-name=${project}_${read}_fqd\n#SBATCH --error=$baseDir/scripts/LOG/fqd_${read}.err\n#SBATCH --output=$baseDir/scripts/LOG/fqd_${read}.out
+			cd $baseDir/RawReads
+			module load SRAtoolkit
+			fastq-dump ${read}
+			mv $baseDir/RawReads/${read}.fastq $baseDir/RawReads/${read}.fq";
+			# prefetch ${read}
+			close $OUT;
+			system ("sbatch $baseDir/scripts/fastqdump_${read}.slurm");
+		}
+	}
 
-#[-t]generate tree
-	if [ "$t" == "1" ]; then
+	if ($preanalyze) {
+		print "Submitting fastqc job(s)...\n";
+		foreach my $read (@reads) {
+			open ($OUT, ">$baseDir/scripts/fastqc_${read}.slurm") or die "Can't open $baseDir/scripts/fastqdump_${read}.slurm";
+			print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=16GB\n#SBATCH --job-name=${project}_${read}_fqc\n#SBATCH --error=$baseDir/scripts/LOG/fqc_${read}.err\n#SBATCH --output=$baseDir/scripts/LOG/fqc_${read}.out
+			cd $baseDir/RawReads
+			module load fastqc
+			fastqc ${read}.fq
+			rm ${read}_fastqc.zip";
+			close $OUT;
+			system ("sbatch $baseDir/scripts/fastqc_${read}.slurm");
+		}
+	}
 
-		#Merge salmon results, check % mapped
-			reads=$(sed -n '1~2!p' ../reference/reads)
-			if [ -d ../salmon/${T}/_merge ]; then
-				rm -r ../salmon/${T}/_merge
-				mkdir ../salmon/${T}/_merge
-				echo "Overwriting ../salmon/${T}/_merge"
-				else
-				mkdir ../salmon/${T}/_merge
-				echo "Created ../salmon/${T}/_merge"
-			fi	
-			for i in $reads
-				do
-				cp ../salmon/${T}/${i}/quant.sf ../salmon/${T}/_merge/${i}.sf
-			done
-			if [ -e rate ]; then
-				rm rate
-			fi
-			touch rate
-			for i in $reads
-				do 
-				grep "Mapping rate" LOG/salmon_${T}_${i}.err | sed 's/^.* = //' | sed 's/%//' >> rate
-			done
-			avg=$(awk '{x+=$1;next}END{print x/NR}' rate)
-			rm rate
-			echo "Average mapping rate = ${avg} %"
+	if ($filter) {		
+		print "Dispatching filtering job(s) for single reads at q = $q...\n";
+		foreach my $read (@reads) {
+			open ($OUT, ">$baseDir/scripts/filter_${read}_q${q}.slurm");
+			print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_${read}_filter_q$q\n#SBATCH --error=$baseDir/scripts/LOG/filter_${read}_q$q.err\n#SBATCH --output=$baseDir/scripts/LOG/filter_${read}_q$q.out\n
+			module load cutadapt
+			module load erne
+			cutadapt -l 600 $baseDir/RawReads/${read}.fq > $baseDir/FilteredReads/${read}_short.fq
+			erne-filter --query1 $baseDir/FilteredReads/${read}_short.fq --output-prefix $baseDir/FilteredReads/${read} --ultra-sensitive --force-standard
+			mv $baseDir/FilteredReads/${read}_1.fastq $baseDir/FilteredReads/${read}.fq
+			rm $baseDir/FilteredReads/${read}_short.fq";
+			close $OUT;
+			system("sbatch $baseDir/scripts/filter_${read}_q${q}.slurm");
+		}
+	}
 
- 		#Translate ${Q}_${T}_hits.fasta to protein
-			cd ../reference
-				echo "Translating ../reference/${Q}_${T}_hits.fasta to peptide..."
-				if [ -d ${Q}_${T}_hits.fasta.transdecoder_dir ]; then
-					rm -r ${Q}_${T}_hits.fasta.transdecoder_dir
-					echo "Overwriting ../reference/${Q}_${T}_hits.fasta.transdecoder_dir"
-				fi
-				if [ -e ${Q}_${T}_hits.fasta.transdecoder.pep ]; then
-					rm ${Q}_${T}_hits.fasta.transdecoder*
-					echo "Overwriting ../reference/${Q}_${T}_hits.fasta.transdecoder*"
-				fi
-				module load transdecoder
-				TransDecoder.LongOrfs -t ${Q}_${T}_hits.fasta
-				TransDecoder.Predict --retain_long_orfs 340 --single_best_orf -t ${Q}_${T}_hits.fasta
+	if ($normalize) {
+		print "Dispatching normalization job(s) for single reads...\n";
+		foreach my $read (@reads) {
+			open ($OUT, ">$baseDir/scripts/normalize_${read}.slurm");
+			print $OUT "#!/bin/sh\n#SBATCH --time=168:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_${read}_normalize\n#SBATCH --error=$baseDir/scripts/LOG/normalize_${read}.err\n#SBATCH --output=$baseDir/scripts/LOG/normalize_${read}.out\n
+			module load khmer
+			normalize-by-median.py -o $baseDir/NormalizedReads/${read}.fq -x 1000000000 -C ${C} --n_tables 99 --force --ksize 32 $baseDir/FilteredReads/${read}.fq";
+			close $OUT;
+			system("sbatch $baseDir/scripts/normalize_${read}.slurm");
+		}
+	}
 
-			#Clean up ${Q}_${T}_hits.fasta.transdecoder.pep
-				echo "Cleaning up ${Q}_${T}_hits.fasta.transdecoder.pep..."
-					echo "Linearizing ${Q}_${T}_hits.fasta.transdecoder.pep..."
-					sed -e 's/\(^>.*$\)/#\1#/' "${Q}_${T}_hits.fasta.transdecoder.pep" | tr -d "\r" | tr -d "\n" | sed -e 's/$/#/' | tr "#" "\n" | sed -e '/^$/d' > "${Q}_${T}_l_hits.fasta.transdecoder.pep"
-					rm ${Q}_${T}_hits.fasta.transdecoder.pep
-					mv ${Q}_${T}_l_hits.fasta.transdecoder.pep ${Q}_${T}_hits.fasta.transdecoder.pep
-				#cutting off up 'til "LOC":  (^ means beginning of line, .* is wildcard)
-					sed -i 's/^.*(+) />/' ${Q}_${T}_hits.fasta.transdecoder.pep
-				#cutting after ", mRNA":  ($ means end of line)
-					sed -i 's/:/_/' ${Q}_${T}_hits.fasta.transdecoder.pep
-					sed -i 's/_.*$//' ${Q}_${T}_hits.fasta.transdecoder.pep
-				#remove * (stop codon characters) from pep.fasta
- 					sed -i 's/*//g' ${Q}_${T}_hits.fasta.transdecoder.pep
-					cp ${Q}_${T}_hits.fasta.transdecoder.pep ${Q}_${T}_hits_pep.fasta
-			cd ../scripts
+	if ($mergenorm) {
+		print "Merging all reads...\n";
+		open ($OUT, ">$baseDir/NormalizedReads/${single}_preclean.fq");
+		foreach my $read (@reads) {
+			open ($IN, "$baseDir/NormalizedReads/${read}.fq");
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+			}
+		}
+		close $OUT;
+		close $IN;
 
- 		#concatenate the BLAST results and QUERY
-			echo "Merging and linearizing ../reference/${Q}_${T}_hits_pep.fasta and ../reference/${Q}.fasta..."
-			awk '{print}' "../reference/${Q}_${T}_hits_pep.fasta" "../reference/${Q}.fasta" > "../reference/${Q}_${T}_hqmerge.fasta"
-			sed -e 's/\(^>.*$\)/#\1#/' "../reference/${Q}_${T}_hqmerge.fasta" | tr -d "\r" | tr -d "\n" | sed -e 's/$/#/' | tr "#" "\n" | sed -e '/^$/d' > "../reference/${Q}_${T}_hqmerge_l.fasta"
-			rm ../reference/${Q}_${T}_hqmerge.fasta
-			mv ../reference/${Q}_${T}_hqmerge_l.fasta ../reference/${Q}_${T}_hqmerge.fasta
+		print "Tidying headers of merged reads file...\n"; #redo headers so that they are all >${single}.${i}/1
+		open ($OUT, ">$baseDir/NormalizedReads/${single}.fq") or die "Can't open $baseDir/NormalizedReads/${single}_preclean.fq\n";
+		open ($IN, "$baseDir/NormalizedReads/${single}_preclean.fq") or die "Can't open $baseDir/NormalizedReads/${single}.fq\n";
+		$i = 1;
+		while (my $line = readline($IN)) { 
+			$line =~ s/^@.*$/\@${single}.${i}\/1/ if $i % 4 == 1;
+			print $OUT $line;
+			$i++;
+		}
+		close $OUT;
+		close $IN;
+		`rm $baseDir/NormalizedReads/${single}_preclean.fq`;
 
-		#size filter ${Q}_${T}_hqmerge.fasta
-			echo "Length filtering 400aa to 600aa..."
-			awk '!/^>/ { next } { getline seq } length(seq) >= 400 { print $0 "\n" seq }' "../reference/${Q}_${T}_hqmerge.fasta" > "../reference/${Q}_${T}_hqmerge_f.fasta"
-			awk '!/^>/ { next } { getline seq } length(seq) <= 600 { print $0 "\n" seq }' "../reference/${Q}_${T}_hqmerge.fasta" > "../reference/${Q}_${T}_hqmerge_ff.fasta"
-			rm ../reference/${Q}_${T}_hqmerge.fasta ../reference/${Q}_${T}_hqmerge_f.fasta
-			mv ../reference/${Q}_${T}_hqmerge_ff.fasta ../reference/${Q}_${T}_hqmerge.fasta
+		print "Dispatching normalization job for merged single reads...\n";
+			open ($OUT, ">$baseDir/scripts/mergenorm_${project}.slurm");
+			print $OUT "#!/bin/sh\n#SBATCH --time=168:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_${project}_normalize\n#SBATCH --error=$baseDir/scripts/LOG/normalize_${project}.err\n#SBATCH --output=$baseDir/scripts/LOG/normalize_${project}.out\n
+			module load khmer
+			normalize-by-median.py -o $baseDir/NormalizedMergedReads/${single}.fq -x 1000000000 -C ${C} --n_tables 99 --force --ksize 32 $baseDir/NormalizedReads/${single}.fq";
+			close $OUT;
+			system("sbatch $baseDir/scripts/mergenorm_${project}.slurm");
+	}
 
- 		#Align ${Q}_${T}_hqmerge.fasta
-			echo "Aligning ../reference/${Q}_${T}_hqmerge.fasta..."
-			module load clustal-omega
-			clustalo -i ../reference/${Q}_${T}_hqmerge.fasta -o ../reference/${Q}_${T}_hqmerge_align.fasta --force
+	if ($assemble) {
+		print "Calculating average read length...\n";
+			my @seqs = `sed -n '2~4p' $baseDir/NormalizedMergedReads/${single}.fq`;
+			foreach my $line (@seqs) {
+				my $len=length($line);
+				push @readlength, $len;
+			}
+	   		$nReads = @readlength;
+	   		# print "$nReads";
+			$nBases = eval join '+', @readlength;
+			# print "$nBases";
+	    	$avgLength = $nBases / $nReads;
+	    	# $stdevLength += 
+		    print "number of reads: $nReads\n";
+		    print "number of bases: $nBases\n";
+		    print "avg read length: $avgLength\n";
 
-		#Create NJ heat tree
-			echo "Creating neighbor-joining heat tree..."
-			cd "../salmon/${T}"
-			cd _merge 
-			merdir=`pwd`
-			cd ..
-			cd ..
-			cd ../reference
-			refdir=`pwd`
-			cd /home/moriyama/lucasbusta/R
+			if ($avgLength < 127) {
+				$kMax = floor($avgLength);
+			} else {
+				$kMax = 127;
+			}
 
-			module load R
-			export R_LIBS="/home/moriyama/lucasbusta/R/R_libs"
-			echo "library(DESeq2)
-library(tximport)
-library(readr)
-library(tximportData)
-library(ggtree)
-library(ape)
-library(msa)
-library(phangorn)
+			print "kMax: ${kMax}\n";
 
-#Create protein fasta phylo
-	setwd("\""$refdir"\"")
-	aa <- read.aa("\""${Q}_${T}_hqmerge_align.fasta"\"", format="\""fasta"\"")
-	phylo <- NJ(dist.ml(aa))
-	dim(as.data.frame(phylo))
-	as.data.frame(phylo)
+		if ($idba) {
+			print "Dispatching idba run...\n";
+				open ($OUT, ">$baseDir/scripts/idba_${single}.slurm") or die "Can't open $baseDir/scripts/idba_${single}.slurm";
+					if ($avgLength <= 128) {
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${single}_idba\n#SBATCH --error=$baseDir/scripts/LOG/idba_${single}.err\n#SBATCH --output=$baseDir/scripts/LOG/idba_${single}.out\n
+						module load idba khmer
+						fastq-to-fasta.py -o $baseDir/NormalizedMergedReads/${single}.fa $baseDir/NormalizedMergedReads/${single}.fq
+						idba_tran -o $baseDir/Assemblies/idba/ -r $baseDir/NormalizedMergedReads/${single}.fa --mink $kMin --maxk $kMax --step 7 --num_threads 8 --max_isoforms 50";
+					}
+					if ($avgLength > 128) {
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${single}_idba\n#SBATCH --error=$baseDir/scripts/LOG/idba_${single}.err\n#SBATCH --output=$baseDir/scripts/LOG/idba_${single}.out\n
+						module load idba khmer
+						fastq-to-fasta.py -o $baseDir/NormalizedMergedReads/${single}.fa $baseDir/NormalizedMergedReads/${single}.fq
+						idba_tran -o $baseDir/Assemblies/idba/ -l $baseDir/NormalizedMergedReads/${single}.fa --mink $kMin --maxk 124 --step 7 --num_threads 8 --max_isoforms 50";
+					}
+				close $OUT;
+				system ("sbatch $baseDir/scripts/idba_${single}.slurm");
+		}
 
-#Create sample Table
-	setwd("\""$merdir"\"")
-	files <- dir()
-	names(files) <- substr(files,1,10)
-	sampleTable <- data.frame(files)
-	sampleTable
+		if ($soap) {
+			print "Creating soap configuration file...\n";
+				open ($OUT, ">$baseDir/Assemblies/soap/SOAP_Conf.txt") or die "Can't open $baseDir/Assemblies/soap/SOAP_Conf.txt";
+					print $OUT "\nmax_rd_len=600\n[LIB]\nrd_len_cutof=600\nreverse_seq=0\nasm_flags=3\nmap_len=32\nq=$baseDir/NormalizedMergedReads/${single}.fq";
+				close $OUT;
 
-#Create annotation file
-	setwd("\""$merdir"\"")
-	txi.salmon <- tximport(files, type = "\""salmon"\"", txOut=TRUE)
-	dds1 <- DESeqDataSetFromTximport(txi.salmon, sampleTable, ~1)
-	dds2 <- DESeq2::fpkm(dds1, robust=FALSE) #NOTE THAT ROBUST IS AFFECTED BY N SAMPLES
-	#dds2 <- log2(dds2)
-	head(dds2)
+			print "Dispatching soap runs...\n";
+				for (my $k = $kMin; $k <= $kMax; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/soap_${k}_${single}.slurm") or die "Can't open $baseDir/scripts/soap_${k}_${single}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${single}_soap_${k}\n#SBATCH --error=$baseDir/scripts/LOG/soap_${k}_${single}.err\n#SBATCH --output=$baseDir/scripts/LOG/soap_${k}_${single}.out\n
+						module load soapdenovo-trans
+						SOAPdenovo-Trans-127mer all -s $baseDir/Assemblies/soap/SOAP_Conf.txt -K $k -o $baseDir/Assemblies/soap/$k -F -p 4";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/soap_${k}_${single}.slurm");
+				}
+		}
 
-	ngenes <- as.numeric(table(as.data.frame(phylo)\$isTip)["\""TRUE"\""])
-	rnas <- as.data.frame(phylo)\$label[1:ngenes]
-	rnas
+		if ($spades) {
+			print "Dispatching spades runs...\n";
+				for (my $k = $kMin; $k <= $kMax; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/spades_${k}_${single}.slurm") or die "Can't open $baseDir/scripts/spades_${k}_${single}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${single}_spades_${k}\n#SBATCH --error=$baseDir/scripts/LOG/spades_${k}_${single}.err\n#SBATCH --output=$baseDir/scripts/LOG/spades_${k}_${single}.out\n
+						module load spades
+						rnaspades.py -k ${k} -o $baseDir/Assemblies/spades/${k} -s $baseDir/NormalizedMergedReads/${single}.fq -m ${M} -t 8";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/spades_${k}_${single}.slurm");
+				}
+		}
+
+		if ($trinity) {
+			print "Dispatching trinity runs...\n";
+				for (my $k = $kMin; $k <= 32; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/trinity_${k}_${single}.slurm") or die "Can't open $baseDir/scripts/trinity_${k}_${single}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${single}_trinity_${k}\n#SBATCH --error=$baseDir/scripts/LOG/trinity_${k}_${single}.err\n#SBATCH --output=$baseDir/scripts/LOG/trinity_${k}_${single}.out\n
+						module load compiler/gcc bowtie samtools trinity
+						Trinity --KMER_SIZE ${k} --no_normalize_reads --no_version_check --seqType fq --max_memory ${M}G --output $baseDir/Assemblies/trinity/${k}/trinity/ --full_cleanup --single $baseDir/NormalizedMergedReads/${single}.fq";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/trinity_${k}_${single}.slurm");
+				}
+		}
+	}
+
+	if ($squant and $T) {
+		print "Setting up salmon directories and dispatching salmon jobs...\n";
+			open ($OUT, ">salmon_${T}.slurm") or die "Can't open salmon_${T}.slurm.\n";
+			if ($single) {
+				print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_SAMPLE_salmon_${T}\n#SBATCH --error=$baseDir/scripts/LOG/salmon_${T}_SAMPLE.err\n#SBATCH --output=$baseDir/scripts/LOG/salmon_${T}_SAMPLE.out\n
+				module load salmon
+				salmon quant -i $baseDir/Mining/salmon/${T}_index -l A -r $baseDir/RawReads/SAMPLE.fq -o $baseDir/Mining/salmon/${T}/SAMPLE";
+				close $OUT;
+			}
+			foreach my $x (@reads) {
+				if ( -d "$baseDir/Mining/salmon/${T}/$x" ) {
+			    print "Overwriting $baseDir/Mining/salmon${T}/$x\n";
+			    	`rm -r $baseDir/Mining/salmon/${T}/$x`;
+			    	mkdir "$baseDir/Mining/salmon/${T}/$x";
+				} else {
+				print "Creating directory $baseDir/Mining/salmon/${T}/$x...\n";
+				mkdir "$baseDir/Mining/salmon/${T}/$x";
+				}
+				system ("sed \"s/SAMPLE/$x/g\" \"salmon_${T}.slurm\" > \"salmon_${T}_auto.slurm\"");
+				system ("sbatch \"salmon_${T}_auto.slurm\"");
+			}
+	}
+	print "Done.\n";
+}
+
+if ($paired) {
+
+	print "Setting up reads...\n";
+	if (-e "$baseDir/scripts/$paired") { 
+		print "	Found $baseDir/scripts/$paired\n"; 
+		} else { 
+		die "	Can't find $baseDir/scripts/$paired\n";
+	}
+
+	print "	Importing read list...\n";
+		my @reads = `sed -n '0~2!p' $baseDir/scripts/$paired`;
+		chomp @reads;
+		print "	Reads are: @reads\n";
+
+	if ($get) {
+		print "Submitting jobs to get SRA files...\n";
+			foreach my $read (@reads) {
+			open ($OUT, ">fastqdump_${read}.slurm") or die "Can't open fastqdump_${read}.slurm";
+			print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=16GB\n#SBATCH --job-name=${project}_${read}_fqd\n#SBATCH --error=$baseDir/scripts/LOG/fqd_${read}.err\n#SBATCH --output=$baseDir/scripts/LOG/fqd_${read}.out
+			cd $baseDir/RawReads
+			module load SRAtoolkit
+			prefetch ${read}
+			fastq-dump --defline-seq \'@\$sn[_\$rn]/\$ri\' --split-files ${read}
+			mv $baseDir/RawReads/${read}_1.fastq $baseDir/RawReads/${read}_1.fq
+			mv $baseDir/RawReads/${read}_2.fastq $baseDir/RawReads/${read}_2.fq";
+			close $OUT;
+			system("sbatch fastqdump_${read}.slurm");
+			}
+	}
+
+	if ($filter) {
+		print "Dispatching filtering job(s) for paired reads at q = $q...\n";
+			foreach my $read (@reads) {
+				open ($OUT, ">$baseDir/scripts/filter_${read}_q${q}.slurm");
+				print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_${read}_filter_q$q\n#SBATCH --error=$baseDir/scripts/LOG/filter_${read}_q$q.err\n#SBATCH --output=$baseDir/scripts/LOG/filter_${read}_q$q.out\n
+				module load erne
+				erne-filter --query1 $baseDir/RawReads/${read}_1.fq --query2 $baseDir/RawReads/${read}_2.fq --output-prefix $baseDir/FilteredReads/${read} --ultra-sensitive --force-standard
+				mv $baseDir/FilteredReads/${read}_1.fastq $baseDir/FilteredReads/${read}_1.fq
+				mv $baseDir/FilteredReads/${read}_2.fastq $baseDir/FilteredReads/${read}_2.fq
+				rm $baseDir/FilteredReads/${read}_unpaired.fastq";
+				close $OUT;
+				system("sbatch $baseDir/scripts/filter_${read}_q${q}.slurm");
+			}
+	}
+
+	if ($normalize) {
+		print "Dispatching normalization job(s) for paired reads...\n";
+		foreach my $read (@reads) {
+			open ($OUT, ">$baseDir/scripts/normalize_${read}.slurm");
+			print $OUT "#!/bin/sh\n#SBATCH --time=168:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_${read}_normalize\n#SBATCH --error=$baseDir/scripts/LOG/normalize_${read}.err\n#SBATCH --output=$baseDir/scripts/LOG/normalize_${read}.out\n
+			module load khmer
+			interleave-reads.py  -o $baseDir/FilteredReads/${read}.fq.I --force $baseDir/FilteredReads/${read}_1.fq $baseDir/FilteredReads/${read}_2.fq
+			normalize-by-median.py -o $baseDir/NormalizedReads/${read}.fq.I -x 1000000000 -C 50 --n_tables 99 --force --ksize 32 $baseDir/FilteredReads/${read}.fq.I
+			extract-paired-reads.py -d $baseDir/NormalizedReads $baseDir/NormalizedReads/${read}.fq.I
+			split-paired-reads.py -d $baseDir/NormalizedReads --force $baseDir/NormalizedReads/${read}.fq.I.pe
+			rm $baseDir/NormalizedReads/${read}.fq.I.se
+			mv $baseDir/NormalizedReads/${read}.fq.I.pe $baseDir/NormalizedReads/${read}.fq.I
+			mv $baseDir/NormalizedReads/${read}.fq.I.pe.1 $baseDir/NormalizedReads/${read}_1.fq
+			mv $baseDir/NormalizedReads/${read}.fq.I.pe.2 $baseDir/NormalizedReads/${read}_2.fq";
+			close $OUT;
+			system("sbatch $baseDir/scripts/normalize_${read}.slurm");
+		}
+	}
+
+	if ($mergenorm) {
+		print "Merging reads in ${paired}...\n";
+		open ($OUT, ">$baseDir/NormalizedReads/${paired}_1.fq");
+		foreach my $read (@reads) {
+			open ($IN, "$baseDir/NormalizedReads/${read}_1.fq");
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+			}
+		}
+		close $OUT;
+		open ($OUT, ">$baseDir/NormalizedReads/${paired}_2.fq");
+		foreach my $read (@reads) {
+			open ($IN, "$baseDir/NormalizedReads/${read}_2.fq");
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+			}
+		}
+		close $OUT;
+		print "Dispatching normalization job for merged single reads...\n";
+			open ($OUT, ">$baseDir/scripts/mergenorm_${paired}.slurm");
+			print $OUT "#!/bin/sh\n#SBATCH --time=168:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${paired}_normalize\n#SBATCH --error=$baseDir/scripts/LOG/normalize_${paired}.err\n#SBATCH --output=$baseDir/scripts/LOG/normalize_${paired}.out\n
+			module load khmer
+			interleave-reads.py -o $baseDir/NormalizedReads/${paired}.fq.I --force $baseDir/NormalizedReads/${paired}_1.fq $baseDir/NormalizedReads/${paired}_2.fq
+			normalize-by-median.py -o $baseDir/NormalizedMergedReads/${paired}.fq.I -x 1000000000 -C ${C} --n_tables 99 --force --ksize 32 $baseDir/NormalizedReads/${paired}.fq.I
+			extract-paired-reads.py -d $baseDir/NormalizedMergedReads $baseDir/NormalizedMergedReads/${read}.fq.I
+			split-paired-reads.py -d $baseDir/NormalizedMergedReads --force $baseDir/NormalizedMergedReads/${read}.fq.I.pe
+			rm $baseDir/NormalizedMergedReads/${read}.fq.I.se
+			mv $baseDir/NormalizedMergedReads/${read}.fq.I.pe $baseDir/NormalizedMergedReads/${read}.fq.I
+			mv $baseDir/NormalizedMergedReads/${read}.fq.I.pe.1 $baseDir/NormalizedMergedReads/${read}_1.fq
+			mv $baseDir/NormalizedMergedReads/${read}.fq.I.pe.2 $baseDir/NormalizedMergedReads/${read}_2.fq";
+			close $OUT;
+			system("sbatch $baseDir/scripts/mergenorm_${paired}.slurm");
+	}
+
+	if ($skipmergenorm) {
+		print "Copying reads to NormalizedMergedReads...\n";
+		`cp $baseDir/NormalizedReads/* $baseDir/NormalizedMergedReads`;
+	}
+
+	if ($assemble) {
+		print "Calculating average read length...\n";
+			my @seqs = `sed -n '2~4p' $baseDir/NormalizedReads/normalized_${project}.fq`;
+			foreach my $line (@seqs) {
+				my $len=length($line);
+				push @readlength, $len;
+			}
+	   		$nReads = @readlength;
+	   		# print "$nReads";
+			$nBases = eval join '+', @readlength;
+			# print "$nBases";
+	    	$avgLength = $nBases / $nReads;
+	    	# $stdevLength += 
+		    print "number of reads: $nReads\n";
+		    print "number of bases: $nBases\n";
+		    print "avg read length: $avgLength\n";
+
+			if ($avgLength < 127) {
+				$kMax = floor($avgLength);
+			} else {
+				$kMax = 127;
+			}
+
+			print "kMax: ${kMax}\n";
+
+		if ($idba) {
+			print "Dispatching idba run...\n";
+			open ($OUT, ">$baseDir/scripts/idba_${paired}.slurm") or die "Can't open $baseDir/scripts/idba_${paired}.slurm";
+				if ($avgLength <= 128) {
+					print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${paired}_idba\n#SBATCH --error=$baseDir/scripts/LOG/idba_${paired}.err\n#SBATCH --output=$baseDir/scripts/LOG/idba_${paired}.out\n
+					module load idba khmer
+					fastq-to-fasta.py -o $baseDir/NormalizedMergedReads/${paired}.fa $baseDir/NormalizedMergedReads/${paired}.fq
+					idba_tran -o $baseDir/Assemblies/idba/ -r $baseDir/NormalizedMergedReads/${paired}.fa --mink $kMin --maxk $kMax --step 7 --num_threads 8 --max_isoforms 50";
+				}
+				if ($avgLength > 128) {
+					print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${paired}_idba\n#SBATCH --error=$baseDir/scripts/LOG/idba_${paired}.err\n#SBATCH --output=$baseDir/scripts/LOG/idba_${paired}.out\n
+					module load idba khmer
+					fastq-to-fasta.py -o $baseDir/NormalizedMergedReads/${paired}.fa $baseDir/NormalizedMergedReads/${paired}.fq
+					idba_tran -o $baseDir/Assemblies/idba/ -l $baseDir/NormalizedMergedReads/${paired}.fa --mink $kMin --maxk $kMax --step 7 --num_threads 8 --max_isoforms 50";
+				}
+			close $OUT;
+			system ("sbatch $baseDir/scripts/idba_${paired}.slurm");
+		}
+
+		if ($soap) {
+			print "Creating soap configuration file..."; ###SHOULD REVERSE_SEQ HERE BE == 1?
+				open ($OUT, ">$baseDir/Assemblies/soap/SOAP_Conf.txt") or die "Can't open $baseDir/Assemblies/soap/SOAP_Conf.txt";
+					print $OUT "\nmax_rd_len=600\n[LIB]\nrd_len_cutof=600\nreverse_seq=0\nasm_flags=3\nmap_len=32\nq=$baseDir/NormalizedReads/normalized_${project}.fq";
+				close $OUT;
+
+			print "Dispatching soap runs...\n";
+				for (my $k = $kMin; $k <= $kMax; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/soap_${k}_${project}.slurm") or die "Can't open $baseDir/scripts/soap_${k}_${project}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${project}_soap_${k}\n#SBATCH --error=$baseDir/scripts/LOG/soap_${k}_${project}.err\n#SBATCH --output=$baseDir/scripts/LOG/soap_${k}_${project}.out\n
+						module load soapdenovo-trans
+						SOAPdenovo-Trans-127mer all -s $baseDir/Assemblies/soap/SOAP_Conf.txt -K $k -o $baseDir/Assemblies/soap/$k -F -p 4";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/soap_${k}_${project}.slurm");
+				}
+		}
+
+		if ($spades) { 
+			print "Dispatching spades runs...\n";
+				for (my $k = $kMin; $k <= $kMax; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/spades_${k}_${project}.slurm") or die "Can't open $baseDir/scripts/spades_${k}_${project}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${project}_spades_${k}\n#SBATCH --error=$baseDir/scripts/LOG/spades_${k}_${project}.err\n#SBATCH --output=$baseDir/scripts/LOG/spades_${k}_${project}.out\n
+						module load spades
+						rnaspades.py -k ${k} -o $baseDir/Assemblies/spades/${k} -s $baseDir/NormalizedReads/normalized_${project}.fq -m ${M} -t 8";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/spades_${k}_${project}.slurm");		
+				}
+		}
+
+		if ($trinity) {
+			print "Dispatching trinity runs...\n"; #trinity has max kmer size of 32
+				for (my $k = $kMin; $k <= 32; $k += 4) {
+					open ($OUT, ">$baseDir/scripts/trinity_${k}_${project}.slurm") or die "Can't open $baseDir/scripts/trinity_${k}_${project}.slurm";
+						print $OUT "#!/bin/sh\n#SBATCH --mem=${M}GB\n#SBATCH --time=168:00:00\n#SBATCH --job-name=${project}_trinity_${k}\n#SBATCH --error=$baseDir/scripts/LOG/trinity_${k}_${project}.err\n#SBATCH --output=$baseDir/scripts/LOG/trinity_${k}_${project}.out\n
+						module load compiler/gcc bowtie samtools trinity
+						Trinity --KMER_SIZE ${k} --no_normalize_reads --no_version_check --seqType fq --max_memory ${M}G --output $baseDir/Assemblies/trinity/${k}/trinity/ --full_cleanup --single $baseDir/NormalizedReads/normalized_${project}.fq";
+					close $OUT;
+					system ("sbatch $baseDir/scripts/trinity_${k}_${project}.slurm");		
+				}
+		}
+	}
+
+	if ($squant and $T) {
+		print "Setting up salmon directories and dispatching salmon jobs...\n";
+			open ($OUT, ">salmon_${T}.slurm") or die "Can't open salmon_${T}.slurm.\n";
+			print $OUT "#!/bin/sh\n#SBATCH --time=12:00:00\n#SBATCH --mem=${M}GB\n#SBATCH --job-name=${project}_SAMPLE_salmon_${T}\n#SBATCH --error=$baseDir/scripts/LOG/salmon_${T}_SAMPLE.err\n#SBATCH --output=$baseDir/scripts/LOG/salmon_${T}_SAMPLE.out\n
+				module load salmon
+				salmon quant -i $baseDir/Mining/salmon/${T}_index -l A -1 $baseDir/RawReads/SAMPLE_1.fq -2 $baseDir/RawReads/SAMPLE_2.fq -o $baseDir/Mining/salmon/${T}/SAMPLE";
+			close $OUT;
+			foreach my $x (@reads) {
+				if ( -d "$baseDir/Mining/salmon/${T}/$x" ) {
+			    print "Overwriting $baseDir/Mining/salmon/${T}/$x\n";
+			    	`rm -r $baseDir/Mining/salmon/${T}/$x`;
+			    	mkdir "$baseDir/Mining/salmon/${T}/$x";
+				} else {
+				print "Creating directory $baseDir/Mining/salmon/${T}/$x...\n";
+				mkdir "$baseDir/Mining/salmon/${T}/$x";
+			}
+				system ("sed \"s/SAMPLE/$x/g\" \"salmon_${T}.slurm\" > \"salmon_${T}_auto.slurm\"");
+				system ("sbatch \"salmon_${T}_auto.slurm\"");
+			}
+		print "Done.\n";
+	}
+}
+
+if ($kmerge) {
+
+	print "Deleting previous kmerges...\n";
+		foreach my $assembler (@assemblers) {
+			if (-e "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa") {
+				unlink "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa";
+			}
+		}
+
+	print "Creating one file for each assembler with all the contigs it found using various kmers...\n";
+		`awk 'FNR==1{print ""}1' $baseDir/Assemblies/idba/transcript-*.fa > $baseDir/Assemblies/idba/all_idba_contigs.fa`;
+		`awk 'FNR==1{print ""}1' $baseDir/Assemblies/soap/*.scafSeq > $baseDir/Assemblies/soap/all_soap_contigs.fa`;
+		`awk 'FNR==1{print ""}1' $baseDir/Assemblies/spades/*/transcripts.fasta > $baseDir/Assemblies/spades/all_spades_contigs.fa`;
+		`awk 'FNR==1{print ""}1' $baseDir/Assemblies/trinity/*/trinity.Trinity.fasta > $baseDir/Assemblies/trinity/all_trinity_contigs.fa`;
+		# system ("cat $baseDir/Assemblies/idba/transcript-*.fa > $baseDir/Assemblies/idba/all_idba_contigs.fa");
+		# system ("cat $baseDir/Assemblies/soap/*.scafSeq > $baseDir/Assemblies/soap/all_soap_contigs.fa");
+		# system ("cat $baseDir/Assemblies/spades/*/transcripts.fasta > $baseDir/Assemblies/spades/all_spades_contigs.fa");
+		# system ("cat $baseDir/Assemblies/trinity/*/trinity.Trinity.fasta > $baseDir/Assemblies/trinity/all_trinity_contigs.fa");
+	print "Done.\n";
+}
+
+if ($translatedenovos) {
+
+	print "Deleting previous translations...\n";
+	foreach my $assembler (@assemblers) {
+		if (-e "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa.faa") {
+			unlink "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa.faa";
+		}
+	}
+
+	foreach my $assembler (@assemblers) {
+	print "Submitting ${assembler} translation job...\n";
+		open (my $OUT, ">$baseDir/scripts/genemarks_${assembler}.slurm") or die "Could not open $baseDir/scripts/genemarks_${assembler}.slurm";
+		print $OUT "#!/bin/sh \n#SBATCH --mem=${M}GB \n#SBATCH --time=168:00:00 \n#SBATCH --job-name=${project}_gmsn_${assembler} \n#SBATCH --error=$baseDir/scripts/LOG/gmsn_${assembler}.err \n#SBATCH --output=$baseDir/scripts/LOG/gmsn_${assembler}.out
+		cd $baseDir/Assemblies/${assembler}
+		echo 'Loading modules...'
+			ml genemarks/4.3
+		echo 'Translating...'
+			gmsn.pl --faa --euk all_${assembler}_contigs.fa
+		echo 'Done.'\n";
+		close $OUT;
+		system("sbatch genemarks_${assembler}.slurm");
+	}
+	print "Done.\n";
+}
+
+if ($nonredund) {
+
+	foreach my $assembler (@assemblers) {
+
+		print "Deleting previous nonredund AA(RNA) selections...\n";
+			if (-e "$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa") {
+				unlink "$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa";
+			}
+
+		$file = "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa";
+		print "Tidying and linearizing ${file}...\n";
+			open ($IN, "${file}") or die "Can't open ${file}\n";
+			open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+			while (my $line = readline($IN)) {
+				$line =~ s/ /_/g;
+				$line =~ s/^>(.*)$/#>$1#/;
+				$line =~ s/\n//g;
+				$line =~ s/#/\n/g;
+				print $OUT $line;
+			}
+			close $IN;
+			close $OUT;
+			system ("sed -i '1d' ${file}_l");
+			unlink "${file}";
+			system ("mv ${file}_l ${file}");
+
+		$file = "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa.faa";
+		print "Tidying and linearizing ${file}...\n";
+			open ($IN, "${file}") or die "Can't open ${file}\n";
+			open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+			while (my $line = readline($IN)) {
+				$line =~ s/ /_/g;
+				$line =~ s/^(>.*)>/>/g;
+				$line =~ s/^>(.*)$/#>$1#/;
+				$line =~ s/\n//g;
+				$line =~ s/#/\n/g;
+				print $OUT $line;
+			}
+			close $IN;
+			close $OUT;
+			system ("sed -i '1d' ${file}_l");
+			unlink "${file}";
+			system ("mv ${file}_l ${file}");
+
+		print "Preparing array of hashes containing all_${assembler}_contigs and their translations...\n";
+		$file = "$baseDir/Assemblies/${assembler}/all_${assembler}_contigs.fa";
+			my %rna;
+			my @rna = `cat ${file}`;
+			chomp @rna;
+			%rna = @rna;
+
+			my %aa;
+			my @aa = `cat ${file}.faa`;
+			chomp @aa;
+			%aa = @aa;
+
+			my @contig = `sed -n '0~2!p' ${file}.faa`;
+			chomp @contig;
+
+			my @results;
+			foreach (@contig) {
+				push @results, { rna => "$rna{\"$_\"}", aa => "$aa{\"$_\"}" };
+			}
+
+		print "Sorting array of all_${assembler}_contigs based on RNA length...\n";
+			my @sorted_results;
+			@sorted_results = sort { length $a->{rna} cmp length $b->{rna} } @results;
+
+		print "Selecting and writing shortest nonredund ${assembler} proteins and their transcripts...\n";
+			my @uniq_results = grep { !$seen{$_->{aa}}++ } @sorted_results;           
+			# print Dumper(\@uniq_idba);
+			open ($OUT, ">$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa") or die "Can't open $baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa\n";
+			$i = 1;
+			foreach  (@uniq_results) {
+				print $OUT ">${project}_${assembler}_${i}-\n";
+				print $OUT "$_->{rna}\n";
+				$i = $i++;
+			}
+			close $OUT;
+			open ($OUT, ">$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa.faa") or die "Can't open $baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa.faa\n";
+			$i = 1;
+			foreach  (@uniq_results) {
+				print $OUT ">${project}_${assembler}_${i}-\n";
+				print $OUT "$_->{aa}\n";
+				$i = $i++;
+			}
+			close $OUT;
+	}
+	print "Done!\n";
+}
+
+if ($consensus) {
+
+	print "Preparing all_${project}_contigs.fa...\n";
+		open ($OUT, ">$baseDir/Assemblies/all_${project}_contigs.fa") or die "Can't open $baseDir/Assemblies/all_${project}_contigs.fa";
+		foreach my $assembler (@assemblers) {
+			open ($IN, "$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa") or die "Can't open $baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa";;
+				while (my $line = readline($IN)) {
+					print $OUT $line;
+				}
+			close $IN;
+		}
+		close $OUT;
+
+	print "Tidying and linearizing all_${project}_contigs.fa\n";
+			$file = "$baseDir/Assemblies/all_${project}_contigs.fa";
+			print "Tidying and linearizing ${file}...\n";
+				open ($IN, "${file}") or die "Can't open ${file}\n";
+				open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+				while (my $line = readline($IN)) {
+					$line =~ s/ /_/g;
+					$line =~ s/^(>.*)>/>/g;
+					$line =~ s/^>(.*)$/#>$1#/;
+					$line =~ s/\n//g;
+					$line =~ s/#/\n/g;
+					print $OUT $line;
+				}
+				close $IN;
+				close $OUT;
+				system ("sed -i '1d' ${file}_l");
+				unlink "${file}";
+				system ("mv ${file}_l ${file}");
+
+	print "Preparing all_${project}_contigs.fa.faa...\n";
+		open ($OUT, ">$baseDir/Assemblies/all_${project}_contigs.fa.faa") or die "Can't open $baseDir/Assemblies/all_${project}_contigs.fa.faa";
+		foreach my $assembler (@assemblers) {
+			open ($IN, "$baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa.faa") or die "Can't open $baseDir/Assemblies/${assembler}/nonredund_${assembler}_contigs.fa.faa";
+				while (my $line = readline($IN)) {
+					print $OUT $line;
+				}
+			close $IN;
+		}
+		close $OUT;
+
+	print "Tidying and linearizing all_${project}_contigs.fa.faa\n";
+			$file = "$baseDir/Assemblies/all_${project}_contigs.fa.faa";
+			print "Tidying and linearizing ${file}...\n";
+				open ($IN, "${file}") or die "Can't open ${file}\n";
+				open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+				while (my $line = readline($IN)) {
+					$line =~ s/ /_/g;
+					$line =~ s/^(>.*)>/>/g;
+					$line =~ s/^>(.*)$/#>$1#/;
+					$line =~ s/\n//g;
+					$line =~ s/#/\n/g;
+					print $OUT $line;
+				}
+				close $IN;
+				close $OUT;
+				system ("sed -i '1d' ${file}_l");
+				unlink "${file}";
+				system ("mv ${file}_l ${file}");
+
+	print "Preparing array of hashes containing all_${project}_contigs and their translations...\n";
+		$file = "$baseDir/Assemblies/all_${project}_contigs.fa";
+		my %rna;
+		my @rna = `cat "${file}"`;
+		chomp @rna;
+		%rna = @rna;
+
+		my %aa;
+		my @aa = `cat "${file}.faa"`;
+		chomp @aa;
+		%aa = @aa;
+
+		my @contig = `sed -n '0~2!p' ${file}.faa`;
+		chomp @contig;
+
+		my @project_results;
+		foreach (@contig) {
+			push @project_results, { rna => "$rna{\"$_\"}", aa => "$aa{\"$_\"}", contig => "$_"};
+		}
+
+		print "Sorting array of all_${project}_contigs based on RNA length...\n";
+			my @sorted_project_results;
+			@sorted_project_results = sort { length $a->{rna} cmp length $b->{rna} } @project_results;
+
+		print "Selecting AA sequences found by at least two assemblers...\n";
+			my @dupl_results = grep { $seen{$_->{aa}}++ } @sorted_project_results;
+			# print Dumper(\@uniq_results);
+
+		print "Sorting array of all_${project}_contigs based on AA length...\n";
+			my @resorted_results;
+			@resorted_results = sort { length $a->{rna} cmp length $b->{rna} } @dupl_results;
+
+		print "Selecting shortest RNA/nonredund AA sequences found by at least two assemblers...\n";
+			my @nonredund_dupl_results = grep { !$seen{$_->{aa}}++ } @resorted_results;
+			# print Dumper(\@uniq_results);
+
+			open ($OUT, ">$baseDir/Assemblies/consensus_${project}_contigs.fa") or die "Can't open $baseDir/Assemblies/consensus_${project}_contigs.fa\n";
+			$i = 1;
+			my $orig;
+			foreach  (@nonredund_dupl_results) {
+				my $orig = substr $_->{contig}, 1;
+				print $OUT ">${project}_consensus_${i}-(${orig})\n";
+				print $OUT "$_->{rna}\n";
+				$i = $i++;
+			}
+			close $OUT;
+			open ($OUT, ">$baseDir/Assemblies/consensus_${project}_contigs.fa.faa") or die "Can't open $baseDir/Assemblies/consensus_${project}_contigs.fa.faa\n";
+			$i = 1;
+			foreach  (@nonredund_dupl_results) {
+				my $orig = substr $_->{contig}, 1;
+				print $OUT ">${project}_consensus_${i}-$_-($orig})\n";
+				print $OUT "$_->{aa}\n";
+				$i = $i++;
+			}
+			close $OUT;
+			print "Done.\n";
+}
+
+if ($sindex and $T) {
 	
-	keep <- which(rownames(dds2) %in% rnas)
-	annot <- dds2[keep,]
-	dim(annot)
-	annot
+	if (-d "$baseDir/Mining/salmon/${T}_index") {
+		print "Removing previous index...\n";
+		`rm -r $baseDir/Mining/salmon/${T}_index`
+	}
+	print "Building salmon database for $baseDir/Assemblies/${T}...\n";
+		`salmon index -t $baseDir/Assemblies/${T}.fa -i $baseDir/Mining/salmon/${T}_index -k 31`;
+	print "Done."
+}
 
-#plot protein tree
-	setwd("\""$refdir"\"")
-	p <- ggtree(phylo, size=1, branch.length = "\""none"\"", ladderize=TRUE)+
-		geom_point(size=1)+
-		theme(legend.position="\""right"\"")+
-		geom_tiplab(align=TRUE, linesize=.5, size=5, hjust=0, offset=0.1)
+if ($blast and $T and $Q and $anchor) {
 
-	pdf(file="\""ggtreeP.pdf"\"",width=16,height=16)
-	gheatmap(p, annot, width=3, offset=6, low = "\""#ffffff"\"", high = "\""#0091d1"\"", color="\""black"\"", colnames_position="\""top"\"", colnames_angle="\""90"\"", colnames_offset_x=0, colnames_offset_y=0, font.size=5, hjust=0)+
-		theme(legend.position="\""right"\"", legend.key.size = unit(1, "\""cm"\""), legend.text=element_text(size=20))
-	dev.off()" > ggtree.R
+	$file = "$baseDir/Assemblies/${T}.fa";
+		print "Tidying and linearizing ${file}...\n";
+		open ($IN, "${file}") or die "Can't open ${file}\n";
+		open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+		while (my $line = readline($IN)) {
+			$line =~ s/ /_/g;
+			$line =~ s/^>(.*)$/#>$1#/;
+			$line =~ s/\n//g;
+			$line =~ s/#/\n/g;
+			print $OUT $line;
+		}
+		close $IN;
+		close $OUT;
+		system ("sed -i '1d' ${file}_l");
+		unlink "${file}";
+		system ("mv ${file}_l ${file}");
 
-				R CMD BATCH ggtree.R
-			cd "$refdir"
-			echo "Done!"
-	fi
+	print "Making BLASTable database from $baseDir/Assemblies/${T}.fa...\n";
+		`makeblastdb -in $baseDir/Assemblies/${T}.fa -parse_seqids -dbtype nucl`;
+
+	$file = "$baseDir/Mining/${Q}.faa";
+		print "Tidying and linearizing ${file}...\n";
+		open ($IN, "${file}") or die "Can't open ${file}\n";
+		open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+		while (my $line = readline($IN)) {
+			$line =~ s/ /_/g;
+			$line =~ s/^>(.*)$/#>$1#/;
+			$line =~ s/\n//g;
+			$line =~ s/#/\n/g;
+			print $OUT $line;
+		}
+		close $IN;
+		close $OUT;
+		system ("sed -i '1d' ${file}_l");
+		unlink "${file}";
+		system ("mv ${file}_l ${file}");
+
+	print "BLASTing $baseDir/Mining/${Q}.faa against $baseDir/Assemblies/${T}.fa...\n";
+		system("tblastn -db $baseDir/Assemblies/${T}.fa -query $baseDir/Mining/${Q}.faa -out $baseDir/Mining/${Q}_${T}_hits.out -outfmt '6 sacc'");
+
+	print "Removing duplicate hits...\n";
+		`sort $baseDir/Mining/${Q}_${T}_hits.out | uniq > $baseDir/Mining/${Q}_${T}_hits_u.out`;
+		`rm $baseDir/Mining/${Q}_${T}_hits.out`;
+		`mv $baseDir/Mining/${Q}_${T}_hits_u.out $baseDir/Mining/${Q}_${T}_hits.out`;
+		my @hits;
+		open (my $HITS, "<", "$baseDir/Mining/${Q}_${T}_hits.out") or die "Failed to open file: $!\n";
+		while (<$HITS>) {
+			chomp;
+			push @hits, $_;
+		}
+		close $HITS;
+		# print "Hits:\n";
+		# print join "\n", @hits;
+		# print "\n";
+		print "Number of nonredund hits:\n";
+		print scalar @hits;
+		print "\n";
+
+	print "Extracting hit sequences...\n";
+		`blastdbcmd -db $baseDir/Assemblies/${T}.fa -entry_batch $baseDir/Mining/${Q}_${T}_hits.out -outfmt %f -out $baseDir/Mining/${Q}_${T}_hits.fa`;
+
+	# Printing results file...\n";
+	# 	foreach my $i (@hits) {
+	# 		my $header_line = `grep -n $i "$baseDir/Assemblies/${T}.fa" | cut -d : -f 1`;
+	# 		chomp $header_line;
+	# 		# print "header_line: ${header_line}\n";
+	# 		my $seq_line = $header_line+1;
+	# 		chomp $seq_line;
+	# 		# print "seq_line: $seq_line\n";
+	# 		my $header = `sed -n ${header_line}p $baseDir/Assemblies/${T}.fa`;
+	# 		chomp $header;
+	# 		push @hits_fasta, "$header";
+	# 		# print "Header: $header\n";
+	# 		my $seq = `sed -n ${seq_line}p $baseDir/Assemblies/${T}.fa`;
+	# 		chomp $seq;
+	# 		push @hits_fasta, "$seq";
+	# 		# print "Seq: $seq\n";			
+	# 	}
+	# 	open ($OUT, ">$baseDir/Mining/${Q}_${T}_hits.fa") or die "Can't open $baseDir/Mining/${Q}_${T}_hits.fa\n";
+	# 		print $OUT join("\n", @hits_fasta);
+	# 	close($OUT);
+
+	print "Translating $baseDir/Mining/${Q}_${T}_hits.fa to peptide then tidying and linearizing ...\n";
+		chdir ("$baseDir/Mining");
+		`gmsn.pl --faa --euk --clean $baseDir/Mining/${Q}_${T}_hits.fa`;
+		chdir ("$baseDir/scripts");
 		
-#IFS="$OIFS"
+		$file = "$baseDir/Mining/${Q}_${T}_hits.fa.faa";
+		print "Tidying and linearizing ${file}...\n";
+			open ($IN, "${file}") or die "Can't open ${file}\n";
+			open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+			while (my $line = readline($IN)) {
+				# $line =~ s/.*>${project}/>${project}/;
+				$line =~ s/.*>XM/>XM/;
+				$line =~ s/ /_/g;
+				$line =~ s/^>(.*)$/#>$1#/;
+				$line =~ s/\n//g;
+				$line =~ s/#/\n/g;
+				print $OUT $line;
+			}
+			close $IN;
+			close $OUT;
+			system ("sed -i '1d' ${file}_l");
+			unlink "${file}";
+			system ("mv ${file}_l ${file}");	
+
+	print "Merging hits and query...\n";
+		`awk '{print}' "$baseDir/Mining/${Q}_${T}_hits.fa.faa" "$baseDir/Mining/${Q}.faa" > "$baseDir/Mining/${Q}_${T}_hqmerge.faa"`;
+	
+
+	print "Merging hits, query, and anchor...\n";
+		`awk '{print}' "$baseDir/Mining/${Q}_${T}_hits.fa.faa" "$baseDir/Mining/${Q}.faa" > "$baseDir/Mining/${Q}_${T}_merge.faa"`;
+		`awk '{print}' "$baseDir/Mining/${Q}_${T}_merge.faa" "$baseDir/Mining/${anchor}.faa" > "$baseDir/Mining/${Q}_${T}_hqmerge.faa"`;
+		
+	print "Linearizing and cleaning $baseDir/Mining/${Q}_${T}_hqmerge.faa...\n";
+		$file = "$baseDir/Mining/${Q}_${T}_hqmerge.faa";
+		print "Tidying and linearizing ${file}...\n";
+		open ($IN, "${file}") or die "Can't open ${file}\n";
+		open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+		while (my $line = readline($IN)) {
+			$line =~ s/ /_/g;
+			$line =~ s/^>(.*)$/#>$1#/;
+			$line =~ s/\n//g;
+			$line =~ s/#/\n/g;
+			print $OUT $line;
+		}
+		close $IN;
+		close $OUT;
+		system ("sed -i '1d' ${file}_l");
+		unlink "${file}";
+		system ("mv ${file}_l ${file}");
+
+	print "Length filtering $baseDir/Mining/${Q}_${T}_hqmerge.faa to ${blast} +/- 100 AA...\n";
+		$file = "$baseDir/Mining/${Q}_${T}_hqmerge.faa";
+		my %fasta;
+		my @fasta = `cat ${file}`;
+		chomp @fasta;
+		%fasta = @fasta;
+		my %long = map { $_ => $fasta{$_} } grep { length($fasta{$_}) >= ${blast}-100 } keys(%fasta);
+		my %short = map { $_ => $long{$_} } grep { length($long{$_}) <= ${blast}+100 } keys(%long);
+		@short = %short;
+		open ($OUT, ">${file}_f") or die "Can't open ${file}_f";
+		foreach (@short) {
+			print $OUT "$_\n"
+		}
+		close ($OUT);
+		unlink ${file};
+		system ("mv ${file}_f ${file}");
+
+	print "Aligning $baseDir/Mining/${Q}_${T}_hqmerge.faa...\n";
+		`clustalo -i $baseDir/Mining/${Q}_${T}_hqmerge.faa -o $baseDir/Mining/${Q}_${T}_hqmerge_align.faa --force`;
+
+	print "Linearizing '$baseDir/Mining/${Q}_${T}_hqmerge_align.faa'...\n";
+	$file = "$baseDir/Mining/${Q}_${T}_hqmerge_align.faa";
+		print "Tidying and linearizing ${file}...\n";
+			open ($IN, "${file}") or die "Can't open ${file}\n";
+			open ($OUT, ">${file}_l") or die "Can't open ${file}_l\n";
+			while (my $line = readline($IN)) {
+				$line =~ s/ /_/g;
+				$line =~ s/^>(.*)$/#>$1#/;
+				$line =~ s/\n//g;
+				$line =~ s/#/\n/g;
+				print $OUT $line;
+			}
+			close $IN;
+			close $OUT;
+			system ("sed -i '1d' ${file}_l");
+			unlink "${file}";
+			system ("mv ${file}_l ${file}");
+	
+	print "Done!\n";
+}
+
+if ($collect) {
+
+	print "Parsing subproject names...\n";
+
+		my @subprojects = `cat $baseDir/scripts/${subprojects}`;
+		chomp @subprojects;
+		print join("\n", @subprojects);
+		print "\n";
+
+	print "Collecting all_contigs from each subproject...\n";
+
+		if (-e "$baseDir/Assemblies/all_${project}_contigs.fa") {
+			unlink "$baseDir/Assemblies/all_${project}_contigs.fa";
+			print "Deleting previous all_${project}_contigs.fa ...\n";
+		}
+		open ($OUT, ">>$baseDir/Assemblies/all_${project}_contigs.fa");
+		foreach my $subproject (@subprojects) {
+			print "Copying all_${subproject}_contigs.fa to all_${project}_contigs.fa...\n";
+			open ($IN, "$mainDir/${subproject}/Assemblies/all_${subproject}_contigs.fa") or die "Can't find $mainDir/${subproject}/Assemblies/all_${subproject}_contigs.fa";
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+				print $OUT "\n";
+			}
+			close $IN;
+		}
+		close $OUT;
+
+		if (-e "$baseDir/Assemblies/all_${project}_contigs.fa.faa") {
+			unlink "$baseDir/Assemblies/all_${project}_contigs.fa.faa";
+			print "Deleting previous collections of all contigs.fa.faa ...\n";
+		}
+		open ($OUT, ">>$baseDir/Assemblies/all_${project}_contigs.fa.faa");
+		foreach my $subproject (@subprojects) {
+			print "Copying all_${subproject}_contigs.fa.faa to all_${project}_contigs.fa.faa...\n";
+			open ($IN, "$mainDir/${subproject}/Assemblies/all_${subproject}_contigs.fa.faa") or die "Can't find $mainDir/${subproject}/Assemblies/all_${subproject}_contigs.fa.faa";
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+				print $OUT "\n";
+			}
+			close $IN;
+		}
+		close $OUT;
+
+	print "Collecting consensus_contigs from each subproject...\n";
+
+		if (-e "$baseDir/Assemblies/consensus_${project}_contigs.fa") {
+			unlink "$baseDir/Assemblies/consensus_${project}_contigs.fa";
+			print "Deleting previous consensus_${project}_contigs.fa ...\n";
+		}
+		open ($OUT, ">>$baseDir/Assemblies/consensus_${project}_contigs.fa");
+		foreach my $subproject (@subprojects) {
+			print "Copying consensus_${subproject}_contigs.fa to consensus_${project}_contigs.fa...\n";
+			open ($IN, "$mainDir/${subproject}/Assemblies/consensus_${subproject}_contigs.fa") or die "Can't find $mainDir/${subproject}/Assemblies/consensus_${subproject}_contigs.fa";
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+				print $OUT "\n";
+			}
+			close $IN;
+		}
+		close $OUT;
+
+		if (-e "$baseDir/Assemblies/consensus_${project}_contigs.fa.faa") {
+			unlink "$baseDir/Assemblies/consensus_${project}_contigs.fa.faa";
+			print "Deleting previous consensus_${project}_contigs.fa.faa ...\n";
+		}
+		open ($OUT, ">>$baseDir/Assemblies/consensus_${project}_contigs.fa.faa");
+		foreach my $subproject (@subprojects) {
+			print "Copying consensus_${subproject}_contigs.fa.faa to consensus_${project}_contigs.fa.faa...\n";
+			open ($IN, "$mainDir/${subproject}/Assemblies/consensus_${subproject}_contigs.fa.faa") or die "Can't find $mainDir/${subproject}/Assemblies/consensus_${subproject}_contigs.fa.faa";
+			while (my $line = readline($IN)) {
+				print $OUT $line;
+				print $OUT "\n";
+			}
+			close $IN;
+		}
+		close $OUT;
+
+	if ($quant) {
+
+		if (-d "$baseDir/Mining/salmon/consensus_${project}_contigs") {
+				print "Found $baseDir/Mining/salmon/consensus_${project}_contigs...\n";
+			} else {
+				print "Making $baseDir/Mining/salmon/consensus_${project}_contigs...\n";
+				mkdir "$baseDir/Mining/salmon/consensus_${project}_contigs";
+		}
+		
+		print "Collecting salmon quantification of consensus_subproject_contigs from each subproject...\n";
+			
+		foreach my $subproject (@subprojects) {
+			`scp -r $mainDir/$subproject/Mining/salmon/consensus_${subproject}_contigs/* $baseDir/Mining/salmon/consensus_${project}_contigs`;
+		}
+	}
+}
