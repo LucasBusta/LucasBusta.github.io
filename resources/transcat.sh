@@ -1,5 +1,6 @@
 #!/usr/bin/perl
-#🜁air🜄water🜂fire🜃earth
+#elemental - 🜁air🜄water🜂fire🜃earth
+#de novo assembly approach is a SLURM-environment implementation of the Voshall et al. (in prep) method.
 use strict;
 use warnings;
 use Getopt::Long;
