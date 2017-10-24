@@ -3,16 +3,23 @@
 ##################### By Lucas Busta #########################
 ##############################################################
 
+## Get the data we will be working with:
+# http://s000.tinyupload.com/?file_id=02326968854156940558
+# Put it in your working directory
+
 ## Lets install the packages we will need
 # install.packages(c("ape", "ips", "seqinr", "phangorn", "msa", "tidyr"))
+# Note that "msa" doesn't install this way...
 # see https://bioconductor.org/packages/release/bioc/html/msa.html
+# Install from bioconductor by executing the following two commands:
 # source("https://bioconductor.org/biocLite.R")
 # biocLite("msa")
 
 ## We also need gBlocks:
 # Get gBlocks: http://molevol.cmima.csic.es/castresana/Gblocks.html
+# Put the gBlocks executable in your working directory
 
-## Change to the working directory:
+## Finally, point R to your working directory, for example:
 setwd("/Users/lucasbusta/Desktop/R_Club/trees_in_R")
 
 
@@ -108,21 +115,24 @@ grid.arrange(ggplot_gtable(ggplot_build(NJtree)), ggplot_gtable(ggplot_build(MLt
 #### Basic tree annotation (tip labels, colors, node labels, etc.) ####
 #######################################################################
 
+#Basic tree
 ggtree(i, layout="unrooted", size=1)
 
+#Basic tree with tip labels
 ggtree(i, layout="unrooted", size=0.5) + geom_tiplab() + ggplot2::xlim(-0.1,0.7)
 
-ggtree(i, layout="unrooted", size=0.5) + geom_tiplab() + ggplot2::xlim(-0.1,0.7)
-
+#Basic tree with bold tip labels
 ggtree(i, layout="unrooted", size=0.5) + 
   ggplot2::xlim(-0.1,0.7) + 
   geom_tiplab(aes(fontface="bold"), size=6)
 
+#Basic tree with bold tip labels and node labels
 ggtree(i, layout="unrooted", size=0.5) + 
   ggplot2::xlim(-0.1,0.7) + 
   geom_tiplab(aes(fontface="bold"), size=6, offset=-0.003, geom="text") +
   geom_text2(label="1")
 
+#Basic tree with bold tip labels and node labels on non-tip nodes
 ggtree(i, layout="unrooted", size=0.5) + 
   ggplot2::xlim(-0.1,0.7) + 
   geom_tiplab(aes(fontface="bold"), size=6, offset=-0.003, geom="text") +
@@ -166,25 +176,24 @@ CLADEtree <- ggtree(i, layout="unrooted", size=0.5)+
   # geom_tiplab(aes(fontface="bold", label=annotation$species), size=6, geom="text")+
   # theme(legend.position="right", legend.text=element_text(size=16))
 # ggplot2::xlim(0,2)
+CLADEtree
 
 pdf(file="tree.pdf", width=12, height=10)
-CLADEtree
+  CLADEtree
 dev.off()
 
 ## Plot table of contents alongside tree
-library(gridExtra)
-# library(grid)
 
 # ttheme_default() ## to see theme defaults
 mytheme <- gridExtra::ttheme_default(base_size=16, fontface="bold", core = list(padding=unit(c(1.5, 3), "mm")))
-t <- annotation[1:36,c(7,2,4)]
+t <- annotation[1:36,c(5,2,4)]
 colnames(t) <- c("number", "species", "enzyme")
 table <- tableGrob(t, rows = NULL, theme = mytheme)
 
 pdf(file="table+tree.pdf", width=22, height=12)
-# grid.arrange(tableGrob(annot[1:21,c(8,3,1)], rows = NULL, theme = mytheme), tableGrob(annot[22:42,c(8,3,1)], rows = NULL, theme = mytheme), ggplot_gtable(ggplot_build(z)), ncol=3, as.table=TRUE, widths=c(1,1,4))
 grid.arrange(table, ggplot_gtable(ggplot_build(CLADEtree)), ncol=2, as.table=TRUE, widths=c(1,2.5))
 dev.off()
+
 
 ################################################################
 #### Advanced tree annotation (heat maps, bar charts, etc.) ####
@@ -210,8 +219,6 @@ BARS
 
 ## Plot the tree and the bar chart together to check ordering
 grid.arrange(ggplot_gtable(ggplot_build(ALIGNEDtree)), ggplot_gtable(ggplot_build(BARS)), ncol=2, as.table=TRUE, widths=c(1,2.5))
-
-
 
 ## Create a heatmap from seqlist
 library(tidyr)
