@@ -32,7 +32,7 @@ table#table1 {text-align:center; width:200px; height:100px; margin: 0 auto; floa
 
 tr,td {text-align:left;}
 
-div.block {background: rgb(255, 255, 255); text-align: center; margin: auto; width:100%}
+div.block {background: rgb(255, 255, 255); text-align: center; margin: 0 auto; width:100%}
 
 /* Superscript */
 sup {font-size: 0.83em; vertical-align: super; line-height: 0}
