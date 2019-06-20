@@ -1,6 +1,5 @@
 ﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ
-PCB_8,Lucas Busta,NE,Blueberry,...,,,fruit
-PCB_7,Lucas Busta,NE,Iris,...,,,leaves
+PCB_7,Lucas Busta,NE,Iris,...,Iris,,leaves
 PCB_6,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem
 PCB_5,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit
 PCB_4,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath
