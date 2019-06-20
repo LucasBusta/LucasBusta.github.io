@@ -50,7 +50,7 @@
 							</header>
 							<p><span class="image right"><a href="images/ChemicalBloom_infographic.jpg"><img src="images/ChemicalBloom_infographic.jpg" alt=""/></a></span>One of the most remarkable chemistry shows that plants put on is on display every day, right before your eyes - just look closely! Many species all across the globe cover themselves in visible layes of white, powdery substances. While we are still working to understand exactly why plants do this, we do know a bit about these "chemical blooms": in some cases they protect the plant from UV light (like sunscreen), and in other cases help keep away insects (like bug spray).</p>
 
-							<p>Regardless of their function, the chemical bloom of a single plant is always made out of a pure chemical. The identity of the chemical varies from plant to plant, but it is nearly always very pure. This means that the cells on the plant's surface are incredible biochemical factories that are specialized in making the plant's particular chemical. The goal of this project is to understand all the different types of chemical compounds that these biochemical factories can make. To make this happen, we need your help! To participate, see the infographic.</p>
+							<!-- <p>Regardless of their function, the chemical bloom of a single plant is always made out of a pure chemical. The identity of the chemical varies from plant to plant, but it is nearly always very pure. This means that the cells on the plant's surface are incredible biochemical factories that are specialized in making the plant's particular chemical. The goal of this project is to understand all the different types of chemical compounds that these biochemical factories can make. To make this happen, we need your help! To participate, see the infographic.</p> -->
 
 							<script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -58,7 +58,7 @@
 					            d3.text("data/wax_bloom_chem_data.csv", function(data) {
 					                var parsedCSV = d3.csv.parseRows(data);
 
-					                var container = d3.select("body")
+					                var container = d3.select("p")
 					                    .append("table")
 
 					                    .selectAll("tr")
