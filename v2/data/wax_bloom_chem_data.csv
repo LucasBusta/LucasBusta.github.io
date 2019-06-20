@@ -1,9 +1,9 @@
-﻿PCB_ID,Name,Genus,species,Organ,Composition,Bioprospector,State
-PCB_8,Blueberry,,,fruit,...,Lucas Busta,NE
-PCB_7,Iris,,,leaves,...,Lucas Busta,NE
-PCB_6,Wild carrot,Daucus,carota,inflorescence stem,...,Lucas Busta,NE
-PCB_5,Blueberry,Vaccinium,,fruit,...,Lucas Busta,NE
-PCB_4,Sorghum,Sorghum,bicolor,sheath,fatty acids,Lucas Busta,NE
-PCB_3,Pineapple,Ananas,comosus,leaf,...,Evan LaBrant,NE
-PCB_2,Magnolia,Magnolia,ashei,leaf,...,Jesse Bellemare,MA
-PCB_1,Black raspberry,Rubus,occidentalis,stem,...,Jesse Bellemare,MA
+﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ
+PCB_8,Lucas Busta,NE,Blueberry,...,,,fruit
+PCB_7,Lucas Busta,NE,Iris,...,,,leaves
+PCB_6,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem
+PCB_5,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit
+PCB_4,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath
+PCB_3,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf
+PCB_2,Jesse Bellemare,MA,Magnolia,...,Magnolia,ashei,leaf
+PCB_1,Jesse Bellemare,MA,Black raspberry,...,Rubus,occidentalis,stem
