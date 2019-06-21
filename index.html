@@ -1,56 +1,250 @@
----
-layout: default
-title: Lucas Busta | Plant Chemistry
----
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Lucas Busta</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
 
-<div class="w3-content w3-display-container" style="max-width:1000px">
-	<img class="mySlides" src="ms.png" style="width:100%">
-	<img class="mySlides" src="rna.png" style="width:100%">
-	<img class="mySlides" src="lab.png" style="width:100%">
-	<img class="mySlides" src="gc.png" style="width:100%">
-	<img class="mySlides" src="flowers.png" style="width:100%">
-	<img class="mySlides" src="moss.png" style="width:100%">
-	<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-topmiddle" style="width:100%">
-		<div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-		<div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
-		<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(6)"></span>
-	</div>
-</div>
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">L. Busta<span></span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
 
-<div class="block_text">
-	<p>I am fascinated by the unique chemistry biological systems use to survive harsh environments. My research uses informatics to unite classical analytical and organic chemistry with emerging high-throughput DNA sequencing technologies to understand the molecular structures, biosynthesis, bioactivities, and physical properties of plant chemicals, polymers, and composites. My goal is to use this approach to develop and apply new knowledge about chemical biology to sustaining and improving human life. You can read more about phytochemicals and the important roles they play in our daily lives and the global economy on my <a href="https://plantsarechemists.blogspot.ca/" target="_blank">phytochemistry blog</a> or <a href="https://twitter.com/PlantsRChemists?lang=en" target="_blank"> twitter blog</a>.</p>
-</div>
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="research.html">Research</a></li>
+					<li><a href="teaching.html">Teaching</a></li>
+					<li><a href="latest_news.html">Latest News</a></li>
+					<li><a href="citizen_science.html">Citizen Science</a></li>
+					<li><a href="publications.html">Publications</a></li>
+					<li><a href="resources.html">Resources</a></li>
+					<li><a href="CV.html">CV</a></li>
+					<li><a href="social_media.html">Social Media</a></li>
+				</ul>
+			</nav>
 
-<script>
-var slideIndex = 1;
-showDivs(slideIndex);
+		<!-- Banner -->
+			<section class="banner full">
+				<article>
+					<img src="images/slide01.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>analytical chemistry in the age of genomics</p>
+							<h3> </h3>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>analytical chemistry in the age of genomics</p>
+							<h3> </h3>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="images/slide03.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>analytical chemistry in the age of genomics</p>
+							<h3> </h3>
+						</header>
+					</div>
+				</article>
+			</section>
 
-function plusDivs(n) {
-showDivs(slideIndex += n);
-}
+		<!-- One -->
+			<section id="one" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
 
-function currentDiv(n) {
-showDivs(slideIndex = n);
-}
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="research.html">
+										<img src="images/research.png" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>research program and aims</p>
+										<h2>Research</h2>
+									</header>
+									<p> I am fascinated by the unique chemistry biological systems use to survive harsh environments. My research uses informatics to unite classical analytical and organic chemistry with emerging high-throughput DNA sequencing technologies to understand the molecular structures, biosynthesis, and evolution of plant chemicals. My goal is to use this approach to develop and apply new knowledge about chemical biology to sustaining and improving human life.</p>
+									<footer class="align-center">
+										<a href="research.html" class="button alt">Learn More</a>
+									</footer>
+								</div>
+							</div>
+						</div>
 
-function showDivs(n) {
-var i;
-var x = document.getElementsByClassName("mySlides");
-var dots = document.getElementsByClassName("demo");
-if (n > x.length) {slideIndex = 1}    
-if (n < 1) {slideIndex = x.length}
-for (i = 0; i < x.length; i++) {
-x[i].style.display = "none";  
-}
-for (i = 0; i < dots.length; i++) {
-dots[i].className = dots[i].className.replace(" w3-white", "");
-}
-x[slideIndex-1].style.display = "block";  
-dots[slideIndex-1].className += " w3-white";
-}
-</script>
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="teaching.html">
+										<img src="images/teaching.png" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>course units and mentoring</p>
+										<h2>Teaching</h2>
+									</header>
+									<p> One of the most enjoyable parts of studying plant chemistry is the interdisciplinary nature of the work. This characteristic greatly facilitates the integration of research, teaching, and learning. I consistently strive to bring learners into the laboratory and to bring research into the classroom. As part of this, I take advantage of plants' presence in our everyday lives to develop teaching materials that can be adapted for use both inside and outside the classroom; both in formal, advanced educational settings, and in public, family-friendly events.</p>
+									<footer class="align-center">
+										<a href="teaching.html" class="button alt">Learn More</a>
+									</footer>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style3">
+				<div class="inner">
+					<header class="align-center">
+						<p>Analytical Chemistry in the Age of Genomics</p>
+						<h2> </h2>
+					</header>
+				</div>
+			</section>
+
+		<!-- More -->
+			<section id="More" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="latest_news.html">
+										<img src="images/latest_news.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>Latest News</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="citizen_science.html">
+										<img src="images/citizen_science.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>Citizen Science</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="publications.html">
+										<img src="images/publications.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>Publications</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="resources.html">
+										<img src="images/resources.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>Resources</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="CV.html">
+										<img src="images/cv.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>CV</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<a href="social_media.html">
+										<img src="images/social_media.jpg" alt="" />
+									</a>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p></p>
+										<h2>Social Media</h2>
+									</header>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="https://twitter.com/PlantsRChemists" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.instagram.com/chemical_blooms/?hl=en" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/LucasBusta" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="mailto:lucasbusta1@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					&copy; Lucas Busta. All rights reserved.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
