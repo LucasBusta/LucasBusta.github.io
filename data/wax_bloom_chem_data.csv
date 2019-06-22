@@ -1,9 +1,15 @@
 ﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ,Date
-PCB_8,@manishtanks,TX,Sorghum,...,Sorghum,bicolor,sheath,7/22/19
-PCB_7,Lucas Busta,NE,Iris,...,Iris,,leaves,7/21/19
-PCB_6,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem,7/21/19
-PCB_5,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit,7/16/19
-PCB_4,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath,7/16/19
-PCB_3,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf,7/1/19
-PCB_2,Jesse Bellemare,MA,Magnolia,...,Magnolia,ashei,leaf,2/12/19
-PCB_1,Jesse Bellemare,MA,Black raspberry,...,Rubus,occidentalis,stem,2/12/19
+PCB_14,@manishtanks,TX,Sorghum,...,Sorghum,bicolor,sheath,7/22/19
+PCB_13,Lucas Busta,NE,Onion,…,Allium,,leaf,7/21/19
+PCB_12,Lucas Busta,NE,Kalanchoe,…,Kalanchoe,thrysiflora,leaf,7/21/19
+PCB_11,Lucas Busta,NE,Kalanchoe,…,Kalanchoe,marginata,leaf,7/21/19
+PCB_10,Lucas Busta,NE,Barley,…,Hordeum,vulgare,sheath,7/21/19
+PCB_9,Lucas Busta,NE,Iris,...,Iris,,leaves,7/21/19
+PCB_8,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem,7/21/19
+PCB_7,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit,7/16/19
+PCB_6,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath,7/16/19
+PCB_5,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf,7/1/19
+PCB_4,Jesse Bellemare,MA,Polypodium,oleanane(?),Polypodium,aureum,leaf,2/12/19
+PCB_3,Jesse Bellemare,MA,Cypress,10-nonacosanol,Cupressus,gigantea,leaf,2/12/19
+PCB_2,Jesse Bellemare,MA,Magnolia,palmitone,Magnolia,ashei,leaf,2/12/19
+PCB_1,Jesse Bellemare,MA,Black raspberry,beta-amyrin,Rubus,occidentalis,stem,2/12/19
