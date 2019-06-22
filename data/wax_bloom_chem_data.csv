@@ -1,9 +1,9 @@
-﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ
-PCB_8,@manishtanks,TX,Sorghum,...,Sorghum,bicolor,sheath
-PCB_7,Lucas Busta,NE,Iris,...,Iris,,leaves
-PCB_6,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem
-PCB_5,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit
-PCB_4,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath
-PCB_3,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf
-PCB_2,Jesse Bellemare,MA,Magnolia,...,Magnolia,ashei,leaf
-PCB_1,Jesse Bellemare,MA,Black raspberry,...,Rubus,occidentalis,stem
+﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ,Date
+PCB_8,@manishtanks,TX,Sorghum,...,Sorghum,bicolor,sheath,7/22/19
+PCB_7,Lucas Busta,NE,Iris,...,Iris,,leaves,7/21/19
+PCB_6,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem,7/21/19
+PCB_5,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit,7/16/19
+PCB_4,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath,7/16/19
+PCB_3,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf,7/1/19
+PCB_2,Jesse Bellemare,MA,Magnolia,...,Magnolia,ashei,leaf,2/12/19
+PCB_1,Jesse Bellemare,MA,Black raspberry,...,Rubus,occidentalis,stem,2/12/19
