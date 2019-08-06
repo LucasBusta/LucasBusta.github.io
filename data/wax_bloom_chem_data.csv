@@ -1,15 +1,25 @@
 ﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ,Date
-PCB_14,@manishtanks,TX,Sorghum,...,Sorghum,bicolor,sheath,7/22/19
-PCB_13,Lucas Busta,NE,Onion,…,Allium,,leaf,7/21/19
-PCB_12,Lucas Busta,NE,Kalanchoe,…,Kalanchoe,thrysiflora,leaf,7/21/19
-PCB_11,Lucas Busta,NE,Kalanchoe,…,Kalanchoe,marginata,leaf,7/21/19
-PCB_10,Lucas Busta,NE,Barley,…,Hordeum,vulgare,sheath,7/21/19
-PCB_9,Lucas Busta,NE,Iris,...,Iris,,leaves,7/21/19
-PCB_8,Lucas Busta,NE,Wild carrot,...,Daucus,carota,inflorescence stem,7/21/19
-PCB_7,Lucas Busta,NE,Blueberry,...,Vaccinium,,fruit,7/16/19
-PCB_6,Lucas Busta,NE,Sorghum,fatty acids,Sorghum,bicolor,sheath,7/16/19
-PCB_5,Evan LaBrant,NE,Pineapple,...,Ananas,comosus,leaf,7/1/19
-PCB_4,Jesse Bellemare,MA,Polypodium,oleanane(?),Polypodium,aureum,leaf,2/12/19
+PCB_24,Robyn Klein,MT,Lauren's grape,…,Papaver,somniferum,stem,8/6/19
+PCB_23,Robyn Klein,MT,Wild bergamot,…,Monarda,fistulosa,stem,8/6/19
+PCB_22,Robyn Klein,MT,Ginkgo,…,Ginkgo,biloba,stem,8/6/19
+PCB_21,Robyn Klein,MT,White sage,…,Salvia,apiana,stem,8/6/19
+PCB_20,Robyn Klein,MT,Western coneflower,…,Rudbeckia,occidentalis,stem,8/6/19
+PCB_19,Robyn Klein,MT,Allium,…,Allium,brevistylum,stem,8/6/19
+PCB_18,Julie Busta,MN,Iris,…,Iris,germanica,leaves,7/15/19
+PCB_17,Julie Busta,MN,Day Lily,…,Hemerocallis,lilioasphodelus,leaves,7/15/19
+PCB_16,Lucas Busta,NE,Broccoli,…,Brassica,oleracea,leaves,8/6/19
+PCB_15,Lucas Busta,NE,Cow parsnip,…,Heracleum,maximum,inflorescence stem,7/31/19
+PCB_14,@manishtanks,TX,Sorghum,NA (photo only),Sorghum,bicolor,sheath,7/22/19
+PCB_13,Lucas Busta,NE,Onion,16-hentriacontanone (?),Allium,fistulosum,leaf,7/21/19
+PCB_12,Lucas Busta,NE,Kalanchoe,cycloartenol (?),Kalanchoe,thrysiflora,leaf,7/21/19
+PCB_11,Lucas Busta,NE,Kalanchoe,cycloartenol (?),Kalanchoe,marginata,leaf,7/21/19
+PCB_10,Lucas Busta,NE,Barley,diketones (?),Hordeum,vulgare,sheath,7/21/19
+PCB_9,Lucas Busta,NE,Iris,octacosanol,Iris,germanica,leaves,7/21/19
+PCB_8,Lucas Busta,NE,Wild carrot,12-hentriacontanone,Daucus,carota,inflorescence stem,7/21/19
+PCB_7,Lucas Busta,NE,Blueberry,beta-amyrin (+TAG? + diketones?),Vaccinium,corymbosum,fruit,7/16/19
+PCB_6,Lucas Busta,NE,Sorghum,octacosanoic acid,Sorghum,bicolor,sheath,7/16/19
+PCB_5,Evan LaBrant,NE,Pineapple,dotraicontanol,Ananas,comosus,leaf,7/1/19
+PCB_4,Jesse Bellemare,MA,Polypodium,oleanene (?),Polypodium,aureum,leaf,2/12/19
 PCB_3,Jesse Bellemare,MA,Cypress,10-nonacosanol,Cupressus,gigantea,leaf,2/12/19
-PCB_2,Jesse Bellemare,MA,Magnolia,palmitone,Magnolia,ashei,leaf,2/12/19
+PCB_2,Jesse Bellemare,MA,Magnolia,16-hentriacontanone,Magnolia,ashei,leaf,2/12/19
 PCB_1,Jesse Bellemare,MA,Black raspberry,beta-amyrin,Rubus,occidentalis,stem,2/12/19
