@@ -1,42 +1,42 @@
 ﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ,Date
 PCB_51,Evan LaBrant,NE,Opuntia,…,Opuntia,9,cladode,10/9/19
 PCB_50,Evan LaBrant,NE,Opuntia,…,Opuntia,8,cladode,10/9/19
-PCB_49,Evan LaBrant,NE,Opuntia,…,Opuntia,7,cladode,10/9/19
-PCB_48,Evan LaBrant,NE,Opuntia,…,Opuntia,6,cladode,10/9/19
-PCB_47,Evan LaBrant,NE,Opuntia,…,Opuntia,5,cladode,10/9/19
-PCB_46,Evan LaBrant,NE,Opuntia,…,Opuntia,4,cladode,10/9/19
-PCB_45,Evan LaBrant,NE,Opuntia,…,Opuntia,3,cladode,10/9/19
-PCB_44,Evan LaBrant,NE,Opuntia,…,Opuntia,2,cladode,10/9/19
-PCB_43,Evan LaBrant,NE,Opuntia,…,Opuntia,1,cladode,10/9/19
-PCB_42,Evan LaBrant,NE,Pencil cholla,…,Cylindropuntia,ramosissima,cladode,10/9/19
-PCB_41,Evan LaBrant,NE,Saguaro,…,Carnegiea,gigantea,cladode,10/9/19
-PCB_40,Evan LaBrant,NE,Staghorn cholla,…,Cylindropuntia,versicolor,cladode,10/9/19
-PCB_39,Evan LaBrant,NE,Fingernail pinecone cactus,…,Tephrocactus,articulatus,cladode,10/9/19
-PCB_38,Evan LaBrant,NE,Pinecone cactus,…,Tephrocactus,articulatus,cladode,10/9/19
-PCB_37,Evan LaBrant,NE,Fishhook barrel cactus,…,Ferocactus,wislizeni,cladode,10/9/19
-PCB_36,Evan LaBrant,NE,Teddy Bear Cholla,…,Cylindropuntia,bigelovii,cladode,10/9/19
-PCB_35,Craig Schenck,MI,Cauliflower,…,Brassica,oleracea,leaf,10/9/19
-PCB_34,Craig Schenck,MI,Pineapple,…,Ananas,comosus,leaf,10/9/19
-PCB_33,Lucas Busta,NE,Plum,…,Prunus,domestica,fruit,9/11/19
+PCB_49,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,7,cladode,10/9/19
+PCB_48,Evan LaBrant,NE,Opuntia,"alkanes, alcohols, fatty acids",Opuntia,6,cladode,10/9/19
+PCB_47,Evan LaBrant,NE,Opuntia,alcohols,Opuntia,5,cladode,10/9/19
+PCB_46,Evan LaBrant,NE,Opuntia,"alcohols, alkanes",Opuntia,4,cladode,10/9/19
+PCB_45,Evan LaBrant,NE,Opuntia,"alcohols, alkanes",Opuntia,3,cladode,10/9/19
+PCB_44,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,2,cladode,10/9/19
+PCB_43,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,1,cladode,10/9/19
+PCB_42,Evan LaBrant,NE,Pencil cholla,alcohols,Cylindropuntia,ramosissima,cladode,10/9/19
+PCB_41,Evan LaBrant,NE,Saguaro,alcohols,Carnegiea,gigantea,cladode,10/9/19
+PCB_40,Evan LaBrant,NE,Staghorn cholla,"alcohols, alkanes",Cylindropuntia,versicolor,cladode,10/9/19
+PCB_39,Evan LaBrant,NE,Fingernail pinecone cactus,alkanes,Tephrocactus,articulatus,cladode,10/9/19
+PCB_38,Evan LaBrant,NE,Pinecone cactus,alkanes,Tephrocactus,articulatus,cladode,10/9/19
+PCB_37,Evan LaBrant,NE,Fishhook barrel cactus,alcohols,Ferocactus,wislizeni,cladode,10/9/19
+PCB_36,Evan LaBrant,NE,Teddy Bear Cholla,"alcohols, alkanes",Cylindropuntia,bigelovii,cladode,10/9/19
+PCB_35,Craig Schenck,MI,Cauliflower,"alcohols, beta-sitosterol",Brassica,oleracea,leaf,10/9/19
+PCB_34,Craig Schenck,MI,Pineapple,"ketone, alkane",Ananas,comosus,leaf,10/9/19
+PCB_33,Lucas Busta,NE,Plum,nonacosanol/alkanes,Prunus,domestica,fruit,9/11/19
 PCB_32,,NE,,beta-amyrin acetate,Echeveria,pulidonis,leaf,9/11/19
 PCB_31,,NE,,beta-amyrin acetate,Graptopetalum,paraguayense,leaf,9/11/19
-PCB_30,,NE,,…,Crassula,falcata,leaf,9/10/19
-PCB_29,,NE,,…,Crassula,arborescens,leaf,9/10/19
-PCB_28,,NE,,…,Crassula,ovata,leaf,9/10/19
-PCB_27,,NE,,…,Crassula,oblique,leaf,9/10/19
+PCB_30,,NE,,"alcohols, aldehydes, fatty acids, alkanes",Crassula,falcata,leaf,9/10/19
+PCB_29,,NE,,alkanes,Crassula,arborescens,leaf,9/10/19
+PCB_28,,NE,,"aldehyde, alcohol, alkane",Crassula,ovata,leaf,9/10/19
+PCB_27,,NE,,alkanes,Crassula,oblique,leaf,9/10/19
 PCB_26,Lucas Busta,NE,Jade necklace,VLC alkanes,Crassula,marneriana,leaf,9/10/19
 PCB_25,Lucas Busta,NE,Crassula,VLC fatty acids,Crassula,deceptrix,leaf,9/10/19
-PCB_24,Robyn Klein,MT,Lauren's grape,…,Papaver,somniferum,stem,8/6/19
-PCB_23,Robyn Klein,MT,Wild bergamot,…,Monarda,fistulosa,stem,8/6/19
-PCB_22,Robyn Klein,MT,Ginkgo,…,Ginkgo,biloba,stem,8/6/19
-PCB_21,Robyn Klein,MT,White sage,…,Salvia,apiana,stem,8/6/19
-PCB_20,Robyn Klein,MT,Western coneflower,…,Rudbeckia,occidentalis,stem,8/6/19
-PCB_19,Robyn Klein,MT,Allium,…,Allium,brevistylum,stem,8/6/19
-PCB_18,Julie Busta,MN,Iris,…,Iris,germanica,leaves,7/15/19
+PCB_24,Robyn Klein,MT,Lauren's grape,Nonacosanol,Papaver,somniferum,stem,8/6/19
+PCB_23,Robyn Klein,MT,Wild bergamot,primary alcohol + amyrins,Monarda,fistulosa,stem,8/6/19
+PCB_22,Robyn Klein,MT,Ginkgo,Nonacosanol/nonacosanone,Ginkgo,biloba,stem,8/6/19
+PCB_21,Robyn Klein,MT,White sage,Ursane triterpenoids,Salvia,apiana,stem,8/6/19
+PCB_20,Robyn Klein,MT,Western coneflower,B-sitosterol + VLC aliphatics,Rudbeckia,occidentalis,stem,8/6/19
+PCB_19,Robyn Klein,MT,Allium,ketone,Allium,brevistylum,stem,8/6/19
+PCB_18,Julie Busta,MN,Iris,primary alcohols,Iris,germanica,leaves,7/15/19
 PCB_17,Julie Busta,MN,Day Lily,…,Hemerocallis,lilioasphodelus,leaves,7/15/19
-PCB_16,Lucas Busta,NE,Broccoli,…,Brassica,oleracea,leaves,8/6/19
-PCB_15,Lucas Busta,NE,Cow parsnip,…,Heracleum,maximum,inflorescence stem,7/31/19
-PCB_14,@manishtanks,TX,Sorghum,NA (photo only),Sorghum,bicolor,sheath,7/22/19
+PCB_16,Lucas Busta,NE,Broccoli,"alkane, ketone, secondary alcohol",Brassica,oleracea,leaves,8/6/19
+PCB_15,Lucas Busta,NE,Cow parsnip,aldehydes and fatty acids,Heracleum,maximum,inflorescence stem,7/31/19
+PCB_14,#NAME?,TX,Sorghum,NA (photo only),Sorghum,bicolor,sheath,7/22/19
 PCB_13,Lucas Busta,NE,Onion,16-hentriacontanone (?),Allium,fistulosum,leaf,7/21/19
 PCB_12,Lucas Busta,NE,Kalanchoe,beta-amyrinone,Kalanchoe,thrysiflora,leaf,7/21/19
 PCB_11,Lucas Busta,NE,Kalanchoe,beta-amyrin,Kalanchoe,marginata,leaf,7/21/19
