@@ -1,52 +1,52 @@
 ﻿PCB_ID,Bioprospector,State,Plant Name,Composition,Genus,Species,Organ,Date
 PCB_51,Evan LaBrant,NE,Opuntia,…,Opuntia,9,cladode,10/9/19
 PCB_50,Evan LaBrant,NE,Opuntia,…,Opuntia,8,cladode,10/9/19
-PCB_49,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,7,cladode,10/9/19
-PCB_48,Evan LaBrant,NE,Opuntia,"alkanes, alcohols, fatty acids",Opuntia,6,cladode,10/9/19
-PCB_47,Evan LaBrant,NE,Opuntia,alcohols,Opuntia,5,cladode,10/9/19
-PCB_46,Evan LaBrant,NE,Opuntia,"alcohols, alkanes",Opuntia,4,cladode,10/9/19
-PCB_45,Evan LaBrant,NE,Opuntia,"alcohols, alkanes",Opuntia,3,cladode,10/9/19
-PCB_44,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,2,cladode,10/9/19
-PCB_43,Evan LaBrant,NE,Opuntia,alkanes,Opuntia,1,cladode,10/9/19
-PCB_42,Evan LaBrant,NE,Pencil cholla,alcohols,Cylindropuntia,ramosissima,cladode,10/9/19
-PCB_41,Evan LaBrant,NE,Saguaro,alcohols,Carnegiea,gigantea,cladode,10/9/19
-PCB_40,Evan LaBrant,NE,Staghorn cholla,"alcohols, alkanes",Cylindropuntia,versicolor,cladode,10/9/19
-PCB_39,Evan LaBrant,NE,Fingernail pinecone cactus,alkanes,Tephrocactus,articulatus,cladode,10/9/19
-PCB_38,Evan LaBrant,NE,Pinecone cactus,alkanes,Tephrocactus,articulatus,cladode,10/9/19
-PCB_37,Evan LaBrant,NE,Fishhook barrel cactus,alcohols,Ferocactus,wislizeni,cladode,10/9/19
-PCB_36,Evan LaBrant,NE,Teddy Bear Cholla,"alcohols, alkanes",Cylindropuntia,bigelovii,cladode,10/9/19
-PCB_35,Craig Schenck,MI,Cauliflower,"alcohols, beta-sitosterol",Brassica,oleracea,leaf,10/9/19
-PCB_34,Craig Schenck,MI,Pineapple,"ketone, alkane",Ananas,comosus,leaf,10/9/19
-PCB_33,Lucas Busta,NE,Plum,nonacosanol/alkanes,Prunus,domestica,fruit,9/11/19
-PCB_32,,NE,,beta-amyrin acetate,Echeveria,pulidonis,leaf,9/11/19
-PCB_31,,NE,,beta-amyrin acetate,Graptopetalum,paraguayense,leaf,9/11/19
-PCB_30,,NE,,"alcohols, aldehydes, fatty acids, alkanes",Crassula,falcata,leaf,9/10/19
-PCB_29,,NE,,alkanes,Crassula,arborescens,leaf,9/10/19
-PCB_28,,NE,,"aldehyde, alcohol, alkane",Crassula,ovata,leaf,9/10/19
-PCB_27,,NE,,alkanes,Crassula,oblique,leaf,9/10/19
-PCB_26,Lucas Busta,NE,Jade necklace,VLC alkanes,Crassula,marneriana,leaf,9/10/19
-PCB_25,Lucas Busta,NE,Crassula,VLC fatty acids,Crassula,deceptrix,leaf,9/10/19
-PCB_24,Robyn Klein,MT,Lauren's grape,Nonacosanol,Papaver,somniferum,stem,8/6/19
-PCB_23,Robyn Klein,MT,Wild bergamot,primary alcohol + amyrins,Monarda,fistulosa,stem,8/6/19
-PCB_22,Robyn Klein,MT,Ginkgo,Nonacosanol/nonacosanone,Ginkgo,biloba,stem,8/6/19
-PCB_21,Robyn Klein,MT,White sage,Ursane triterpenoids,Salvia,apiana,stem,8/6/19
-PCB_20,Robyn Klein,MT,Western coneflower,B-sitosterol + VLC aliphatics,Rudbeckia,occidentalis,stem,8/6/19
-PCB_19,Robyn Klein,MT,Allium,ketone,Allium,brevistylum,stem,8/6/19
-PCB_18,Julie Busta,MN,Iris,primary alcohols,Iris,germanica,leaves,7/15/19
+PCB_49,Evan LaBrant,NE,Opuntia,alkanes_(100%),Opuntia,7,cladode,10/9/19
+PCB_48,Evan LaBrant,NE,Opuntia,"alcohols_(40%),alkanes_(60%)",Opuntia,6,cladode,10/9/19
+PCB_47,Evan LaBrant,NE,Opuntia,alcohols_(100%),Opuntia,5,cladode,10/9/19
+PCB_46,Evan LaBrant,NE,Opuntia,"alcohols_(60%),alkanes_(40%)",Opuntia,4,cladode,10/9/19
+PCB_45,Evan LaBrant,NE,Opuntia,"alcohols_(60%),alkanes_(40%)",Opuntia,3,cladode,10/9/19
+PCB_44,Evan LaBrant,NE,Opuntia,alkanes_(100%),Opuntia,2,cladode,10/9/19
+PCB_43,Evan LaBrant,NE,Opuntia,alkanes_(100%),Opuntia,1,cladode,10/9/19
+PCB_42,Evan LaBrant,NE,Pencil cholla,alcohols_(100%),Cylindropuntia,ramosissima,cladode,10/9/19
+PCB_41,Evan LaBrant,NE,Saguaro,alcohols_(100%),Carnegiea,gigantea,cladode,10/9/19
+PCB_40,Evan LaBrant,NE,Staghorn cholla,"alcohols_(30%),alkanes_(70%)",Cylindropuntia,versicolor,cladode,10/9/19
+PCB_39,Evan LaBrant,NE,Fingernail pinecone cactus,alkanes_(100%),Tephrocactus,articulatus,cladode,10/9/19
+PCB_38,Evan LaBrant,NE,Pinecone cactus,alkanes_(100%),Tephrocactus,articulatus,cladode,10/9/19
+PCB_37,Evan LaBrant,NE,Fishhook barrel cactus,alcohols_(100%),Ferocactus,wislizeni,cladode,10/9/19
+PCB_36,Evan LaBrant,NE,Teddy Bear Cholla,"alcohols_(60%),alkanes_(40%)",Cylindropuntia,bigelovii,cladode,10/9/19
+PCB_35,Craig Schenck,MI,Cauliflower,"beta-sitosterol_(60%),alcohols_(40%)",Brassica,oleracea,leaf,10/9/19
+PCB_34,Craig Schenck,MI,Pineapple,"alkanes_(30%),15-hentriacontanone_(50%),15-hentriacontanol_(20%)",Ananas,comosus,leaf,10/9/19
+PCB_33,Lucas Busta,NE,Plum,"10-nonacosanol_(50%),alkanes_(50%)",Prunus,domestica,fruit,9/11/19
+PCB_32,Lucas Busta,NE,,beta-amyrin acetate_(100%),Echeveria,pulidonis,leaf,9/11/19
+PCB_31,Lucas Busta,NE,,beta-amyrin acetate_(100%),Graptopetalum,paraguayense,leaf,9/11/19
+PCB_30,Lucas Busta,NE,,"alcohols, aldehydes, fatty acids, alkanes",Crassula,falcata,leaf,9/10/19
+PCB_29,Lucas Busta,NE,,alkanes_(100%),Crassula,arborescens,leaf,9/10/19
+PCB_28,Lucas Busta,NE,,"aldehyde, alcohol, alkane",Crassula,ovata,leaf,9/10/19
+PCB_27,Lucas Busta,NE,,alkanes_(100%),Crassula,oblique,leaf,9/10/19
+PCB_26,Lucas Busta,NE,Jade necklace,alkanes_(100%),Crassula,marneriana,leaf,9/10/19
+PCB_25,Lucas Busta,NE,Crassula,fatty acids_(100%),Crassula,deceptrix,leaf,9/10/19
+PCB_24,Robyn Klein,MT,Lauren's grape,10-nonacosanol_(100%),Papaver,somniferum,stem,8/6/19
+PCB_23,Robyn Klein,MT,Wild bergamot,"alpha-amyrin_(50%),hexacosanol_(50%)",Monarda,fistulosa,stem,8/6/19
+PCB_22,Robyn Klein,MT,Ginkgo,10-nonacosanol_(100%),Ginkgo,biloba,stem,8/6/19
+PCB_21,Robyn Klein,MT,White sage,ursolic acid_(100%),Salvia,apiana,stem,8/6/19
+PCB_20,Robyn Klein,MT,Western coneflower,"beta-sitosterol_(80%),fatty acids_(20%)",Rudbeckia,occidentalis,stem,8/6/19
+PCB_19,Robyn Klein,MT,Allium,16-hentriacontanone_(100%),Allium,brevistylum,stem,8/6/19
+PCB_18,Julie Busta,MN,Iris,alcohols_(100%),Iris,germanica,leaves,7/15/19
 PCB_17,Julie Busta,MN,Day Lily,…,Hemerocallis,lilioasphodelus,leaves,7/15/19
-PCB_16,Lucas Busta,NE,Broccoli,"alkane, ketone, secondary alcohol",Brassica,oleracea,leaves,8/6/19
-PCB_15,Lucas Busta,NE,Cow parsnip,aldehydes and fatty acids,Heracleum,maximum,inflorescence stem,7/31/19
-PCB_14,#NAME?,TX,Sorghum,NA (photo only),Sorghum,bicolor,sheath,7/22/19
-PCB_13,Lucas Busta,NE,Onion,16-hentriacontanone (?),Allium,fistulosum,leaf,7/21/19
-PCB_12,Lucas Busta,NE,Kalanchoe,beta-amyrinone,Kalanchoe,thrysiflora,leaf,7/21/19
-PCB_11,Lucas Busta,NE,Kalanchoe,beta-amyrin,Kalanchoe,marginata,leaf,7/21/19
-PCB_10,Lucas Busta,NE,Barley,diketones (?),Hordeum,vulgare,sheath,7/21/19
-PCB_9,Lucas Busta,NE,Iris,octacosanol,Iris,germanica,leaves,7/21/19
-PCB_8,Lucas Busta,NE,Wild carrot,12-hentriacontanone,Daucus,carota,inflorescence stem,7/21/19
-PCB_7,Lucas Busta,NE,Blueberry,beta-amyrin (+TAG? + diketones?),Vaccinium,corymbosum,fruit,7/16/19
-PCB_6,Lucas Busta,NE,Sorghum,octacosanoic acid,Sorghum,bicolor,sheath,7/16/19
-PCB_5,Evan LaBrant,NE,Pineapple,dotraicontanol,Ananas,comosus,leaf,7/1/19
-PCB_4,Jesse Bellemare,MA,Polypodium,oleanene (?),Polypodium,aureum,leaf,2/12/19
-PCB_3,Jesse Bellemare,MA,Cypress,10-nonacosanol,Cupressus,gigantea,leaf,2/12/19
-PCB_2,Jesse Bellemare,MA,Magnolia,16-hentriacontanone,Magnolia,ashei,leaf,2/12/19
-PCB_1,Jesse Bellemare,MA,Black raspberry,beta-amyrin,Rubus,occidentalis,stem,2/12/19
+PCB_16,Lucas Busta,NE,Broccoli,"alkane_(50%),15-hentriacontanone_(30%),15-hentriacontanol_(20%)",Brassica,oleracea,leaves,8/6/19
+PCB_15,Lucas Busta,NE,Cow parsnip,"aldehydes_(40%),fatty acids_(60%)",Heracleum,maximum,inflorescence stem,7/31/19
+PCB_14,ManishInANattyLite,TX,Sorghum,NA,Sorghum,bicolor,sheath,7/22/19
+PCB_13,Lucas Busta,NE,Onion,16-hentriacontanone_(100%),Allium,fistulosum,leaf,7/21/19
+PCB_12,Lucas Busta,NE,Kalanchoe,beta-amyrone_(100%),Kalanchoe,thrysiflora,leaf,7/21/19
+PCB_11,Lucas Busta,NE,Kalanchoe,glutinol_(100%),Kalanchoe,marginata,leaf,7/21/19
+PCB_10,Lucas Busta,NE,Barley,diketone_(100%),Hordeum,vulgare,sheath,7/21/19
+PCB_9,Lucas Busta,NE,Iris,octacosanol_(100%),Iris,germanica,leaves,7/21/19
+PCB_8,Lucas Busta,NE,Wild carrot,12-hentriacontanone_(100%),Daucus,carota,inflorescence stem,7/21/19
+PCB_7,Lucas Busta,NE,Blueberry,"beta-amyrin_(25%),TAG_(40%),diketone_(35%)",Vaccinium,corymbosum,fruit,7/16/19
+PCB_6,Lucas Busta,NE,Sorghum,"hexacosanoate_(56%),octacosanoate_(44%)",Sorghum,bicolor,sheath,7/16/19
+PCB_5,Evan LaBrant,NE,Pineapple,"dotraicontanol_(85%),triacontanol_(15%)",Ananas,comosus,leaf,7/1/19
+PCB_4,Jesse Bellemare,MA,Polypodium,oleanene_(100%),Polypodium,aureum,leaf,2/12/19
+PCB_3,Jesse Bellemare,MA,Cypress,10-nonacosanol_(100%),Cupressus,gigantea,leaf,2/12/19
+PCB_2,Jesse Bellemare,MA,Black raspberry,beta-amyrin_(100%),Rubus,occidentalis,stem,2/12/19
+PCB_1,Jesse Bellemare,MA,Magnolia,16-hentriacontanone_(100%),Magnolia,ashei,leaf,2/12/19
