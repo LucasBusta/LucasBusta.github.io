@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Biology 723: Statistical Computing for Biologists</title>
-  <meta name="description" content="Hands-on materials for Bio 723 course at Duke University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Phylochemistry</title>
+  <meta name="description" content="Vingette for the R Package Phylochemistry." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Biology 723: Statistical Computing for Biologists" />
+  <meta property="og:title" content="Phylochemistry" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Hands-on materials for Bio 723 course at Duke University." />
+  <meta property="og:description" content="Vingette for the R Package Phylochemistry." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Biology 723: Statistical Computing for Biologists" />
+  <meta name="twitter:title" content="Phylochemistry" />
   
-  <meta name="twitter:description" content="Hands-on materials for Bio 723 course at Duke University." />
-  
-
-<meta name="author" content="Paul M. Magwene">
-
-
-<meta name="date" content="2019-04-17">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  
+  <meta name="twitter:description" content="Vingette for the R Package Phylochemistry." />
   
 
-<link rel="next" href="getting-started-with-r.html">
+<meta name="author" content="Lucas Busta" />
+
+
+<meta name="date" content="2020-03-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="getting-started-with-r.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,13 +48,8 @@
 
 
 
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<link href="libs/rglwidgetClass-2/rgl.css" rel="stylesheet" />
-<script src="libs/rglwidgetClass-2/rglClass.src.js"></script>
-<script src="libs/CanvasMatrix4-2016/CanvasMatrix.src.js"></script>
-<script src="libs/rglWebGL-binding-0.99.16/rglWebGL.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
 
 
 <style type="text/css">
@@ -63,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -75,7 +69,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -134,8 +128,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#accessing-older-versions-of-the-course-notes"><i class="fa fa-check"></i><b>1.1</b> Accessing older versions of the course notes</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-use-these-lecture-notes"><i class="fa fa-check"></i><b>1.2</b> How to use these lecture notes</a></li>
+<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#install-phylochemistry-directly-from-github-and-view-documentation-contents"><i class="fa fa-check"></i><b>1.0.1</b> Install <code>phylochemistry</code> directly from github and view documentation contents</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
@@ -525,7 +518,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Biology 723: Statistical Computing for Biologists</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Phylochemistry</a>
           </h1>
         </div>
 
@@ -534,25 +527,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Biology 723: Statistical Computing for Biologists</h1>
-<p class="author"><em>Paul M. Magwene</em></p>
-<p class="date"><em>2019-04-17</em></p>
+<h1 class="title">Phylochemistry</h1>
+<p class="author"><em>Lucas Busta</em></p>
+<p class="date"><em>2020-03-19</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
 <p><img src="figures/fig-title-page.png" style="display: block; margin: auto;" /></p>
-<p><a href="https://github.com/Bio723-class/Bio723-lecture/wiki">Bio 723</a> is a course I offer at Duke University. The focus of this course is statistical computing for the biological sciences with an emphasis on common multivariate statistical methods and techniques for exploratory data analysis. A major goal of the course is to help graduate students in the biological sciences develop practical insights into methods that they are likely to encounter in their own research, and the potential advantages and pitfalls that come with their use.</p>
-<p>In terms of mathematical perspectives, the course emphasize a geometric approach to understanding multivariate statistics. I try to help students develop an intuition for the geometry of vector spaces and discuss topics like correlation, regression, and principal components analysis in terms of angles between vectors, dot products, and projection.</p>
-<p>This course also provides an introduction to the R language/statistical computing environment.</p>
-<div id="accessing-older-versions-of-the-course-notes" class="section level2">
-<h2><span class="header-section-number">1.1</span> Accessing older versions of the course notes</h2>
-<p>The material covered in Bio 723 changes a bit from year to year. If you’d like to access older versions of the course notes, I will be making these available on the “Releases” page of the <a href="https://github.com/Bio723-class/Bio723-book/releases">Github site for this book</a>.</p>
-</div>
-<div id="how-to-use-these-lecture-notes" class="section level2">
-<h2><span class="header-section-number">1.2</span> How to use these lecture notes</h2>
-<p>In this and future materials to be posted on the course website you’ll encounter blocks of R code. <em>Your natural intuition will be to cut and paste commands or code blocks into the R interpretter to save yourself the typing.</em> <strong>DO NOT DO THIS!!</strong></p>
-<p>In each of the examples below, I provide example input, but I don’t show you the output. It’s your job to type in these examples at the R console, evaluate what you typed, and to look at and think critically about the output. <strong>You will make mistakes and generate errors!</strong> Part of learning any new skill is making mistakes, figuring out where you went wrong, and correcting those mistakes. In the process of fixing those errors, you’ll learn more about how R works, and how to avoid such errors, or correct bugs in your own code in the future. If you cut and paste the examples into the R interpretter the code will run, but you will learn less than if you input the code yourself and you’ll be less capable of apply the concepts in new situations.</p>
-<p>The R interpretter, like all programming languages, is very exacting. A mispelled variable or function name, a stray period, or an unbalanced parenthesis will raise an error and finding the sources of such errors can sometimes be tedious and frustrating. Persist! If you read your code critically, think about what your doing, and seek help when needed (teaching team, R help, Google, etc) you’ll eventually get better at debugging your code. But keep in mind that like most new skills, learning to write and debug your code efficiently takes time and experience.</p>
+<p><code>phylochemistry</code> enables analyses of natural chemicals and gene sequences in the context of phylogeny.</p>
+<div id="install-phylochemistry-directly-from-github-and-view-documentation-contents" class="section level3">
+<h3><span class="header-section-number">1.0.1</span> Install <code>phylochemistry</code> directly from github and view documentation contents</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;LucasBusta/phylochemistry&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;phylochemistry&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">lapply</span>(packages, require, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">## Loading required package: phylochemistry</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">## [[1]]</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">help</span>(<span class="dt">package =</span> <span class="st">&quot;phylochemistry&quot;</span>)</a></code></pre></div>
+<!-- In terms of mathematical perspectives, the course emphasize a geometric approach to understanding multivariate statistics.  I try to help students develop an intuition for the geometry of vector spaces and discuss topics like correlation, regression, and principal components analysis in terms of angles between vectors, dot products, and projection. -->
+<!-- This course also provides an introduction to the R language/statistical computing environment. -->
+<!-- ## Accessing older versions of the course notes -->
+<!-- The material covered in Bio 723 changes a bit from year to year.  If you'd like to access older versions of the course notes, I will be making these available on the "Releases" page of the [Github site for this book](https://github.com/Bio723-class/Bio723-book/releases). -->
+<!-- ## How to use these lecture notes -->
+<!-- In this and future materials to be posted on the course website you'll encounter blocks of R code.  *Your natural intuition will be to cut and paste commands or code blocks into the R interpretter to save yourself the typing.*  **DO NOT DO THIS!!**  -->
+<!-- In each of the examples below, I provide example input, but I don't show you the output. It's your job to type in these examples at the R console, evaluate what you typed, and to look at and think critically about the output. **You will make mistakes and generate errors!** Part of learning any new skill is making mistakes, figuring out where you went wrong, and correcting those mistakes.  In the process of fixing those errors, you'll learn more about how R works, and how to avoid such errors, or correct bugs in your own code in the future. If you cut and paste the examples into the R interpretter the code will run, but you will learn less than if you input the code yourself and you'll be less capable of apply the concepts in new situations.    -->
+<!-- The R interpretter, like all programming languages, is very exacting.  A mispelled variable or function name, a stray period, or an unbalanced parenthesis will raise an error and finding the sources of such errors can sometimes be tedious and frustrating.  Persist!  If you read your code critically, think about what your doing, and seek help when needed (teaching team, R help, Google, etc) you'll eventually get better at debugging your code.  But keep in mind that like most new skills, learning to write and debug your code efficiently takes time and experience. -->
 
 </div>
 </div>
@@ -567,11 +566,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -579,12 +580,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -596,6 +596,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -617,8 +621,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
