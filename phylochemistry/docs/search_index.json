@@ -1,0 +1,3 @@
+[
+["index.html", "Phylochemistry Chapter 1 Introduction", " Phylochemistry Lucas Busta 2020-03-20 Chapter 1 Introduction phylochemistry enables analyses of natural chemicals and gene sequences in the context of phylogeny. 1.0.1 Install phylochemistry directly from github and view documentation contents devtools::install_github(&quot;LucasBusta/phylochemistry&quot;, quiet = TRUE) packages &lt;- c(&quot;phylochemistry&quot;) lapply(packages, require, character.only = TRUE) ## Loading required package: phylochemistry ## [[1]] ## [1] TRUE help(package = &quot;phylochemistry&quot;) "]
+]

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Analyzing chromatography data with phylochemistry | Phylochemistry</title>
+  <meta name="description" content="Vingette for the R Package Phylochemistry." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Analyzing chromatography data with phylochemistry | Phylochemistry" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Vingette for the R Package Phylochemistry." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Analyzing chromatography data with phylochemistry | Phylochemistry" />
+  
+  <meta name="twitter:description" content="Vingette for the R Package Phylochemistry." />
+  
+
+<meta name="author" content="Lucas Busta" />
+
+
+<meta name="date" content="2020-03-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="setting-up-a-phylochemistry-analysis.html"/>
+<link rel="next" href="gene-mining.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#install-phylochemistry-directly-from-github-and-view-documentation-contents"><i class="fa fa-check"></i><b>1.0.1</b> Install <code>phylochemistry</code> directly from github and view documentation contents</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html"><i class="fa fa-check"></i><b>2</b> Setting up a <code>phylochemistry</code> analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#conventions-in-phylochemsitry"><i class="fa fa-check"></i><b>2.1</b> Conventions in <code>phylochemsitry</code></a><ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#monolists"><i class="fa fa-check"></i><b>2.1.1</b> Monolists</a></li>
+<li class="chapter" data-level="2.1.2" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#storing-your-data-as-a-list-of-lists"><i class="fa fa-check"></i><b>2.1.2</b> Storing your data as a list of lists</a></li>
+<li class="chapter" data-level="2.1.3" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#nomenclature"><i class="fa fa-check"></i><b>2.1.3</b> Nomenclature</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analyzing-chromatography-data-with-phylochemistry.html"><a href="analyzing-chromatography-data-with-phylochemistry.html"><i class="fa fa-check"></i><b>3</b> Analyzing chromatography data with <code>phylochemistry</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="analyzing-chromatography-data-with-phylochemistry.html"><a href="analyzing-chromatography-data-with-phylochemistry.html#preparing-the-raw-data-and-metadata"><i class="fa fa-check"></i><b>3.1</b> Preparing the raw data and metadata</a></li>
+<li class="chapter" data-level="3.2" data-path="analyzing-chromatography-data-with-phylochemistry.html"><a href="analyzing-chromatography-data-with-phylochemistry.html#using-the-phylochemistry-integrationapp"><i class="fa fa-check"></i><b>3.2</b> Using the <code>phylochemistry</code> integrationApp</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gene-mining.html"><a href="gene-mining.html"><i class="fa fa-check"></i><b>4</b> Gene mining</a><ul>
+<li class="chapter" data-level="4.1" data-path="gene-mining.html"><a href="gene-mining.html#blast"><i class="fa fa-check"></i><b>4.1</b> BLAST</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="gene-mining.html"><a href="gene-mining.html#using-the-blasttranscriptomes-command"><i class="fa fa-check"></i><b>4.1.1</b> Using the blastTranscriptomes command</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Phylochemistry</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyzing-chromatography-data-with-phylochemistry" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Analyzing chromatography data with <code>phylochemistry</code></h1>
+<p>One of the central features of <code>phylochemsitry</code> is its chromatogram processing tools.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(phylochemistry)</a></code></pre></div>
+<div id="preparing-the-raw-data-and-metadata" class="section level2">
+<h2><span class="header-section-number">3.1</span> Preparing the raw data and metadata</h2>
+<p>To use the <code>phylochemistry</code> chromatogram processing tools, we need two things: (i) a list of the samples we want to analyze (a monolist, metadata), and (ii) a singel file that contains their chromatograms (a .csv file, raw data). Here is how you get each of those things:</p>
+<p>The first step is to export .CDF files from the chromatographic analysis system. These can then be converted into the ubiquitous .csv file format using the function <code>convertCDFstoCSVs</code>. This can take a while, but it only needs to be done once.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">phylochem_analysis_directory_path =<span class="st"> &quot;/Volumes/Luke_Lab_1/hemp/&quot;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">data_directory_contents &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">paste0</span>(phylochem_analysis_directory_path, <span class="st">&quot;chem_data/&quot;</span>))</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">CDFs &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">paste0</span>(phylochem_analysis_directory_path, <span class="st">&quot;chem_data/&quot;</span>))[<span class="kw">grep</span>(<span class="st">&quot;.CDF$&quot;</span>, data_directory_contents)]</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">paths_to_cdfs &lt;-<span class="st"> </span><span class="kw">paste0</span>(phylochem_analysis_directory_path, <span class="st">&quot;chem_data/&quot;</span>, CDFs)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">paths_to_cdfs &lt;-<span class="st"> </span>paths_to_cdfs[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">head</span>(paths_to_cdfs)</a></code></pre></div>
+<pre><code>## [1] &quot;/Volumes/Luke_Lab_1/hemp/chem_data/custer-2-3.CDF&quot;
+## [2] &quot;/Volumes/Luke_Lab_1/hemp/chem_data/dakota-1-2.CDF&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># convertCDFstoCSVs(paths_to_cdfs = paths_to_cdfs, min_mz = 50, max_mz = 800, min_rt = 0, max_rt = 5000)</span></a></code></pre></div>
+<p>Once this is done, we need to create a monolist of the cdf_csvs. It’s possible that you already have a list of all your samples, if so, you can just modify this list. The monolist can contain any and all column you want, but it needs to include the following columns: “rt_offset”, “baseline_window”, and “path_to_cdf_csv”. “rt_offset” should initially be 0 for all samples. “baseline_window” should initially be 100 for all samples. “path_to_cdf_csv” should be a path stating where the cdf_csv file for that sample is. Here is an example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># hemp$samples &lt;- readMonolist(monolist_in_path = &quot;/Volumes/Luke_Lab_1/hemp/monolists/hemp_plants_raw.csv&quot;)</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># hemp$samples$rt_offset &lt;- 0</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># hemp$samples$baseline_window &lt;- 100</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># hemp$samples$path_to_cdf_csv &lt;- NA</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co"># hemp$samples$path_to_cdf_csv &lt;- paste0(paths_to_cdfs[match(hemp$samples$plant_name, gsub(&quot;.CDF&quot;, &quot;&quot;, gsub(&quot;.*chem_data/&quot;, &quot;&quot;, paths_to_cdfs)))], &quot;.csv&quot;)</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># writeMonolist(monolist = hemp$samples, monolist_out_path = &quot;/Volumes/Luke_Lab_1/hemp/monolists/hemp_plants_updated.csv&quot;)</span></a></code></pre></div>
+<p>We can now extract total ion chromatograms from the .csv files we just created. Since this can also take a while if there are lots of files, it’s best to write these chromatograms to a new .csv so that we only have to do this extraction once.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># chromatograms &lt;- extractChromatogramsFromCSVs(paste0(paths_to_cdfs, &quot;.csv&quot;))</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co"># write.table(</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#   chromatograms, </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#   file = paste0(phylochem_analysis_directory_path, &quot;chem_data/chromatograms.csv&quot;),</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#   row.names = FALSE</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># )</span></a></code></pre></div>
+</div>
+<div id="using-the-phylochemistry-integrationapp" class="section level2">
+<h2><span class="header-section-number">3.2</span> Using the <code>phylochemistry</code> integrationApp</h2>
+<p>Once the raw data has been processed, we should have two things: (i) a list of the samples we want to process (a monolist), (ii) a .csv file that contains the chromatograms that correspond to those samples, as created by the extractChromatogramsFromCSVs() function. We are now ready to look at and analyze the chromatograms with the <code>phylochemistry</code> integration app. Let’s load the app with the <code>integrationApp</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># integrationApp(</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#   chromatograms = read.table(file = paste0(phylochem_analysis_directory_path, &quot;chem_data/chromatograms.csv&quot;), sep = &quot;,&quot;, header = TRUE),</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#   x_axis_start = 0,</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#   x_axis_end = 5000,</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#   samples_monolist_path = paste0(phylochem_analysis_directory_path, &quot;monolists/hemp_plants.csv&quot;),</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#   create_new_samples_monolist = FALSE,</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#   samples_monolist_subset = c(6),</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#   peaks_monolist_path = paste0(phylochem_analysis_directory_path, &quot;monolists/peak_list.csv&quot;),</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#   create_new_peak_monolist = TRUE,</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#   zoom_and_scroll_rate = 100</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co"># )</span></a></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="setting-up-a-phylochemistry-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gene-mining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

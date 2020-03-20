@@ -1,0 +1,66 @@
+# Gene mining
+
+Very often, we are interested in learning about genes in a particular species, or in a set of species. This section will walk you through the functions offered by `phylochemistry` that help solve problems in this area.
+
+## BLAST
+
+One of the most common tasks we want to perform are BLAST searches. For this, we need a query (what you are looking to find - "the needle") and a subject ("the haystack"). Often, these two take the forms of the sequence of a known gene (the query), and a transcriptome (the haystack). Let's look at an example.
+
+Note: this example requires BLAST+ to be installed. See: https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download, or google "BLAST+".
+
+### Using the blastTranscriptomes command
+
+Let's load the phylochemistry library and set up our phylochemistry directory
+```{r}
+library(phylochemistry)
+phylochemistry_example_dir <- "/Users/lucasbusta/Desktop/phylochemistry_example_data/"
+phylochemistry_example_dir
+```
+
+Next, we'll need to make a named object that contans the path to the subject transcriptome
+```{r}
+transcriptome_path <- paste0(phylochemistry_example_dir, "sequences_by_species/Sorghum_bicolor/Sbicolor_454_v3.1.1.cds_primaryTranscriptOnly.fa")
+names(transcriptome_path) <- "Sorghum_bicolor"
+transcriptome_path
+```
+
+Finally, we can run the blast. The blastTranscriptomes() command needs a variety of information to run: 
+
+* transcriptomes - the named list of paths to your transcriptomes (in this example, the `transcriptome_path` object we created).
+* query_in_path - the path to the query. Note that this can be a single or multifasta file.
+* blast_module_directory_path - the path to the directory of the BLAST+ module on your computer.
+* monolist_out_path - the path to the monolist that you want the results written to.
+* sequences_of_interest_directory_path - the path to the directory where you want blast hits to be stored.
+
+```{r}
+blastTranscriptomes(
+  transcriptomes = transcriptome_path,
+  query_in_path = paste0(phylochemistry_example_dir, "sequences_by_species/Arabidopsis_thaliana/AtThalaniolCyclase.fa"),
+  blast_module_directory_path = "/usr/local/ncbi/blast/bin/",
+  blast_type = "dc-megablast",
+  monolist_out_path = paste0(phylochemistry_example_dir, "monolists/blast_hits.csv"),
+  sequences_of_interest_directory_path = paste0(phylochemistry_example_dir, "sequences_of_interest/")
+)
+```
+
+Now that this has run, let's look at the results. There are two aspects to the results. One is the monolist output:
+```{r}
+sequences <- readMonolist(monolist_in_path = paste0(phylochemistry_example_dir, "monolists/blast_hits.csv"))
+sequences
+```
+
+In the above we can see the results of the BLAST. There were 14 hits, and it this dataframe now contains a variety of information about them.
+
+The second aspect to the results is of course the sequences of the hits themselves. These are stored in the `sequences_of_interest_directory_path`.
+
+```{r}
+dir(paste0(phylochemistry_example_dir, "sequences_of_interest/"))
+```
+
+Above, you can see that this directory now contains a file that corresponds to each BLAST hit. We can look at one of these files:
+
+```{r}
+Biostrings::readDNAStringSet(filepath = paste0(phylochemistry_example_dir, "sequences_of_interest/", "Sobic.001G179740.1.fa"))
+```
+
+So, now we have our BLAST hits all organized! One way in which we may want to view them is using a phylogenetic tree. See the next chapter for more information on this.

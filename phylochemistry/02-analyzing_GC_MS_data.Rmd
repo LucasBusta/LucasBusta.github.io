@@ -1,0 +1,68 @@
+# Analyzing chromatography data with `phylochemistry`
+
+One of the central features of `phylochemsitry` is its chromatogram processing tools.
+
+```{r}
+library(phylochemistry)
+```
+
+## Preparing the raw data and metadata
+
+To use the `phylochemistry` chromatogram processing tools, we need two things: (i) a list of the samples we want to analyze (a monolist, metadata), and (ii) a singel file that contains their chromatograms (a .csv file, raw data). Here is how you get each of those things:
+
+The first step is to export .CDF files from the chromatographic analysis system. These can then be converted into the ubiquitous .csv file format using the function `convertCDFstoCSVs`. This can take a while, but it only needs to be done once.
+
+```{r}
+phylochem_analysis_directory_path = "/Volumes/Luke_Lab_1/hemp/"
+
+data_directory_contents <- dir(paste0(phylochem_analysis_directory_path, "chem_data/"))
+CDFs <- dir(paste0(phylochem_analysis_directory_path, "chem_data/"))[grep(".CDF$", data_directory_contents)]
+paths_to_cdfs <- paste0(phylochem_analysis_directory_path, "chem_data/", CDFs)
+paths_to_cdfs <- paths_to_cdfs[1:2]
+
+head(paths_to_cdfs)
+
+# convertCDFstoCSVs(paths_to_cdfs = paths_to_cdfs, min_mz = 50, max_mz = 800, min_rt = 0, max_rt = 5000)
+
+```
+
+Once this is done, we need to create a monolist of the cdf_csvs. It's possible that you already have a list of all your samples, if so, you can just modify this list. The monolist can contain any and all column you want, but it needs to include the following columns: "rt_offset", "baseline_window", and "path_to_cdf_csv". "rt_offset" should initially be 0 for all samples. "baseline_window" should initially be 100 for all samples. "path_to_cdf_csv" should be a path stating where the cdf_csv file for that sample is. Here is an example:
+
+```{r}
+# hemp$samples <- readMonolist(monolist_in_path = "/Volumes/Luke_Lab_1/hemp/monolists/hemp_plants_raw.csv")
+# hemp$samples$rt_offset <- 0
+# hemp$samples$baseline_window <- 100
+# hemp$samples$path_to_cdf_csv <- NA
+# hemp$samples$path_to_cdf_csv <- paste0(paths_to_cdfs[match(hemp$samples$plant_name, gsub(".CDF", "", gsub(".*chem_data/", "", paths_to_cdfs)))], ".csv")
+# writeMonolist(monolist = hemp$samples, monolist_out_path = "/Volumes/Luke_Lab_1/hemp/monolists/hemp_plants_updated.csv")
+```
+
+We can now extract total ion chromatograms from the .csv files we just created. Since this can also take a while if there are lots of files, it's best to write these chromatograms to a new .csv so that we only have to do this extraction once.
+
+```{r}
+# chromatograms <- extractChromatogramsFromCSVs(paste0(paths_to_cdfs, ".csv"))
+
+# write.table(
+#   chromatograms, 
+#   file = paste0(phylochem_analysis_directory_path, "chem_data/chromatograms.csv"),
+#   row.names = FALSE
+# )
+```
+
+## Using the `phylochemistry` integrationApp
+
+Once the raw data has been processed, we should have two things: (i) a list of the samples we want to process (a monolist), (ii) a .csv file that contains the chromatograms that correspond to those samples, as created by the extractChromatogramsFromCSVs() function. We are now ready to look at and analyze the chromatograms with the `phylochemistry` integration app. Let's load the app with the `integrationApp` function.
+
+```{r}
+# integrationApp(
+#   chromatograms = read.table(file = paste0(phylochem_analysis_directory_path, "chem_data/chromatograms.csv"), sep = ",", header = TRUE),
+#   x_axis_start = 0,
+#   x_axis_end = 5000,
+#   samples_monolist_path = paste0(phylochem_analysis_directory_path, "monolists/hemp_plants.csv"),
+#   create_new_samples_monolist = FALSE,
+#   samples_monolist_subset = c(6),
+#   peaks_monolist_path = paste0(phylochem_analysis_directory_path, "monolists/peak_list.csv"),
+#   create_new_peak_monolist = TRUE,
+#   zoom_and_scroll_rate = 100
+# )
+```

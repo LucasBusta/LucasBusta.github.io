@@ -1,0 +1,105 @@
+# Setting up a `phylochemistry` analysis
+
+`phylochemistry` is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform  analyses very efficiently and with great versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project's lifetime.
+
+## Conventions in `phylochemsitry`
+
+### Monolists
+
+One way to think of `phylochemistry` is as a set of tools that enables you to integrate and analyze raw data stored on your hard drive. Let's use the example dataset included with `phylochemistry` to explore this idea. First, let's load the phylochemistry library and set up our phylochemistry directory:
+
+```{r}
+library(phylochemistry)
+phylochemistry_example_dir <- "/Users/lucasbusta/Desktop/phylochemistry_example_data/"
+phylochemistry_example_dir
+```
+
+Now, let's see what's in that directory
+```{r}
+dir(phylochemistry_example_dir)
+```
+
+We can see that there's a folder called monolists. What's in there?
+```{r}
+dir(paste0(phylochemistry_example_dir, "monolists/"))
+```
+
+### Storing your data as a list of lists
+
+There are lots of different kinds of data structures. `phylochemistry` was designed with a very simple and flexible data structure in mind: a heirarchy of lists. These are very easy to create and modify:
+
+```{r}
+my_analysis <- list()
+my_analysis$chemistry_data <- readMonolist(monolist_in_path = paste0(phylochemistry_example_dir, "monolists/chemistry_samples.csv"))
+my_analysis$chemistry_data
+```
+
+This is a list of chemistry samples and how much of two different types of standards are in each.
+
+### Nomenclature
+
+<!-- snakeCase -->
+
+<!-- ## Setting up a new `phylochemistry` analysis -->
+
+<!-- If you want, you can use the `setupPhylochemistryAnalysis` function to help you set up a new analysis. Otherwise, you can do it manually. Simply create a directory that contains subdirectories called "alignments", "chem_data", monolists" ... -->
+
+<!-- `phylochemistry` enables analyses of natural chemicals and gene sequences in the context of phylogeny. -->
+
+<!-- ### Install `phylochemistry` directly from github and view documentation contents -->
+
+<!-- ```{r} -->
+<!-- devtools::install_github("LucasBusta/phylochemistry", quiet = TRUE) -->
+<!-- packages <- c("phylochemistry") -->
+<!-- lapply(packages, require, character.only = TRUE) -->
+<!-- help(package = "phylochemistry") -->
+<!-- ``` -->
+
+<!-- ## Visualizing data types separately -->
+
+<!-- 1. $Taxa - taxonomy information   -->
+
+<!--   + $species - we can see what's in the list just using `head()`. -->
+<!-- ```{r} -->
+<!-- data(fads) -->
+<!-- head(fads$Taxa$species) -->
+<!-- ``` -->
+
+<!--   + $tree - we can see the tree using (among others) the excellent `ggtree` package -->
+<!-- ```{r} -->
+<!-- library(ggtree, quietly = TRUE) -->
+<!-- ggtree(fads$Taxa$tree) -->
+<!-- ``` -->
+
+<!-- 2. $Chemistry - structural and quantitative chemical data   -->
+
+<!--   + $structural_chemical_data -  -->
+
+
+
+<!-- ## Building a phylochem object from scratch -->
+
+<!-- ### Create a phylochem object called "fads" and bind taxonomic data to it -->
+
+<!-- The data for this section is included in the "example_data" folder -->
+<!-- ```{r} -->
+<!-- species <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/_Phylochemistry/__plant_list_and_DBs/_phylochemistry_lists/angiosperms.csv" -->
+<!-- tree <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/_Phylochemistry/__plant_list_and_DBs/PhytoPhylo.newick" -->
+<!-- fads <- list() -->
+<!-- fads <- loadTaxa(file = species, phylochem = fads, tree = tree) -->
+<!-- ``` -->
+
+<!-- ### Create a phylochem object called "fads" and bind taxonomic data to it -->
+
+<!-- Let's have a look at the structure of the "fads" phylochem object so far. We can see that it contains two things: a data.frame ("species") with information from the "angiosperms" species file, and a phylogenetic tree ("tree"; actually a list), that contains an angiosperm phylogeny with ~31,000 species. -->
+<!-- ```{r} -->
+<!-- str(fads, strict.width = "cut") -->
+<!-- ``` -->
+
+<!-- ### Bind chemical data to the "fads" phylochem object -->
+
+<!-- ```{r} -->
+<!-- chemistry <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/__R_code/packages/phylochemistry/example_data/seed_oil_chemistry.csv" -->
+<!-- fads <- loadChemistry(file = chemistry, phylochem = fads, structural_alignment = FALSE, fingerprint_alignment = FALSE) -->
+<!-- str(fads, strict.width = "cut") -->
+<!-- ``` -->
