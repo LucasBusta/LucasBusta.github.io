@@ -4,6 +4,10 @@
 
 ## Conventions in `phylochemsitry`
 
+### File paths and directory paths
+
+
+
 ### Monolists
 
 One way to think of `phylochemistry` is as a set of tools that enables you to integrate and analyze raw data stored on your hard drive. Let's use the example dataset included with `phylochemistry` to explore this idea. First, let's load the phylochemistry library and set up our phylochemistry directory:
