@@ -1,12 +1,12 @@
 # Setting up a `phylochemistry` analysis
 
-`phylochemistry` is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform  analyses very efficiently and with great versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project's lifetime.
+`phylochemistry` is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform analyses very efficiently and with great versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project's lifetime.
 
 ## Conventions in `phylochemsitry`
 
 ### File paths and directory paths
 
-
+`phylochemistry` is made to run on data from single sources (for example, one species) or multiple sources (for example, multiple species) at the same time. This means that sometimes a function will run using a single file, or sometimes you will want to feed it multiple files. In cases where a function wants a single file, it will request a "file_path", which is an explicit path to a single file (for example, "Desktop/project/file.csv"). Other times, a function will want a directory instead of a specific file, in which case it will request a "directory_path". This is a path to a directory and it ends with a forward slash (for example, "Desktop/project/").
 
 ### Monolists
 
