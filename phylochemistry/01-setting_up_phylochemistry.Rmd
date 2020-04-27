@@ -28,16 +28,34 @@ We can see that there's a folder called monolists. What's in there?
 dir(paste0(phylochemistry_example_dir, "monolists/"))
 ```
 
-### Storing your data as a list of lists
+### Recommendations
+
+The ideas in this section are not required for `phylochemistry` commands to run, but they are helpful and can make your life easier.
+
+#### Storing your data as a list of lists
 
 There are lots of different kinds of data structures. `phylochemistry` was designed with a very simple and flexible data structure in mind: a heirarchy of lists. These are very easy to create and modify:
 
 ```{r}
 my_analysis <- list()
-my_analysis$chromatography_samples <- readMonolist(monolist_in_path = paste0(phylochemistry_example_dir, "monolists/chemistry_samples.csv"))
-my_analysis$chromatography_samples
+my_analysis$GCMS_samples <- readMonolist(monolist_in_path = paste0(phylochemistry_example_dir, "monolists/GCMS_samples.csv"))
+str(my_analysis)
 ```
 
-This is a list of chromatography samples and how much of two different types of standards are in each.
+When we run str() on "my_analysis", it shows us the structure of the "my_analysis" object. In the output above, we can see that "my_analysis" is a list of Now we have the information about the GC-MS samples stored in a This is a list of chromatography samples and how much of two different types of standards are in each.
 
-### Nomenclature
+#### in that case...
+
+Computational work nearly always requires the analyst to use multiple programs to complete a project. Some programs can handle a great variety of special characters, and some cannot. Consider using snake case when naming your objects and files - it can increase campatibility!
+
+All phylochemistry functions are called using camelCase.
+All argument names in phylochemistry functions use snake_case.
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), results="markup"}
+knitr::include_graphics('http://lucasbusta.github.io/phylochemistry/in_that_case.png', dpi = NA)
+```
+
+
+
+
+
