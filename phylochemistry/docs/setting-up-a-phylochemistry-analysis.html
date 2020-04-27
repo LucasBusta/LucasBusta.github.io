@@ -24,7 +24,7 @@
 <meta name="author" content="Lucas Busta" />
 
 
-<meta name="date" content="2020-03-20" />
+<meta name="date" content="2020-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,9 +132,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html"><i class="fa fa-check"></i><b>2</b> Setting up a <code>phylochemistry</code> analysis</a><ul>
 <li class="chapter" data-level="2.1" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#conventions-in-phylochemsitry"><i class="fa fa-check"></i><b>2.1</b> Conventions in <code>phylochemsitry</code></a><ul>
-<li class="chapter" data-level="2.1.1" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#monolists"><i class="fa fa-check"></i><b>2.1.1</b> Monolists</a></li>
-<li class="chapter" data-level="2.1.2" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#storing-your-data-as-a-list-of-lists"><i class="fa fa-check"></i><b>2.1.2</b> Storing your data as a list of lists</a></li>
-<li class="chapter" data-level="2.1.3" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#nomenclature"><i class="fa fa-check"></i><b>2.1.3</b> Nomenclature</a></li>
+<li class="chapter" data-level="2.1.1" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#file-paths-and-directory-paths"><i class="fa fa-check"></i><b>2.1.1</b> File paths and directory paths</a></li>
+<li class="chapter" data-level="2.1.2" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#monolists"><i class="fa fa-check"></i><b>2.1.2</b> Monolists</a></li>
+<li class="chapter" data-level="2.1.3" data-path="setting-up-a-phylochemistry-analysis.html"><a href="setting-up-a-phylochemistry-analysis.html#recommendations"><i class="fa fa-check"></i><b>2.1.3</b> Recommendations</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="analyzing-chromatography-data-with-phylochemistry.html"><a href="analyzing-chromatography-data-with-phylochemistry.html"><i class="fa fa-check"></i><b>3</b> Analyzing chromatography data with <code>phylochemistry</code></a><ul>
@@ -165,11 +165,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="setting-up-a-phylochemistry-analysis" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Setting up a <code>phylochemistry</code> analysis</h1>
-<p><code>phylochemistry</code> is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform analyses very efficiently and with great versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project’s lifetime.</p>
+<p><code>phylochemistry</code> is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform analyses efficiently and with versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project’s lifetime.</p>
 <div id="conventions-in-phylochemsitry" class="section level2">
 <h2><span class="header-section-number">2.1</span> Conventions in <code>phylochemsitry</code></h2>
+<div id="file-paths-and-directory-paths" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> File paths and directory paths</h3>
+<p><code>phylochemistry</code> is made to run both on data from single sources (for example, one species) or multiple sources (for example, multiple species) at the same time. This means that sometimes a function will run using a single file, or sometimes you will want to feed it multiple files. In cases where a function wants a single file, it will request a “file_path”, which is an explicit path to a single file (for example, “Desktop/project/file.csv”). Other times, a function will want a directory instead of a specific file, in which case it will request a “directory_path”. This is a path to a directory and it ends with a slash (for example, “Desktop/project/”).</p>
+</div>
 <div id="monolists" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Monolists</h3>
+<h3><span class="header-section-number">2.1.2</span> Monolists</h3>
 <p>One way to think of <code>phylochemistry</code> is as a set of tools that enables you to integrate and analyze raw data stored on your hard drive. Let’s use the example dataset included with <code>phylochemistry</code> to explore this idea. First, let’s load the phylochemistry library and set up our phylochemistry directory:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(phylochemistry)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">phylochemistry_example_dir &lt;-<span class="st"> &quot;/Users/lucasbusta/Desktop/phylochemistry_example_data/&quot;</span></a>
@@ -177,80 +181,39 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;/Users/lucasbusta/Desktop/phylochemistry_example_data/&quot;</code></pre>
 <p>Now, let’s see what’s in that directory</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">dir</span>(phylochemistry_example_dir)</a></code></pre></div>
-<pre><code>## [1] &quot;chem_data&quot;             &quot;monolists&quot;             &quot;sequences_by_species&quot; 
+<pre><code>## [1] &quot;monolists&quot;             &quot;raw_data&quot;              &quot;sequences_by_species&quot; 
 ## [4] &quot;sequences_of_interest&quot;</code></pre>
 <p>We can see that there’s a folder called monolists. What’s in there?</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">dir</span>(<span class="kw">paste0</span>(phylochemistry_example_dir, <span class="st">&quot;monolists/&quot;</span>))</a></code></pre></div>
-<pre><code>## [1] &quot;blast_hits.csv&quot;        &quot;chemistry_samples.csv&quot;</code></pre>
+<pre><code>## [1] &quot;blast_hits.csv&quot;           &quot;GCMS_samples_updated.csv&quot;
+## [3] &quot;GCMS_samples.csv&quot;         &quot;peak_list_example.csv&quot;   
+## [5] &quot;peak_list.csv&quot;</code></pre>
 </div>
-<div id="storing-your-data-as-a-list-of-lists" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Storing your data as a list of lists</h3>
+<div id="recommendations" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Recommendations</h3>
+<p>The ideas in this section are not required for <code>phylochemistry</code> commands to run, but they are helpful and can make your life easier.</p>
+<div id="storing-your-data-as-a-list-of-lists" class="section level4">
+<h4><span class="header-section-number">2.1.3.1</span> Storing your data as a list of lists</h4>
 <p>There are lots of different kinds of data structures. <code>phylochemistry</code> was designed with a very simple and flexible data structure in mind: a heirarchy of lists. These are very easy to create and modify:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">my_analysis &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">my_analysis<span class="op">$</span>chemistry_data &lt;-<span class="st"> </span><span class="kw">readMonolist</span>(<span class="dt">monolist_in_path =</span> <span class="kw">paste0</span>(phylochemistry_example_dir, <span class="st">&quot;monolists/chemistry_samples.csv&quot;</span>))</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">my_analysis<span class="op">$</span>chemistry_data</a></code></pre></div>
-<pre><code>## # A tibble: 9 x 4
-##   sample_name amount_internal_std_in_… amount_mixed_analyte_std_… replicate
-##   &lt;chr&gt;                          &lt;int&gt;                      &lt;int&gt;     &lt;int&gt;
-## 1 10_10_1                           10                         10         1
-## 2 10_10_2                           10                         10         2
-## 3 10_10_3                           10                         10         3
-## 4 10_20_1                           10                         20         1
-## 5 10_20_2                           10                         20         2
-## 6 10_20_3                           10                         20         3
-## 7 10_30_1                           10                         30         1
-## 8 10_30_2                           10                         30         2
-## 9 10_30_3                           10                         30         3</code></pre>
-<p>This is a list of chemistry samples and how much of two different types of standards are in each.</p>
+<a class="sourceLine" id="cb7-2" data-line-number="2">my_analysis<span class="op">$</span>GCMS_samples &lt;-<span class="st"> </span><span class="kw">readMonolist</span>(<span class="dt">monolist_in_path =</span> <span class="kw">paste0</span>(phylochemistry_example_dir, <span class="st">&quot;monolists/GCMS_samples.csv&quot;</span>))</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">str</span>(my_analysis)</a></code></pre></div>
+<pre><code>## List of 1
+##  $ GCMS_samples:&#39;data.frame&#39;:    9 obs. of  4 variables:
+##   ..$ sample_name                   : chr [1:9] &quot;10_10_1&quot; &quot;10_10_2&quot; &quot;10_10_3&quot; &quot;10_20_1&quot; ...
+##   ..$ amount_internal_std_in_ul     : int [1:9] 10 10 10 10 10 10 10 10 10
+##   ..$ amount_mixed_analyte_std_in_ul: int [1:9] 10 10 10 20 20 20 30 30 30
+##   ..$ replicate                     : int [1:9] 1 2 3 1 2 3 1 2 3</code></pre>
+<p>When we run str() on “my_analysis”, it shows us the structure of the “my_analysis” object. In the output above, we can see that “my_analysis” is a list of Now we have the information about the GC-MS samples stored in a This is a list of chromatography samples and how much of two different types of standards are in each.</p>
 </div>
-<div id="nomenclature" class="section level3">
-<h3><span class="header-section-number">2.1.3</span> Nomenclature</h3>
-<!-- snakeCase -->
-<!-- ## Setting up a new `phylochemistry` analysis -->
-<!-- If you want, you can use the `setupPhylochemistryAnalysis` function to help you set up a new analysis. Otherwise, you can do it manually. Simply create a directory that contains subdirectories called "alignments", "chem_data", monolists" ... -->
-<!-- `phylochemistry` enables analyses of natural chemicals and gene sequences in the context of phylogeny. -->
-<!-- ### Install `phylochemistry` directly from github and view documentation contents -->
-<!-- ```{r} -->
-<!-- devtools::install_github("LucasBusta/phylochemistry", quiet = TRUE) -->
-<!-- packages <- c("phylochemistry") -->
-<!-- lapply(packages, require, character.only = TRUE) -->
-<!-- help(package = "phylochemistry") -->
-<!-- ``` -->
-<!-- ## Visualizing data types separately -->
-<!-- 1. $Taxa - taxonomy information   -->
-<!--   + $species - we can see what's in the list just using `head()`. -->
-<!-- ```{r} -->
-<!-- data(fads) -->
-<!-- head(fads$Taxa$species) -->
-<!-- ``` -->
-<!--   + $tree - we can see the tree using (among others) the excellent `ggtree` package -->
-<!-- ```{r} -->
-<!-- library(ggtree, quietly = TRUE) -->
-<!-- ggtree(fads$Taxa$tree) -->
-<!-- ``` -->
-<!-- 2. $Chemistry - structural and quantitative chemical data   -->
-<!--   + $structural_chemical_data -  -->
-<!-- ## Building a phylochem object from scratch -->
-<!-- ### Create a phylochem object called "fads" and bind taxonomic data to it -->
-<!-- The data for this section is included in the "example_data" folder -->
-<!-- ```{r} -->
-<!-- species <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/_Phylochemistry/__plant_list_and_DBs/_phylochemistry_lists/angiosperms.csv" -->
-<!-- tree <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/_Phylochemistry/__plant_list_and_DBs/PhytoPhylo.newick" -->
-<!-- fads <- list() -->
-<!-- fads <- loadTaxa(file = species, phylochem = fads, tree = tree) -->
-<!-- ``` -->
-<!-- ### Create a phylochem object called "fads" and bind taxonomic data to it -->
-<!-- Let's have a look at the structure of the "fads" phylochem object so far. We can see that it contains two things: a data.frame ("species") with information from the "angiosperms" species file, and a phylogenetic tree ("tree"; actually a list), that contains an angiosperm phylogeny with ~31,000 species. -->
-<!-- ```{r} -->
-<!-- str(fads, strict.width = "cut") -->
-<!-- ``` -->
-<!-- ### Bind chemical data to the "fads" phylochem object -->
-<!-- ```{r} -->
-<!-- chemistry <- "/Users/lucasbusta/Documents/Science/_Lab_Notebook/__R_code/packages/phylochemistry/example_data/seed_oil_chemistry.csv" -->
-<!-- fads <- loadChemistry(file = chemistry, phylochem = fads, structural_alignment = FALSE, fingerprint_alignment = FALSE) -->
-<!-- str(fads, strict.width = "cut") -->
-<!-- ``` -->
+<div id="in-that-case" class="section level4">
+<h4><span class="header-section-number">2.1.3.2</span> in that case…</h4>
+<p>Computational work nearly always requires the analyst to use multiple programs to complete a project. Some programs can handle a great variety of special characters, and some cannot. Consider using snake case when naming your objects and files - it can increase campatibility!</p>
+<p>All phylochemistry functions are called using camelCase.
+All argument names in phylochemistry functions use snake_case.</p>
+<p><img src="http://lucasbusta.github.io/phylochemistry/figures/in_that_case.png" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
 </div>
 </div>

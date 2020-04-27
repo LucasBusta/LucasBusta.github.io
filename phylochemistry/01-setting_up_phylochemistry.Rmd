@@ -52,7 +52,7 @@ All phylochemistry functions are called using camelCase.
 All argument names in phylochemistry functions use snake_case.
 
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), results="markup"}
-knitr::include_graphics('http://lucasbusta.github.io/phylochemistry/in_that_case.png', dpi = NA)
+knitr::include_graphics('http://lucasbusta.github.io/phylochemistry/figures/in_that_case.png', dpi = NA)
 ```
 
 

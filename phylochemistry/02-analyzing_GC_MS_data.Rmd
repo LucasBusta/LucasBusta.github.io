@@ -28,17 +28,17 @@ phylochemistry::convertCDFstoCSVs(paths_to_cdfs = paths_to_cdfs, min_mz = 50, ma
 Once this is done, we need to create a monolist of the cdf_csvs. If you are keeping a good digital lab notebook, then you should have a list of all your samples. So, you can just modify this list. The monolist can contain any and all column you want, but it needs to include the following columns: "rt_offset", "baseline_window", and "path_to_cdf_csv". "rt_offset" should initially be 0 for all samples. "baseline_window" should initially be 100 for all samples. "path_to_cdf_csv" should be a path stating where the cdf_csv file for that sample is. Here is an example:
 
 ```{r}
-experiment <- list()
-experiment$GCMS_samples$sample_data <- readMonolist(monolist_in_path = "/Users/lucasbusta/Desktop/phylochemistry_example_data/monolists/GCMS_samples.csv")
+my_analysis <- list()
+my_analysis$GCMS_samples$sample_data <- readMonolist(monolist_in_path = "/Users/lucasbusta/Desktop/phylochemistry_example_data/monolists/GCMS_samples.csv")
 head(experiment$GCMS_samples$sample_data)
 
-experiment$GCMS_samples$sample_data$rt_offset <- 0
-experiment$GCMS_samples$sample_data$baseline_window <- 100
-experiment$GCMS_samples$sample_data$path_to_cdf_csv <- NA
-experiment$GCMS_samples$sample_data$path_to_cdf_csv <- paste0(paths_to_cdfs[match(experiment$GCMS_samples$sample_data$sample_name, gsub(".CDF", "", gsub(".*raw_data/GCMS_data/", "", paths_to_cdfs)))], ".csv")
-head(experiment$GCMS_samples$sample_data)
+my_analysis$GCMS_samples$sample_data$rt_offset <- 0
+my_analysis$GCMS_samples$sample_data$baseline_window <- 100
+my_analysis$GCMS_samples$sample_data$path_to_cdf_csv <- NA
+my_analysis$GCMS_samples$sample_data$path_to_cdf_csv <- paste0(paths_to_cdfs[match(experiment$GCMS_samples$sample_data$sample_name, gsub(".CDF", "", gsub(".*raw_data/GCMS_data/", "", paths_to_cdfs)))], ".csv")
+head(my_analysis$GCMS_samples$sample_data)
 
-writeMonolist(monolist = experiment$GCMS_samples$sample_data, monolist_out_path = paste0(phylochem_analysis_directory_path, "monolists/GCMS_samples_updated.csv"))
+writeMonolist(monolist = my_analysis$GCMS_samples$sample_data, monolist_out_path = paste0(phylochem_analysis_directory_path, "monolists/GCMS_samples_updated.csv"))
 ```
 
 We can now extract total ion chromatograms from the .csv files we just created. Since this can also take a while if there are lots of files, it's best to write these chromatograms to a new .csv so that we only have to do this extraction once.
