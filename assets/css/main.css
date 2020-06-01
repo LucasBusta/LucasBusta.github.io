@@ -1630,7 +1630,7 @@
 
 	body {
 		background-color: #fff;
-		color: #000;
+		color: #444;
 	}
 
 	body, input, select, textarea {
@@ -1658,6 +1658,7 @@
 
 	p {
 		margin: 0 0 2rem 0;
+		color: #000000;
 	}
 
 		p.special {
