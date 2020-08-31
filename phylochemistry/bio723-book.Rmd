@@ -1,0 +1,167 @@
+--- 
+title: "Phylochemistry"
+author: "Lucas Busta"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+always_allow_html: yes
+output:
+  bookdown::gitbook:
+    highlight: tango
+    df_print: tibble
+    css: style.css
+    config:
+      toc:
+        collapse: section
+      fontsettings:
+        theme: white
+        family: sans
+        size: 2 
+      toolbar:
+        position: fixed     
+documentclass: book
+bibliography: [bio723-refs.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Vingette for the R Package Phylochemistry."
+---
+
+# Introduction
+
+Placeholder
+
+
+## Installing R
+## (optional) Installing R Studio
+
+<!--chapter:end:index.Rmd-->
+
+## Installing `R`
+
+R is the computing language we will use to run our chemometric analyses and produce high quality plots. Follow these steps to install R:
+
+1. Go to https://cran.r-project.org/
+2. Click on "Download R for <your operating system>"*, depending on your operating system you will select "Download R for Linux", "Download R for (Mac) OS X", or "Download R for Windows".
+
+* We will use <this notation> quite a bit. It indicates a place where you should insert information, data, or something similar that corresponds to your particular situation. In this example it means insert "your operating system", i.e. Linux, (Mac) OS X, or Windows.
+
+3. After the executable finishes downloading (in Windows, it is a file with .exe extension; for Mac, it is a .dmg file), open the file as an administrator, and follow the installation instructions. R should install without any problems. You can click OK for all of the windows that pop-up during installation, and choose a "regular" installation (if given the choice). Please contact me if you have any trouble installing R.
+
+## Installing `RStudio`
+
+Once we install R, we can install RStudio, which is essentially a convenient way of interacting with R. Some people do not like RStudio and prefer to interact with R directly. This is fine, but many beginning R users find RStudio helpful, so I recommend it. Follow these steps to install RStudio:
+
+1. Go to https://rstudio.com/
+2. Click "DOWNLOAD" at the top of the page.
+3. Click the "DOWNLOAD" button that corresponds to RStudio Desktop with the free Open Source License.
+4. The page may automatically detect which operating system you are using and recommend a version for you. If it does, download that file (.exe for PC or .dmg for Mac). If not, scroll down to the "All Installers" section and download the file that is right for you. Open the file as an administrator, and follow the installation instructions. RStudio should install without any problems. You can click OK for all of the windows that pop-up during installation, and choose a "regular" installation (if given the choice). Please contact me if you have any trouble installing RStudio.
+
+## Check your installations of R and RStudio
+
+Open RStudio by clicking on the appropriate file in your applications folder, or wherever it is saved on your computer. You should see a window with a carat in it:
+
+```{r}
+devtools::install_github("LucasBusta/phylochemistry", quiet = FALSE, force = TRUE)
+packages <- c("phylochemistry")
+lapply(packages, require, character.only = TRUE)
+help(package = "phylochemistry")
+```
+
+## Installing `phylochemistry`
+
+`phylochemistry` enables analyses of natural chemicals and gene sequences in the context of phylogeny.
+
+### Install `phylochemistry` directly from github and view documentation contents
+
+```{r}
+devtools::install_github("LucasBusta/phylochemistry", quiet = FALSE, force = TRUE)
+packages <- c("phylochemistry")
+lapply(packages, require, character.only = TRUE)
+help(package = "phylochemistry")
+```
+
+## Setting up a `phylochemistry` analysis
+
+`phylochemistry` is not just a set of functions that helps with analyses. It is also a conceptual and organizational framework that helps you perform analyses efficiently and with versatility. It takes a few minutes to understand and set up a phylochemistry analysis, but that investment will be paid back many-fold over the course of a project's lifetime.
+
+## Conventions in `phylochemsitry`
+
+### File paths and directory paths
+
+`phylochemistry` is made to run both on data from single sources (for example, one species) or multiple sources (for example, multiple species) at the same time. This means that sometimes a function will run using a single file, or sometimes you will want to feed it multiple files. In cases where a function wants a single file, it will request a "file_path", which is an explicit path to a single file (for example, "Desktop/project/file.csv"). Other times, a function will want a directory instead of a specific file, in which case it will request a "directory_path". This is a path to a directory and it ends with a slash (for example, "Desktop/project/").
+
+### Monolists
+
+One way to think of `phylochemistry` is as a set of tools that enables you to integrate and analyze raw data stored on your hard drive. Let's use the example dataset included with `phylochemistry` to explore this idea. First, let's load the phylochemistry library and set up our phylochemistry directory:
+
+```{r}
+library(phylochemistry)
+phylochemistry_example_dir <- "/Users/lucasbusta/Desktop/phylochemistry_example_data/"
+phylochemistry_example_dir
+```
+
+Now, let's see what's in that directory
+```{r}
+dir(phylochemistry_example_dir)
+```
+
+We can see that there's a folder called monolists. What's in there?
+```{r}
+dir(paste0(phylochemistry_example_dir, "monolists/"))
+```
+
+### Recommendations
+
+The ideas in this section are not required for `phylochemistry` commands to run, but they are helpful and can make your life easier.
+
+#### Storing your data as a list of lists
+
+There are lots of different kinds of data structures. `phylochemistry` was designed with a very simple and flexible data structure in mind: a heirarchy of lists. These are very easy to create and modify:
+
+```{r}
+my_analysis <- list()
+my_analysis$GCMS_samples <- readMonolist(monolist_in_path = paste0(phylochemistry_example_dir, "monolists/GCMS_samples.csv"))
+str(my_analysis)
+```
+
+When we run str() on "my_analysis", it shows us the structure of the "my_analysis" object. In the output above, we can see that "my_analysis" is a list of Now we have the information about the GC-MS samples stored in a This is a list of chromatography samples and how much of two different types of standards are in each.
+
+#### in that case...
+
+Computational work nearly always requires the analyst to use multiple programs to complete a project. Some programs can handle a great variety of special characters, and some cannot. Consider using snake case when naming your objects and files - it can increase campatibility!
+
+All phylochemistry functions are called using camelCase.
+All argument names in phylochemistry functions use snake_case.
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), results="markup"}
+knitr::include_graphics('http://lucasbusta.github.io/phylochemistry/figures/in_that_case.png', dpi = NA)
+```
+
+
+
+
+
+
+<!--chapter:end:01-setting_up_phylochemistry.Rmd-->
+
+
+# Analyzing chromatography data with `phylochemistry`
+
+Placeholder
+
+
+## Preparing the raw data and metadata
+## Using the `phylochemistry` integrationApp
+
+<!--chapter:end:02-analyzing_GC_MS_data.Rmd-->
+
+
+# Gene mining
+
+Placeholder
+
+
+## BLAST
+### Using the blastTranscriptomes command
+
+<!--chapter:end:03-gene_mining.Rmd-->
+

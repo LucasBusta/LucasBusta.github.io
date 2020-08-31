@@ -34,19 +34,14 @@ knitr::opts_chunk$set(echo = TRUE, prompt = FALSE, eval = TRUE,
 options(pillar.sigfig = 3)
 ```
 
-# Introduction 
+# Introduction
 
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), results="markup"}
 knitr::include_graphics('http://lucasbusta.github.io/phylochemistry/figures/phylochemistry_logo.jpg', dpi = NA)
 ```
 
-`phylochemistry` enables analyses of natural chemicals and gene sequences in the context of phylogeny.
+## Installing R
 
-### Install `phylochemistry` directly from github and view documentation contents
+We will use a free statistical software package called “R”. R is powerful because it has many built-in functions for doing calculations and statistical modeling, allows for command-line programming, and can produce graphs. 
 
-```{r}
-devtools::install_github("LucasBusta/phylochemistry", quiet = FALSE, force = TRUE)
-packages <- c("phylochemistry")
-lapply(packages, require, character.only = TRUE)
-help(package = "phylochemistry")
-```
+## (optional) Installing R Studio
